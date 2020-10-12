@@ -1,9 +1,9 @@
-// 评论issues仓库 by.removeif https://removeif.github.io/
+// 评论issues仓库 by.removeif https://removeif.github.io/https://api.github.com/repos/{用户名}/{仓库}/issues
 var repoIssuesUrl = "https://api.github.com/repos/limenggen/blog-comment/issues";
 // 对应仓库 clientId、clientSecret 关于这两个参数的安全问题，查看 https://removeif.github.io/2019/09/19/博客源码分享.html#1-热门推荐，最新评论：
 var clientId; = "92fb67debfc9e0bbb634";
 var clientSecret; = "d5ada77b829710b04eed0e53d62dc9091f07ca8c";
-// var authorizationToken = 'Basic ' + btoa(clientId + ':' + clientSecret);
+var authorizationToken = 'Basic ' + btoa(clientId + ':' + clientSecret);
 // 写comment count值
 var reqCommentCountUrl;
 // 评论缓存key
@@ -332,7 +332,7 @@ function loadIssueData(appId, appKey, userName, userRepo, isValine) {
             }
         }
         // console.clear();
-        console.log("~~~~欢迎光临！记得有时间多来看看哦，https://removeif.github.io/ ~~~~")
+        console.log("~~~~欢迎光临！记得有时间多来看看哦，https://limenggen.github.io/ ~~~~")
     }
         ,
         500
