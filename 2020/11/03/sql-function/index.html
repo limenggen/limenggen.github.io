@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>sql常用函数笔记 - 初月-二三</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="初月-二三"><meta name="msapplication-TileImage" content="https://limenggen.gitee.io/img/favicon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="初月-二三"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta description="sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用本篇主要记录一些sql常用函数的知识点本篇博客有参考：winter-bamboo的博客"><meta property="og:type" content="初月二三"><meta property="og:title" content="初月-二三"><meta property="og:url" content="https://limenggen.github.io/"><meta property="og:site_name" content="初月-二三"><meta property="og:description" content="sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用本篇主要记录一些sql常用函数的知识点本篇博客有参考：winter-bamboo的博客"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://limenggen.gitee.io/img/head.jpg"><meta property="article:published_time" content="2020-11-03T09:17:04.000Z"><meta property="article:modified_time" content="2020-11-03T09:40:29.134Z"><meta property="article:author" content="limgen"><meta property="article:tag" content="sql"><meta property="article:tag" content="数据库笔记"><meta property="twitter:card" content="summary"><meta property="twitter:image" content="https://limenggen.gitee.io/img/head.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://limenggen.github.io/2020/11/03/sql-function/"},"headline":"初月-二三","image":["https://cdn.jsdelivr.net/gh/limenggen/blog-file/blog/blog-essay/sql-function.jpg"],"datePublished":"2020-11-03T09:17:04.000Z","dateModified":"2020-11-03T09:40:29.134Z","author":{"@type":"Person","name":"初月-二三"},"description":"sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用本篇主要记录一些sql常用函数的知识点本篇博客有参考：winter-bamboo的博客"}</script><link rel="canonical" href="http://limenggen.github.io/2020/11/03/sql-function/"><link rel="icon" href="https://limenggen.gitee.io/img/favicon.png"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.12.0/css/all.min.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro|Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Microsoft YaHei:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&amp;amp;subset=latin,latin-ext|Inconsolata|Itim|Lobster.css"><script src="https://cdnjs.loli.net/ajax/libs/jquery/3.3.1/jquery.min.js"></script><script src="/js/globalUtils.js"></script><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" defer></script><!--!--><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/css/justifiedGallery.min.css"><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/pace/1.0.2/pace.min.js"></script><link rel="stylesheet" href="/live2d/waifu.css"><script type="text/javascript" async src="/live2d/autoload.js"></script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="初月-二三" type="application/atom+xml">
+</head><body class="is-3-column has-navbar-fixed-top"><nav class="navbar navbar-main is-fixed-top"><div class="container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://limenggen.gitee.io/img/logo.png" alt="初月-二三" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/media">影音</a><a class="navbar-item" href="/album">相册</a><a class="navbar-item" href="/friend">友链</a><a class="navbar-item" href="/self-talking">碎碎念</a><a class="navbar-item" href="/message">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/limenggen/hexo-theme-amazing"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a><a class="navbar-item" id="night-nav" title="Night Mode" href="javascript:;"><i class="fas fa-moon" id="night-icon"></i></a></div></div></div></nav><script type="text/javascript" src="/js/theme-setting.js"></script><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-9-widescreen"><!--!--><div class="card"><div class="card-image"><span class="image is-7by3"><img class="fill" src="https://cdn.jsdelivr.net/gh/limenggen/blog-file/blog/blog-essay/sql-function.jpg" alt="sql常用函数笔记"></span></div><article class="card-content article" role="article"><div class="article-meta size-small is-uppercase level is-mobile"><div class="level-left"><i class="far fa-calendar-plus"> </i>2020-11-03  <a class="commentCountImg" href="/2020/11/03/sql-function/#comment-container"><span class="display-none-class">e56b1ce2f84f675672cee7e6dc2ed81c</span><i class="far fa-comment-dots"></i> <span class="commentCount" id="e56b1ce2f84f675672cee7e6dc2ed81c">99+</span>  </a><span class="level-item"><i class="far fa-clock"> </i>6 分钟  <i class="fas fa-pencil-alt"> </i>1.0 k</span><span class="level-item" id="busuanzi_container_page_pv"><span id="busuanzi_value_page_pv">0</span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">sql常用函数笔记</h1><div class="content"><blockquote>
+<p>sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用<br>本篇主要记录一些sql常用函数的知识点<br>本篇博客有参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/winter-bamboo/p/10779466.html">winter-bamboo的博客</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h1 id="一、字符函数"><a href="#一、字符函数" class="headerlink" title="一、字符函数"></a>一、字符函数</h1><h2 id="1、-LENGTH"><a href="#1、-LENGTH" class="headerlink" title="1、 LENGTH"></a>1、 LENGTH</h2><p>获取参数值的字节个数</p>
+<pre><code>例：SELECT LENGTH (&#39;lala&#39;) ;
+结果： 4</code></pre>
+<h2 id="2、-CONCAT"><a href="#2、-CONCAT" class="headerlink" title="2、 CONCAT"></a>2、 CONCAT</h2><p>拼接字符串</p>
+<pre><code>例：SELECT CONCAT (&#39;asd&#39; , &#39;we&#39; );
+结果： asdwe</code></pre>
+<h2 id="3、-UPPER"><a href="#3、-UPPER" class="headerlink" title="3、 UPPER"></a>3、 UPPER</h2><p>将参数全部变为大写</p>
+<pre><code>例：SELECT UPPER(&#39; abcd&#39; );
+结果:   ABCD</code></pre>
+<h2 id="4、-LOWER"><a href="#4、-LOWER" class="headerlink" title="4、 LOWER"></a>4、 LOWER</h2><p>将参数全部变为小写</p>
+<pre><code>例：SELECT LOWER(&#39; ABCD&#39; );
+结果:   abcd</code></pre>
+<h2 id="5、-SUBSTR"><a href="#5、-SUBSTR" class="headerlink" title="5、 SUBSTR"></a>5、 SUBSTR</h2><p>索引从1开始，返回指定位置及其之后的字符串</p>
+<pre><code>例：SELECT SUBSTR( &#39; ABCD&#39; , 2 ); 
+结果：BCD</code></pre>
+<p>截取从指定索引处（第二个参数）开始，获取索引位置及其后指定字符长度的字符串（第三个参数）</p>
+<pre><code>例：SELECT SUBSTR( &#39; ABCD&#39; , 1,3 ); 
+结果：ABC</code></pre>
+<h2 id="6、-INSTR"><a href="#6、-INSTR" class="headerlink" title="6、 INSTR"></a>6、 INSTR</h2><p>返回第二个参数在第一个参数中第一次出现的位置，若没有出现，则返回0</p>
+<pre><code>例：SELECT INSTR(&#39;ABCD&#39; , &#39;CD&#39;)
+结果：  3
+
+例：SELECT INSTR(&#39;ABCD&#39; , &#39;E&#39;)
+结果：  0</code></pre>
+<h2 id="7、-TRIM"><a href="#7、-TRIM" class="headerlink" title="7、 TRIM"></a>7、 TRIM</h2><p>去除首尾指定的字符，若没有指定，则表示去除空格</p>
+<pre><code>例：SELECT TRIM ( &#39;#&#39; , &#39;###acd##sas###&#39;);
+结果：  acd##sas</code></pre>
+<h2 id="8、-LPAD"><a href="#8、-LPAD" class="headerlink" title="8、 LPAD"></a>8、 LPAD</h2><p>用指定的字符实现左填充指定长度，同时也是结果的最终长度</p>
+<pre><code>例：SELECT LPAD( &#39;abc&#39; , 4 , &#39;#&#39;&#39;);
+结果:  #ABC</code></pre>
+<h2 id="9、-RPAD"><a href="#9、-RPAD" class="headerlink" title="9、 RPAD"></a>9、 RPAD</h2><p>用指定的字符实现右填充指定长度，同时也是结果的最终长度</p>
+<pre><code>例：SELECT LPAD( &#39;ABC&#39; , 4 , &#39;#&#39;);
+结果:  ABC#
+
+
+
+例：SELECT LPAD( &#39;ABC&#39; , 2 , &#39;#&#39;);
+结果:  AB</code></pre>
+<h2 id="10、-REPLACE"><a href="#10、-REPLACE" class="headerlink" title="10、 REPLACE"></a>10、 REPLACE</h2><p>替换所有的指定的字符串为另一个字符串</p>
+<pre><code>例：SELECT REPLACE( &#39;ABCBCD&#39; , &#39;BC&#39; ,&#39;#&#39; ); 
+结果: A##D</code></pre>
+<h1 id="二、数学函数"><a href="#二、数学函数" class="headerlink" title="二、数学函数"></a>二、数学函数</h1><h2 id="1、-ROUND"><a href="#1、-ROUND" class="headerlink" title="1、 ROUND"></a>1、 ROUND</h2><p>四舍五入</p>
+<pre><code>例：SELECT ROUND(-1.55);
+结果：  -2 </code></pre>
+<p>保留指定小数的位数</p>
+<pre><code>例：SELECT ROUND (1.547,2);
+结果：  1.54</code></pre>
+<h2 id="2、-CEIL"><a href="#2、-CEIL" class="headerlink" title="2、 CEIL"></a>2、 CEIL</h2><p>向上取整，返回大于等于该参数的最小整数</p>
+<pre><code>例：SELECT CEIL (-1.0002);
+结果：  -1</code></pre>
+<h2 id="3、-FLOOR"><a href="#3、-FLOOR" class="headerlink" title="3、 FLOOR"></a>3、 FLOOR</h2><p>向下取整，返回小于等于该参数的最大整数</p>
+<pre><code>例：SELECT CEIL (9.99999);
+结果：  9</code></pre>
+<h2 id="4、-TRUNCATE"><a href="#4、-TRUNCATE" class="headerlink" title="4、 TRUNCATE"></a>4、 TRUNCATE</h2><p>截断</p>
+<pre><code>例：SELECT TRUNCATE (1.6699,2);
+结果:  1.66</code></pre>
+<h2 id="5、-MOD"><a href="#5、-MOD" class="headerlink" title="5、 MOD"></a>5、 MOD</h2><p>取模</p>
+<pre><code>例：SELECT MOD(-10,-3)
+结果:  -1</code></pre>
+<h1 id="三、日期函数"><a href="#三、日期函数" class="headerlink" title="三、日期函数"></a>三、日期函数</h1><h2 id="1、-NOW"><a href="#1、-NOW" class="headerlink" title="1、 NOW"></a>1、 NOW</h2><p>返回当前系统日期+时间</p>
+<pre><code>例：SELECT NOW();</code></pre>
+<h2 id="2、-CURDATE"><a href="#2、-CURDATE" class="headerlink" title="2、 CURDATE"></a>2、 CURDATE</h2><p>返回当前系统时间，不包含时间</p>
+<pre><code>例：SELECT CURDATE();</code></pre>
+<h2 id="3、-CURTIME"><a href="#3、-CURTIME" class="headerlink" title="3、 CURTIME"></a>3、 CURTIME</h2><p>返回当前时间，不包含日期</p>
+<pre><code>例：SELECT CURTIME();</code></pre>
+<h2 id="4、-MONTHNAME-DAYNAME-等"><a href="#4、-MONTHNAME-DAYNAME-等" class="headerlink" title="4、 MONTHNAME , DAYNAME  等"></a>4、 MONTHNAME , DAYNAME  等</h2><p>返回日期的英文名字</p>
+<pre><code>例：SELECT DAYNAME(NOW());</code></pre>
+<h2 id="5、-STR-TO-DATE"><a href="#5、-STR-TO-DATE" class="headerlink" title="5、 STR_TO_DATE"></a>5、 STR_TO_DATE</h2><p>将字符串通过指定的格式转化为日期</p>
+<pre><code>例：SELECT STR_TO_DATE(&#39;4-3#1992&#39;, &#39;%m-%d#%Y&#39;);
+结果：1992-04-03</code></pre>
+<h2 id="6、-DATE-FORMAT"><a href="#6、-DATE-FORMAT" class="headerlink" title="6、 DATE_FORMAT"></a>6、 DATE_FORMAT</h2><p>将日期转化为指定格式字符串</p>
+<pre><code>例：SELECT DATE_FORMAT(NOW(), &#39;%m#%d#%Y&#39;);
+结果： 04#27#2019</code></pre>
+<h1 id="三、其他函数"><a href="#三、其他函数" class="headerlink" title="三、其他函数"></a>三、其他函数</h1><h2 id="1、-SELECT-VERSION"><a href="#1、-SELECT-VERSION" class="headerlink" title="1、 SELECT VERSION()"></a>1、 SELECT VERSION()</h2><p>获取sql的版本号</p>
+<h2 id="2、-SELECT-DATABASE"><a href="#2、-SELECT-DATABASE" class="headerlink" title="2、 SELECT DATABASE()"></a>2、 SELECT DATABASE()</h2><p>获取当前所在数据库名</p>
+<h2 id="3、-SELECT-USER"><a href="#3、-SELECT-USER" class="headerlink" title="3、 SELECT USER()"></a>3、 SELECT USER()</h2><p>获取登陆用户名</p>
+<h1 id="四、流程控制函数"><a href="#四、流程控制函数" class="headerlink" title="四、流程控制函数"></a>四、流程控制函数</h1><h2 id="1、-if"><a href="#1、-if" class="headerlink" title="1、 if"></a>1、 if</h2><p>一共三个参数，若第一个参数代表的表达式值为true, 则执行第二个参数代表的表达式，否则执行第三个参数代表的表达式</p>
+<pre><code>例：SELECT IF (10 &gt; 5 , &#39;大&#39; , &#39;小&#39; )；
+结果： 大</code></pre>
+<h2 id="2、-case"><a href="#2、-case" class="headerlink" title="2、 case"></a>2、 case</h2><p>用法一：<br>    相当于switch case</p>
+<pre><code>CASE 要判断的字段或者表达式
+
+WHEN 常量1 THEN 要显示的值1或者与语句1
+
+WHEN 常量2   THEN 要显示的值2或者与语句2
+
+WHEN 常量3 THEN 要显示的值3或者与语句3
+
+ELSE  要显示的值x或者与语句x
+
+END</code></pre>
+<p>用法二：<br>    相当于多重if<br>    相当于switch case</p>
+<pre><code>CASE
+
+WHEN 条件1 THEN 要显示的值1或者与语句1
+
+WHEN 条件2   THEN 要显示的值2或者与语句2
+
+WHEN 条件3 THEN 要显示的值3或者与语句3
+
+ELSE  要显示的值x或者与语句x</code></pre>
+</div><div class="article-licensing box"><div class="licensing-title"><p>sql常用函数笔记</p><p><a href="http://limenggen.github.io/2020/11/03/sql-function/">http://limenggen.github.io/2020/11/03/sql-function/</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>初月-二三</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2020-11-03</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2020-11-03</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a class="icon" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a><a class="icon" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="recommend-area"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/css/share.min.css"><div class="social-share"></div><script src="https://cdnjs.loli.net/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script></article></div><div class="card"><div class="card-content"><h3 class="menu-label has-text-centered">喜欢这篇文章？打赏一下作者吧</h3><div class="buttons is-centered"><a class="button donate" data-type="alipay"><span class="icon is-small"><i class="fab fa-alipay"></i></span><span>支付宝</span><span class="qrcode"><img src="https://limenggen.gitee.io/img/alipay.jpg" alt="支付宝"></span></a><a class="button donate" data-type="wechat"><span class="icon is-small"><i class="fab fa-weixin"></i></span><span>微信</span><span class="qrcode"><img src="https://limenggen.gitee.io/img/weixin.png" alt="微信"></span></a></div></div></div><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/2020/10/28/spring-studyNode/"><span class="level-item">Spring学习笔记</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><!--!--><div class="card"><div class="card-content"><div class="title is-5">评论</div><div id="comment-container"></div><link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/gitalk/1.6.0/gitalk.css"><script> $.getScript('/js/gitalk.min.js', function () { 
+            var gitalk = new Gitalk({
+            language:'zh-CN',
+            id: 'e56b1ce2f84f675672cee7e6dc2ed81c',
+            repo: 'blog-comment',
+            owner: 'limenggen',
+            clientID: '92fb67debfc9e0bbb634',
+            clientSecret: 'd5ada77b829710b04eed0e53d62dc9091f07ca8c',
+            admin: ["limenggen"],
+            createIssueManually: true,
+            distractionFreeMode: true,
+            perPage: 10,
+            pagerDirection: 'last',
+            
+            
+            enableHotKey: true,
+            isLocked: false
+        })
+        gitalk.render('comment-container')});</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="is-flex is-mobile" href="#一、字符函数"><span>一、字符函数</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1、-LENGTH"><span>1、 LENGTH</span></a></li><li><a class="is-flex is-mobile" href="#2、-CONCAT"><span>2、 CONCAT</span></a></li><li><a class="is-flex is-mobile" href="#3、-UPPER"><span>3、 UPPER</span></a></li><li><a class="is-flex is-mobile" href="#4、-LOWER"><span>4、 LOWER</span></a></li><li><a class="is-flex is-mobile" href="#5、-SUBSTR"><span>5、 SUBSTR</span></a></li><li><a class="is-flex is-mobile" href="#6、-INSTR"><span>6、 INSTR</span></a></li><li><a class="is-flex is-mobile" href="#7、-TRIM"><span>7、 TRIM</span></a></li><li><a class="is-flex is-mobile" href="#8、-LPAD"><span>8、 LPAD</span></a></li><li><a class="is-flex is-mobile" href="#9、-RPAD"><span>9、 RPAD</span></a></li><li><a class="is-flex is-mobile" href="#10、-REPLACE"><span>10、 REPLACE</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#二、数学函数"><span>二、数学函数</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1、-ROUND"><span>1、 ROUND</span></a></li><li><a class="is-flex is-mobile" href="#2、-CEIL"><span>2、 CEIL</span></a></li><li><a class="is-flex is-mobile" href="#3、-FLOOR"><span>3、 FLOOR</span></a></li><li><a class="is-flex is-mobile" href="#4、-TRUNCATE"><span>4、 TRUNCATE</span></a></li><li><a class="is-flex is-mobile" href="#5、-MOD"><span>5、 MOD</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#三、日期函数"><span>三、日期函数</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1、-NOW"><span>1、 NOW</span></a></li><li><a class="is-flex is-mobile" href="#2、-CURDATE"><span>2、 CURDATE</span></a></li><li><a class="is-flex is-mobile" href="#3、-CURTIME"><span>3、 CURTIME</span></a></li><li><a class="is-flex is-mobile" href="#4、-MONTHNAME-DAYNAME-等"><span>4、 MONTHNAME , DAYNAME  等</span></a></li><li><a class="is-flex is-mobile" href="#5、-STR-TO-DATE"><span>5、 STR_TO_DATE</span></a></li><li><a class="is-flex is-mobile" href="#6、-DATE-FORMAT"><span>6、 DATE_FORMAT</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#三、其他函数"><span>三、其他函数</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1、-SELECT-VERSION"><span>1、 SELECT VERSION()</span></a></li><li><a class="is-flex is-mobile" href="#2、-SELECT-DATABASE"><span>2、 SELECT DATABASE()</span></a></li><li><a class="is-flex is-mobile" href="#3、-SELECT-USER"><span>3、 SELECT USER()</span></a></li></ul></li><li><a class="is-flex is-mobile" href="#四、流程控制函数"><span>四、流程控制函数</span></a><ul class="menu-list"><li><a class="is-flex is-mobile" href="#1、-if"><span>1、 if</span></a></li><li><a class="is-flex is-mobile" href="#2、-case"><span>2、 case</span></a></li></ul></li></ul></div></div><style>.menu-list > li > a.is-active + .menu-list { display: block; }.menu-list > li > a + .menu-list { display: none; }</style><script src="/js/toc.js" defer></script></div><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar is-rounded" src="https://limenggen.gitee.io/img/head.jpg" alt="初月-二三"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">初月-二三</p><p class="is-size-6 is-block">情怀仍在，纵然往事早已下落不明</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>荷兰  阿姆斯特丹</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">9</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">6</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">13</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/limenggen" target="_blank" rel="noopener">关注我</a></div><div class="level is-mobile"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/limenggen"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Weibo" href="https://weibo.com/limenggen"><i class="fab fa-weibo"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Email" href="mailto:lmgsoul@163.com"><i class="fa fa-envelope"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Next" href="https://limenggen.gitee.io"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/atom.xml"><i class="fas fa-rss"></i></a></div><div><hr><p id="hitokoto">:D 一言句子获取中...</p><script type="text/javascript" defer>function getYiyan(){
+                                $.getJSON("https://v1.hitokoto.cn/", function (data) {
+                                if(data){
+                                    $('#hitokoto').html("");
+                                    $('#hitokoto').append("<strong style='color: #3273dc;'>"+data.hitokoto+"</strong>"+
+                                    "<p>"+"来源《"+data.from+"》</p><p>提供者-"+data.creator+"</p>");
+                                }});}
+                                $(function (){getYiyan();$('#hitokoto').click(function(){getYiyan();})});</script></div></div></div><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://limenggen.gitee.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">博客</span></span><span class="level-right"><span class="level-item tag">limenggen.gitee.io</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">最新评论</h3><span class="body_hot_comment">加载中，最新评论有1分钟缓存...</span></div></div><div class="card widget"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><figure class="media-left"><a class="image" href="/2020/11/03/sql-function/"><img src="https://cdn.jsdelivr.net/gh/limenggen/blog-file/blog/blog-essay/sql-function.jpg" alt="sql常用函数笔记"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-11-03T09:17:04.000Z">2020-11-03</time></p><p class="title"><a href="/2020/11/03/sql-function/">sql常用函数笔记</a></p><p class="categories"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/">数据库笔记</a> / <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/sql%E5%87%BD%E6%95%B0/">sql函数</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/10/28/spring-studyNode/"><img src="https://cdn.jsdelivr.net/gh/limenggen/blog-file/blog/blog-essay/spring-studyNode.jpg" alt="Spring学习笔记"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-10-28T11:17:04.000Z">2020-10-28</time></p><p class="title"><a href="/2020/10/28/spring-studyNode/">Spring学习笔记</a></p><p class="categories"><a href="/categories/Spring/">Spring</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/10/10/springboot-security/"><img src="https://cdn.jsdelivr.net/gh/limenggen/blog-file/blog/blog-essay/springboot-security.jpg" alt="SpringBoot项目整合SpringSecurity笔记"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-10-10T13:17:04.000Z">2020-10-10</time></p><p class="title"><a href="/2020/10/10/springboot-security/">SpringBoot项目整合SpringSecurity笔记</a></p><p class="categories"><a href="/categories/SpringBoot/">SpringBoot</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/09/30/springboot-redisChche/"><img src="https://cdn.jsdelivr.net/gh/limenggen/blog-file/blog/blog-essay/springboot-redisCache.jpg" alt="SpringBoot项目整合Redis作缓存"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-09-30T13:17:04.000Z">2020-09-30</time></p><p class="title"><a href="/2020/09/30/springboot-redisChche/">SpringBoot项目整合Redis作缓存</a></p><p class="categories"><a href="/categories/SpringBoot/">SpringBoot</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/2020/09/30/springboot-swagger/"><img src="https://cdn.jsdelivr.net/gh/limenggen/blog-file/blog/blog-essay/springboot-swagger.jpg" alt="SpringBoot项目中引入Swagger"></a></figure><div class="media-content"><p class="date"><time dateTime="2020-09-30T08:24:56.000Z">2020-09-30</time></p><p class="title"><a href="/2020/09/30/springboot-swagger/">SpringBoot项目中引入Swagger</a></p><p class="categories"><a href="/categories/SpringBoot/">SpringBoot</a></p></div></article></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/categories/Linux/"><span class="level-start"><span class="level-item">Linux</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/Spring/"><span class="level-start"><span class="level-item">Spring</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/SpringBoot/"><span class="level-start"><span class="level-item">SpringBoot</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"><span class="level-start"><span class="level-item">搭建个人博客</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"><span class="level-start"><span class="level-item">数据库笔记</span></span><span class="level-end"><span class="level-item tag">1</span></span></a><ul class="mr-0"><li><a class="level is-mobile is-marginless" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/sql%E5%87%BD%E6%95%B0/"><span class="level-start"><span class="level-item">sql函数</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile is-marginless" href="/archives/2020/11/"><span class="level-start"><span class="level-item">十一月 2020</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/10/"><span class="level-start"><span class="level-item">十月 2020</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile is-marginless" href="/archives/2020/09/"><span class="level-start"><span class="level-item">九月 2020</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li></ul></div></div></div><div class="card widget"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/SpringBoot/"><span class="tag">SpringBoot</span><span class="tag is-grey-lightest">3</span></a></div><div class="control"><a class="tags has-addons" href="/tags/CentOS/"><span class="tag">CentOS</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GitHub/"><span class="tag">GitHub</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Gitee/"><span class="tag">Gitee</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hexo/"><span class="tag">hexo</span><span class="tag is-grey-lightest">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Security/"><span class="tag">Security</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Spring/"><span class="tag">Spring</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Swagger/"><span class="tag">Swagger</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/sql/"><span class="tag">sql</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"><span class="tag">数据库笔记</span><span class="tag is-grey-lightest">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%AC%94%E8%AE%B0/"><span class="tag">笔记</span><span class="tag is-grey-lightest">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">订阅更新</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="订阅"></div></div></form></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://limenggen.gitee.io/img/logo.png" alt="初月-二三" height="28"></a><p class="size-small"><span>&copy; 2020 初月-二三</span>  Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a> &amp; <a href="https://github.com/removeif/hexo-theme-amazing" target="_blank">Amazing</a> <br></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://limenggen.gitee.io/img/1322585204.jpg"><i class="fab fa-qq"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://limenggen.gitee.io/img/weixin_.jpg"><i class="fab fa-weixin"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/limenggen/hexo-theme-amazing"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdnjs.loli.net/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script><script src="https://cdnjs.loli.net/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" async></script><script>moment.locale("zh-CN");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdnjs.loli.net/ajax/libs/lightgallery/1.6.8/js/lightgallery.min.js" defer></script><script src="https://cdnjs.loli.net/ajax/libs/justifiedGallery/3.7.0/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><script>$.getScript('/js/comment-issue-data.js',function(){loadIssueData('92fb67debfc9e0bbb634','d5ada77b829710b04eed0e53d62dc9091f07ca8c','limenggen','blog-comment',false);})</script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script><script type="text/javascript">var pjax = new Pjax({
+            elements: "a",//代表点击链接就更新
+            selectors: [  //代表要更新的节点
+                ".section",
+                "title"
+            ],
+            cache: true,
+            cacheBust:false
+        })
+
+        function loadBusuanzi(){
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js", function () {});
+        }
+
+        // 开始 PJAX 执行的函数
+        document.addEventListener('pjax:send', function () {
+        });
+        
+        // PJAX 完成之后执行的函数，可以和上面的重载放在一起
+        document.addEventListener('pjax:complete', function () {
+            $(".section").css({opacity:1});
+            if(true){
+                $.getScript('/js/comment-issue-data.js',function(){loadIssueData('92fb67debfc9e0bbb634','d5ada77b829710b04eed0e53d62dc9091f07ca8c','limenggen','blog-comment',false);});
+            }
+            if(false){
+                loadMathJax();
+            }
+            loadMainJs(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings);
+            loadBackTop();
+            loadBusuanzi();
+            if(typeof loadBanner == 'function'){
+                loadBanner();
+            }
+        });</script></body></html>

@@ -6,7 +6,7 @@
   <link href="http://limenggen.github.io/atom.xml" rel="self"/>
   
   <link href="http://limenggen.github.io/"/>
-  <updated>2020-10-28T12:32:47.346Z</updated>
+  <updated>2020-11-03T09:40:29.134Z</updated>
   <id>http://limenggen.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sql常用函数笔记</title>
+    <link href="http://limenggen.github.io/2020/11/03/sql-function/"/>
+    <id>http://limenggen.github.io/2020/11/03/sql-function/</id>
+    <published>2020-11-03T09:17:04.000Z</published>
+    <updated>2020-11-03T09:40:29.134Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用<br>本篇主要记录一些sql常用函数的知识点<br>本篇博客有参考：<a href="https://www.cnblogs.com/winter-bamboo/p/10779466.html">winter-bamboo的博客</a></p></blockquote><a id="more"></a><h1 id="一、字符函数"><a href="#一、字符函数" class="headerlink" title="一、字符函数"></a>一、字符函数</h1><h2 id="1、-LENGTH"><a href="#1、-LENGTH" class="headerlink" title="1、 LENGTH"></a>1、 LENGTH</h2><p>获取参数值的字节个数</p><pre><code>例：SELECT LENGTH (&#39;lala&#39;) ;结果： 4</code></pre><h2 id="2、-CONCAT"><a href="#2、-CONCAT" class="headerlink" title="2、 CONCAT"></a>2、 CONCAT</h2><p>拼接字符串</p><pre><code>例：SELECT CONCAT (&#39;asd&#39; , &#39;we&#39; );结果： asdwe</code></pre><h2 id="3、-UPPER"><a href="#3、-UPPER" class="headerlink" title="3、 UPPER"></a>3、 UPPER</h2><p>将参数全部变为大写</p><pre><code>例：SELECT UPPER(&#39; abcd&#39; );结果:   ABCD</code></pre><h2 id="4、-LOWER"><a href="#4、-LOWER" class="headerlink" title="4、 LOWER"></a>4、 LOWER</h2><p>将参数全部变为小写</p><pre><code>例：SELECT LOWER(&#39; ABCD&#39; );结果:   abcd</code></pre><h2 id="5、-SUBSTR"><a href="#5、-SUBSTR" class="headerlink" title="5、 SUBSTR"></a>5、 SUBSTR</h2><p>索引从1开始，返回指定位置及其之后的字符串</p><pre><code>例：SELECT SUBSTR( &#39; ABCD&#39; , 2 ); 结果：BCD</code></pre><p>截取从指定索引处（第二个参数）开始，获取索引位置及其后指定字符长度的字符串（第三个参数）</p><pre><code>例：SELECT SUBSTR( &#39; ABCD&#39; , 1,3 ); 结果：ABC</code></pre><h2 id="6、-INSTR"><a href="#6、-INSTR" class="headerlink" title="6、 INSTR"></a>6、 INSTR</h2><p>返回第二个参数在第一个参数中第一次出现的位置，若没有出现，则返回0</p><pre><code>例：SELECT INSTR(&#39;ABCD&#39; , &#39;CD&#39;)结果：  3例：SELECT INSTR(&#39;ABCD&#39; , &#39;E&#39;)结果：  0</code></pre><h2 id="7、-TRIM"><a href="#7、-TRIM" class="headerlink" title="7、 TRIM"></a>7、 TRIM</h2><p>去除首尾指定的字符，若没有指定，则表示去除空格</p><pre><code>例：SELECT TRIM ( &#39;#&#39; , &#39;###acd##sas###&#39;);结果：  acd##sas</code></pre><h2 id="8、-LPAD"><a href="#8、-LPAD" class="headerlink" title="8、 LPAD"></a>8、 LPAD</h2><p>用指定的字符实现左填充指定长度，同时也是结果的最终长度</p><pre><code>例：SELECT LPAD( &#39;abc&#39; , 4 , &#39;#&#39;&#39;);结果:  #ABC</code></pre><h2 id="9、-RPAD"><a href="#9、-RPAD" class="headerlink" title="9、 RPAD"></a>9、 RPAD</h2><p>用指定的字符实现右填充指定长度，同时也是结果的最终长度</p><pre><code>例：SELECT LPAD( &#39;ABC&#39; , 4 , &#39;#&#39;);结果:  ABC#例：SELECT LPAD( &#39;ABC&#39; , 2 , &#39;#&#39;);结果:  AB</code></pre><h2 id="10、-REPLACE"><a href="#10、-REPLACE" class="headerlink" title="10、 REPLACE"></a>10、 REPLACE</h2><p>替换所有的指定的字符串为另一个字符串</p><pre><code>例：SELECT REPLACE( &#39;ABCBCD&#39; , &#39;BC&#39; ,&#39;#&#39; ); 结果: A##D</code></pre><h1 id="二、数学函数"><a href="#二、数学函数" class="headerlink" title="二、数学函数"></a>二、数学函数</h1><h2 id="1、-ROUND"><a href="#1、-ROUND" class="headerlink" title="1、 ROUND"></a>1、 ROUND</h2><p>四舍五入</p><pre><code>例：SELECT ROUND(-1.55);结果：  -2 </code></pre><p>保留指定小数的位数</p><pre><code>例：SELECT ROUND (1.547,2);结果：  1.54</code></pre><h2 id="2、-CEIL"><a href="#2、-CEIL" class="headerlink" title="2、 CEIL"></a>2、 CEIL</h2><p>向上取整，返回大于等于该参数的最小整数</p><pre><code>例：SELECT CEIL (-1.0002);结果：  -1</code></pre><h2 id="3、-FLOOR"><a href="#3、-FLOOR" class="headerlink" title="3、 FLOOR"></a>3、 FLOOR</h2><p>向下取整，返回小于等于该参数的最大整数</p><pre><code>例：SELECT CEIL (9.99999);结果：  9</code></pre><h2 id="4、-TRUNCATE"><a href="#4、-TRUNCATE" class="headerlink" title="4、 TRUNCATE"></a>4、 TRUNCATE</h2><p>截断</p><pre><code>例：SELECT TRUNCATE (1.6699,2);结果:  1.66</code></pre><h2 id="5、-MOD"><a href="#5、-MOD" class="headerlink" title="5、 MOD"></a>5、 MOD</h2><p>取模</p><pre><code>例：SELECT MOD(-10,-3)结果:  -1</code></pre><h1 id="三、日期函数"><a href="#三、日期函数" class="headerlink" title="三、日期函数"></a>三、日期函数</h1><h2 id="1、-NOW"><a href="#1、-NOW" class="headerlink" title="1、 NOW"></a>1、 NOW</h2><p>返回当前系统日期+时间</p><pre><code>例：SELECT NOW();</code></pre><h2 id="2、-CURDATE"><a href="#2、-CURDATE" class="headerlink" title="2、 CURDATE"></a>2、 CURDATE</h2><p>返回当前系统时间，不包含时间</p><pre><code>例：SELECT CURDATE();</code></pre><h2 id="3、-CURTIME"><a href="#3、-CURTIME" class="headerlink" title="3、 CURTIME"></a>3、 CURTIME</h2><p>返回当前时间，不包含日期</p><pre><code>例：SELECT CURTIME();</code></pre><h2 id="4、-MONTHNAME-DAYNAME-等"><a href="#4、-MONTHNAME-DAYNAME-等" class="headerlink" title="4、 MONTHNAME , DAYNAME  等"></a>4、 MONTHNAME , DAYNAME  等</h2><p>返回日期的英文名字</p><pre><code>例：SELECT DAYNAME(NOW());</code></pre><h2 id="5、-STR-TO-DATE"><a href="#5、-STR-TO-DATE" class="headerlink" title="5、 STR_TO_DATE"></a>5、 STR_TO_DATE</h2><p>将字符串通过指定的格式转化为日期</p><pre><code>例：SELECT STR_TO_DATE(&#39;4-3#1992&#39;, &#39;%m-%d#%Y&#39;);结果：1992-04-03</code></pre><h2 id="6、-DATE-FORMAT"><a href="#6、-DATE-FORMAT" class="headerlink" title="6、 DATE_FORMAT"></a>6、 DATE_FORMAT</h2><p>将日期转化为指定格式字符串</p><pre><code>例：SELECT DATE_FORMAT(NOW(), &#39;%m#%d#%Y&#39;);结果： 04#27#2019</code></pre><h1 id="三、其他函数"><a href="#三、其他函数" class="headerlink" title="三、其他函数"></a>三、其他函数</h1><h2 id="1、-SELECT-VERSION"><a href="#1、-SELECT-VERSION" class="headerlink" title="1、 SELECT VERSION()"></a>1、 SELECT VERSION()</h2><p>获取sql的版本号</p><h2 id="2、-SELECT-DATABASE"><a href="#2、-SELECT-DATABASE" class="headerlink" title="2、 SELECT DATABASE()"></a>2、 SELECT DATABASE()</h2><p>获取当前所在数据库名</p><h2 id="3、-SELECT-USER"><a href="#3、-SELECT-USER" class="headerlink" title="3、 SELECT USER()"></a>3、 SELECT USER()</h2><p>获取登陆用户名</p><h1 id="四、流程控制函数"><a href="#四、流程控制函数" class="headerlink" title="四、流程控制函数"></a>四、流程控制函数</h1><h2 id="1、-if"><a href="#1、-if" class="headerlink" title="1、 if"></a>1、 if</h2><p>一共三个参数，若第一个参数代表的表达式值为true, 则执行第二个参数代表的表达式，否则执行第三个参数代表的表达式</p><pre><code>例：SELECT IF (10 &gt; 5 , &#39;大&#39; , &#39;小&#39; )；结果： 大</code></pre><h2 id="2、-case"><a href="#2、-case" class="headerlink" title="2、 case"></a>2、 case</h2><p>用法一：<br>    相当于switch case</p><pre><code>CASE 要判断的字段或者表达式WHEN 常量1 THEN 要显示的值1或者与语句1WHEN 常量2   THEN 要显示的值2或者与语句2WHEN 常量3 THEN 要显示的值3或者与语句3ELSE  要显示的值x或者与语句xEND</code></pre><p>用法二：<br>    相当于多重if<br>    相当于switch case</p><pre><code>CASEWHEN 条件1 THEN 要显示的值1或者与语句1WHEN 条件2   THEN 要显示的值2或者与语句2WHEN 条件3 THEN 要显示的值3或者与语句3ELSE  要显示的值x或者与语句x</code></pre>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用&lt;br&gt;本篇主要记录一些sql常用函数的知识点&lt;br&gt;本篇博客有参考：&lt;a href=&quot;https://www.cnblogs.com/winter-bamboo/p/10779466.html&quot;&gt;winter-bamboo的博客&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="sql函数" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/sql%E5%87%BD%E6%95%B0/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring学习笔记</title>
