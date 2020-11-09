@@ -44,6 +44,33 @@
   </entry>
   
   <entry>
+    <title>sql常用关键字笔记</title>
+    <link href="http://limenggen.github.io/2020/11/05/sql-keyword/"/>
+    <id>http://limenggen.github.io/2020/11/05/sql-keyword/</id>
+    <published>2020-11-05T10:17:04.000Z</published>
+    <updated>2020-11-09T10:44:46.369Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>sql关键字是使用sql的基础，掌握sql关键字才能在sql的各种需求中，完成对应任务<br>本篇主要记录一些sql常用关键字的知识点<br>本篇博客有参考：<a href="https://me.csdn.net/qq_32038679">阳呀么阳阳阳的博客</a></p></blockquote><a id="more"></a><h2 id="1、基本类型"><a href="#1、基本类型" class="headerlink" title="1、基本类型"></a>1、基本类型</h2><table><thead><tr><th>类型</th><th>含义</th></tr></thead><tbody><tr><td>char(n)</td><td>存放固定长度的字符串，用户指定长度为n。如果没有使用n个长度则会在末尾添加空格。</td></tr><tr><td>varchar(n)</td><td>可变长度的字符串，用户指定最大长度n。char的改进版，大多数情况下我们最好使用varchar。</td></tr><tr><td>int</td><td>整数类型</td></tr><tr><td>smallint</td><td>小整数类型</td></tr><tr><td>numeric(p,d)</td><td>定点数，精度由用户指定。这个数有p位数字（包括一个符号位）d位在小数点右边。</td></tr><tr><td>real ,double precision</td><td>浮点数和双精度浮点数。</td></tr><tr><td>float(n)</td><td>精度至少位n位的浮点数</td></tr></tbody></table><h2 id="2、特殊关键字"><a href="#2、特殊关键字" class="headerlink" title="2、特殊关键字"></a>2、特殊关键字</h2><table><thead><tr><th>类型</th><th>含义</th><th>实例</th></tr></thead><tbody><tr><td>primary key</td><td>主键</td><td>primary key（student_id）</td></tr><tr><td>foreign key references</td><td>外键，括号中为外键，references后为外键的表</td><td>foreign key(course_id) references Course</td></tr><tr><td>not null    不为空，前面为属性的定义</td><td>name varchar(10) not null</td><td></td></tr></tbody></table><h2 id="3、创建-插入-删除-修改"><a href="#3、创建-插入-删除-修改" class="headerlink" title="3、创建/插入/删除/修改"></a>3、创建/插入/删除/修改</h2><table><thead><tr><th>类型</th><th>含义</th></tr></thead><tbody><tr><td>create table</td><td>创建一张表</td></tr><tr><td>insert into…values</td><td>向表中插入一条信息</td></tr><tr><td>delete from</td><td>从表中删除一条信息</td></tr><tr><td>update…set…where</td><td>在where的位置，更新内容为set的值</td></tr><tr><td>drop table</td><td>删除表</td></tr><tr><td>alter table…add</td><td>向表中添加某个属性</td></tr><tr><td>alter table…drop</td><td>删除某个属性</td></tr><tr><td>truncate</td><td>清空内容</td></tr></tbody></table><h2 id="4、SQL查询语句−单表查询"><a href="#4、SQL查询语句−单表查询" class="headerlink" title="4、SQL查询语句−单表查询"></a>4、SQL查询语句−单表查询</h2><table><thead><tr><th>类型</th><th>含义</th></tr></thead><tbody><tr><td>select</td><td>表示要查找表所含有的属性</td></tr><tr><td>from</td><td>表示要操作的表</td></tr><tr><td>where</td><td>判断条件，根据该判断条件选择信息</td></tr><tr><td>distinct</td><td>表示将结果去重</td></tr><tr><td>all</td><td>表示不去重</td></tr><tr><td>and</td><td>在where后使用and表示将判断条件连接起来</td></tr><tr><td>or</td><td>在where中使用or表示判断条件多选一</td></tr><tr><td>not</td><td>在where中使用not表示判断条件相反</td></tr></tbody></table><h2 id="5、SQL查询语句−多表查询"><a href="#5、SQL查询语句−多表查询" class="headerlink" title="5、SQL查询语句−多表查询"></a>5、SQL查询语句−多表查询</h2><table><thead><tr><th>类型</th><th>含义</th></tr></thead><tbody><tr><td>A,B</td><td>在from后面通过逗号连接多张表，表示将这些表进行笛卡尔积运算</td></tr><tr><td>natural join</td><td>将natural join关键字前后的两张表进行自然连接运算</td></tr><tr><td>left outer join</td><td>左外连接，以左边为基准进行连接，右边没有的用NULL代替</td></tr><tr><td>right outer join</td><td>右外连接，以右边为基准进行连接，左边没有的用NULL代替</td></tr><tr><td>full join</td><td>全然外连接，将两表完全合并，没有的用NULL代替</td></tr><tr><td>join/inner</td><td>join    内连接，只连接两表皆有，其他删除</td></tr><tr><td>corss join</td><td>交叉连接，结果为两表的笛卡尔积</td></tr><tr><td>A join B using(c)</td><td>将A和B通过c属性自然连接</td></tr></tbody></table><h2 id="6、附加运算关键字"><a href="#6、附加运算关键字" class="headerlink" title="6、附加运算关键字"></a>6、附加运算关键字</h2><table><thead><tr><th>类型</th><th>含义</th></tr></thead><tbody><tr><td>as</td><td>将as前的关系起一个别名，在此语句中可以用别名来代指这个表</td></tr><tr><td>*</td><td>在select中表示找出这个表所有的属性</td></tr><tr><td>order by</td><td>让查询结果中的信息按照给定的属性排序（默认升序，上小下大）</td></tr><tr><td>desc</td><td>在排序后使用，表示采用降序</td></tr><tr><td>asc</td><td>在排序后使用，表示采用升序</td></tr><tr><td>between</td><td>在where中使用between表示一个数在两个数值之间取值</td></tr><tr><td>not between</td><td>between的反义词，在两个数之外取值</td></tr><tr><td>union/union all</td><td>将连个SQL语句做并运算，并且自动去重，添加all表示不去重</td></tr><tr><td>intersect/intersect all</td><td>将两个SQL语句做交运算，并自动去重，添加all表示不去重</td></tr><tr><td>except/except all</td><td>将两个SQL语句做差运算，并且自动去重，添加all表示不去重</td></tr><tr><td>is null</td><td>在where中使用is null表示这个值是空值</td></tr><tr><td>is not null</td><td>在where中使用is not null表示这个值不是空值</td></tr></tbody></table><h2 id="7、聚集函数运算"><a href="#7、聚集函数运算" class="headerlink" title="7、聚集函数运算"></a>7、聚集函数运算</h2><table><thead><tr><th>类型</th><th>含义</th></tr></thead><tbody><tr><td>avg</td><td>平均值</td></tr><tr><td>min</td><td>最小值</td></tr><tr><td>max</td><td>最大值</td></tr><tr><td>sum</td><td>总和</td></tr><tr><td>count</td><td>计数</td></tr><tr><td>distinct</td><td>表示将后面的属性去重</td></tr><tr><td>group by</td><td>将在group by上取值相同的信息分在一个组</td></tr><tr><td>having</td><td>对group by产生的分组进行筛选，可以使用聚集函数</td></tr></tbody></table>]]></content>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;sql关键字是使用sql的基础，掌握sql关键字才能在sql的各种需求中，完成对应任务&lt;br&gt;本篇主要记录一些sql常用关键字的知识点&lt;br&gt;本篇博客有参考：&lt;a href=&quot;https://me.csdn.net/qq_32038679&quot;&gt;阳呀么阳阳阳的博客&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="sql关键字" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/sql%E5%85%B3%E9%94%AE%E5%AD%97/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>sql常用函数笔记</title>
     <link href="http://limenggen.github.io/2020/11/03/sql-function/"/>
     <id>http://limenggen.github.io/2020/11/03/sql-function/</id>
