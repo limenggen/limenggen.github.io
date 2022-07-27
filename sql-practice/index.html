@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="">
+<meta name="description" content="sql的练习题是一些sql的基本使用以及函数、关键字的常用练习本篇主要记录一些sql常见练习题，适合sql基础不稳定的童鞋，快来跟着一起学习吧！练习后你会感受到自己sql又提升一步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql数据库练习题">
+<meta property="og:url" content="http://limenggen.github.io/sql-practice/index.html">
+<meta property="og:site_name" content="初月二三">
+<meta property="og:description" content="sql的练习题是一些sql的基本使用以及函数、关键字的常用练习本篇主要记录一些sql常见练习题，适合sql基础不稳定的童鞋，快来跟着一起学习吧！练习后你会感受到自己sql又提升一步">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-11-28T05:35:03.000Z">
+<meta property="article:modified_time" content="2022-07-27T06:12:10.773Z">
+<meta property="article:author" content="初月二三">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="数据库笔记">
+<meta name="twitter:card" content="summary">
+
+    <meta name="description" content="情怀仍在，纵然往事早已下落不明">
+
+<title>
+    sql数据库练习题
+</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+
+<link rel="preload" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.css">
+
+
+<link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
+<link rel="stylesheet" href="/css/plugins/locomotive-scroll.css">
+<link rel="stylesheet" href="/css/plugins/swiper.min.css">
+<link rel="stylesheet" href="/css/plugins/fancybox.min.css">
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+<!-- variable -->
+<script>window.TYPED_TEXT=[
+  "好好生活 慢慢相遇"
+]</script>
+<script>window.FAVICON={
+  "icon16": "https://limenggen.gitee.io/img/favicon.png",
+  "icon32": "https://limenggen.gitee.io/img/favicon.png",
+  "appleTouchIcon": null,
+  "webmanifest": null,
+  "visibilitychange": false,
+  "hidden": null,
+  "showText": "(/≧▽≦/)咦！又好了！",
+  "hideText": "(●—●)喔哟，崩溃啦！"
+}</script>
+<script>window.HTMEM_VERSION='1.0.2'</script>
+<link data-theme-type="style-light" rel="stylesheet" href="/css/style-light.css?v=1.0.2" id="trm-switch-style">
+<link data-theme-type="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.0.2" id="trm-switch-style">
+
+<!-- theme css -->
+<script>
+    let themeMode = localStorage.getItem('theme-mode') === 'style-dark' ? 'style-light' : 'style-dark';
+    let linkdom = document.querySelector('[data-theme-type='+themeMode+']');
+    if(linkdom) linkdom.remove();
+</script>
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="初月二三" type="application/atom+xml">
+</head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation"><i class="far fa-sun"></i>
+        <div class="trm-horizon"></div>
+        <i class="far fa-moon"></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+            <!-- top bar -->
+            <div class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target="#content" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				<img src="https://limenggen.gitee.io/img/favicon.png" alt="logo">
+				<div class="trm-logo-text">
+					初月
+					<span>二三</span>
+				</div>
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/">
+								首页
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/">
+								归档
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/categories/Linux/">
+								分类
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/links/">
+								友链
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/share/">
+								分享
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/comment/">
+								评论
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/">
+								关于
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+
+			<!-- mode switcher place -->
+			<div class="trm-mode-switcher-place"></div>
+			<!-- mode switcher place end -->
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</div>
+            <!-- top bar end -->
+
+            <!-- body -->
+            <div class="trm-content-start">
+
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    <!-- banner cover -->
+    <img src="https://limenggen.gitee.io/img/media.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <!-- banner cover end -->
+
+    <!-- banner slideshow cover-->
+    <!-- <div class="swiper-container trm-slideshow" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/img/blog/b1.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b2.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b3.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+        </div>
+    </div> -->
+    <!-- banner slideshow cover end -->
+
+    <!-- banner video cover -->
+    <!-- <video autoplay="autoplay" loop muted playsinline webkit-playinginline class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <source src="img/banner.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="img/banner.webm" type='video/webm; codecs="vp8, vorbis"'>
+        <source src="img/banner.ogg" type='video/ogg; codecs="theora, vorbis"'>
+        Your browser does not support HTML5 video.
+    </video> -->
+    <!-- banner video cover end -->
+
+    <!-- banner cover end -->
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            sql数据库练习题
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        sql-practice
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- main card -->
+                <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
+        <!-- card header -->
+        <div class="trm-mc-header">
+            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://limenggen.gitee.io/img/head.jpg" alt="Avatar"> </div>
+            <h5 class="trm-name trm-mb-15">
+                初月二三
+            </h5>
+            <div class="trm-label">
+                Live
+                <span class="trm-typed-text">
+                    <!-- Words for theme.user.typedText -->
+                </span>
+            </div>
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+                    <!-- categories -->
+                    <div class="row">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    文章
+                                </h6>
+                                <a href="/archives" class="trm-label">
+                                    13
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    分类
+                                </h6>
+                                <a href="/categories/Linux/" class="trm-label">
+                                    5
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                    </div>
+                    <!-- categories end -->
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+            
+                <a href="https://github.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            
+                <a href="https://gitee.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-gitee"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-weibo"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            
+                <a href="https://limenggen.gitee.io/img/weixin_.jpg" rel="nofollow" target="_blank">
+                    <i class="fa fa-comments"></i>
+                </a>
+            
+        </div>
+        <!-- sidebar social end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- info -->
+        <ul class="trm-table trm-mb-20">
+            
+                <li>
+                    <div class="trm-label">
+                        个人:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        囊中羞涩，不知市井繁华
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        生活:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        白天归顺生活，夜晚臣服灵魂
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        选择:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        晚上11点前睡觉
+                    </div>
+                </li>
+            
+        </ul>
+        
+        <!-- info end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- action button -->
+        <div class="text-center">
+            <a href="/atom.xml" class="trm-btn">
+                订阅我
+                <i class="fa fa-rss"></i>
+            </a>
+        </div>
+        <!-- action button end -->
+        
+    </div>
+</div>
+                <!-- main card end -->
+            </div>
+            <div class="col-lg-8">
+                <!-- content -->
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-calendar-alt trm-icon"></i><br>
+                                2020/11/28
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-clock trm-icon"></i><br>
+                                01:35
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-user trm-icon"></i><br>
+                                初月二三
+                            </div>
+                        </div>
+                    </div>
+
+                    <article class="trm-card trm-publication">
+                        <blockquote>
+<p>sql的练习题是一些sql的基本使用以及函数、关键字的常用练习<br>本篇主要记录一些sql常见练习题，适合sql基础不稳定的童鞋，快来跟着一起学习吧！练习后你会感受到自己sql又提升一步</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、建表"><a href="#一、建表" class="headerlink" title="一、建表"></a>一、建表</h1><h2 id="1、表字段及含义"><a href="#1、表字段及含义" class="headerlink" title="1、表字段及含义"></a>1、表字段及含义</h2><blockquote>
+<p>Student(Sid,Sname,Sage,Ssex)学生表</p>
+<p>*Sid：学号<br>*Sname：学生姓名<br>*Sage：学生年龄<br>*Ssex：学生性别</p>
+</blockquote>
+<blockquote>
+<p>Course(Cid,Cname,T#)课程表</p>
+<p>*Cid：课程编号<br>*Cname：课程名称<br>*Tid：教师编号</p>
+</blockquote>
+<blockquote>
+<p>SC(Sid,Cid,score)成绩表</p>
+<p>*Sid：学号<br>*Cid：课程编号<br>*score：成绩</p>
+</blockquote>
+<blockquote>
+<p>Teacher(Tid,Tname)教师表</p>
+<p>*Tid：教师编号：<br>*Tname：教师名字</p>
+</blockquote>
+<h1 id="二、练习题"><a href="#二、练习题" class="headerlink" title="二、练习题"></a>二、练习题</h1><h2 id="1、查询“001”课程比“002”课程成绩高的所有学生的学号"><a href="#1、查询“001”课程比“002”课程成绩高的所有学生的学号" class="headerlink" title="1、查询“001”课程比“002”课程成绩高的所有学生的学号"></a>1、查询“001”课程比“002”课程成绩高的所有学生的学号</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select a.sid from </span><br><span class="line">(select sid,score from sc where cid = &#x27;001&#x27;) a,</span><br><span class="line">(select sid,score from sc where cid = &#x27;002&#x27;) b </span><br><span class="line">where a.sid = b.sid and a.score &gt; b.score;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、查询平均成绩大于60分的同学的学号和平均成绩"><a href="#2、查询平均成绩大于60分的同学的学号和平均成绩" class="headerlink" title="2、查询平均成绩大于60分的同学的学号和平均成绩"></a>2、查询平均成绩大于60分的同学的学号和平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select sid,avg(score) from sc</span><br><span class="line">group by sid </span><br><span class="line">having avg(score) &gt; 60;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、查询所有同学的学号、姓名、选课数、总成绩"><a href="#3、查询所有同学的学号、姓名、选课数、总成绩" class="headerlink" title="3、查询所有同学的学号、姓名、选课数、总成绩"></a>3、查询所有同学的学号、姓名、选课数、总成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select s.sid,s.sname,count_cid as 选课数, </span><br><span class="line">sum_score  as 总成绩</span><br><span class="line">from student s</span><br><span class="line">left join </span><br><span class="line">(select sid,count(cid) as count_cid,sum(score) as sum_score </span><br><span class="line">from sc group by sid ) sc</span><br><span class="line">on s.sid = sc.sid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、查询姓‘李’的老的个数"><a href="#4、查询姓‘李’的老的个数" class="headerlink" title="4、查询姓‘李’的老的个数"></a>4、查询姓‘李’的老的个数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select count(tname)</span><br><span class="line">from teacher </span><br><span class="line">where tname like &#x27;李%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、查询没有学过“叶平”老师可的同学的学号、姓名"><a href="#5、查询没有学过“叶平”老师可的同学的学号、姓名" class="headerlink" title="5、查询没有学过“叶平”老师可的同学的学号、姓名"></a>5、查询没有学过“叶平”老师可的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select s.sid,s.sname </span><br><span class="line">from student as s </span><br><span class="line">where s.sid not in (</span><br><span class="line">    select DISTINCT sid </span><br><span class="line">    from sc as sc </span><br><span class="line">    where sc.cid in (</span><br><span class="line">        select cid </span><br><span class="line">        from course as c </span><br><span class="line">        left join teacher as t on c.tid = t.tid </span><br><span class="line">        where t.tname = &#x27;叶平&#x27;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、查询学过“叶平”老师所教的所有课的同学的学号、姓名"><a href="#6、查询学过“叶平”老师所教的所有课的同学的学号、姓名" class="headerlink" title="6、查询学过“叶平”老师所教的所有课的同学的学号、姓名"></a>6、查询学过“叶平”老师所教的所有课的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">select s.sid,s.sname </span><br><span class="line">from student as s </span><br><span class="line">where s.sid in (</span><br><span class="line">    select distinct sc.sid </span><br><span class="line">  from sc as sc </span><br><span class="line">  where sc.cid in (</span><br><span class="line">    select cid </span><br><span class="line">    from course as c </span><br><span class="line">    left join teacher as t on c.tid = t.tid </span><br><span class="line">    where t.tname = &#x27;叶平&#x27;)</span><br><span class="line">        group by sc.sid </span><br><span class="line">    HAVING count(cid) =</span><br><span class="line">    (select count(cid) </span><br><span class="line">     from course as c left join teacher as t on c.tid = t.tid </span><br><span class="line">     where t.tname = &#x27;叶平&#x27;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名"><a href="#7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名" class="headerlink" title="7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名"></a>7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">SELECT s.sid,s.sname </span><br><span class="line">from student as s </span><br><span class="line">left join sc as sc on s.sid = sc.sid</span><br><span class="line">where sc.cid = &#x27;001&#x27;</span><br><span class="line">and EXISTS(</span><br><span class="line">  select * from sc as sc_2 </span><br><span class="line">  where sc.sid = sc_2.sid </span><br><span class="line">  and sc_2.cid = &#x27;002&#x27;);</span><br><span class="line"></span><br><span class="line">select s.sid,s.sname</span><br><span class="line">from student as s </span><br><span class="line">left join sc as sc </span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">where sc.cid = &#x27;001&#x27;</span><br><span class="line">and s.sid in (</span><br><span class="line">  select sid from sc as sc_2 </span><br><span class="line">  where sc_2.cid = &#x27;002&#x27; </span><br><span class="line">  and sc_2.sid = sc.sid);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名"><a href="#8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名" class="headerlink" title="8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名"></a>8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from (select student.sid,student.sname,score,</span><br><span class="line">     (select score from sc as sc_2 </span><br><span class="line">      where sc_2.sid = student.sid </span><br><span class="line">      and sc_2.cid = &#x27;002&#x27;) as score2 </span><br><span class="line">      from student,sc </span><br><span class="line">      where student.sid = sc.sid and cid = &#x27;001&#x27;) s_2</span><br><span class="line">where score2 &lt; score;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、查询所有课程成绩小于60的同学的学号、姓名"><a href="#9、查询所有课程成绩小于60的同学的学号、姓名" class="headerlink" title="9、查询所有课程成绩小于60的同学的学号、姓名"></a>9、查询所有课程成绩小于60的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from student</span><br><span class="line">where sid not in </span><br><span class="line">(select s.sid </span><br><span class="line">from student s,sc </span><br><span class="line">where s.sid = sc.sid and score&gt;60 );</span><br><span class="line"></span><br><span class="line">select sid,sname</span><br><span class="line">from student s</span><br><span class="line">where not EXISTS (</span><br><span class="line">select s.sid from sc </span><br><span class="line">where sc.sid = s.sid and sc.score&gt;60);</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、查询没有学全所有课的同学的学号、姓名"><a href="#10、查询没有学全所有课的同学的学号、姓名" class="headerlink" title="10、查询没有学全所有课的同学的学号、姓名"></a>10、查询没有学全所有课的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">select s.sid,s.sname</span><br><span class="line">from student s ,sc sc </span><br><span class="line">where s.sid = sc.sid</span><br><span class="line">group by s.sid,s.sname</span><br><span class="line">having count(sc.cid)&lt;(</span><br><span class="line">select count(cid) </span><br><span class="line">from course);</span><br><span class="line"></span><br><span class="line">select s.sid,s.sname</span><br><span class="line">from student s </span><br><span class="line">right join sc sc on s.sid = sc.sid</span><br><span class="line">group by s.sid,s.sname</span><br><span class="line">having count(sc.cid)&lt;</span><br><span class="line">(select count(cid) from course);</span><br></pre></td></tr></table></figure>
+
+<h2 id="11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名"><a href="#11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名" class="headerlink" title="11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名"></a>11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">select student.sid,sname</span><br><span class="line">from student,sc </span><br><span class="line">where student.sid = sc.sid</span><br><span class="line">and cid in </span><br><span class="line">(select cid from sc where sid = &#x27;1001&#x27;);</span><br><span class="line"></span><br><span class="line">select s.sid,s.sname</span><br><span class="line">from sc sc left join student as s</span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">where sc.cid in (select cid from sc where sid = &#x27;1001&#x27;);</span><br><span class="line"></span><br><span class="line">select sc_1.sid,s.sname</span><br><span class="line">from sc sc_1 left join student as s</span><br><span class="line">on sc_1.sid = s.sid</span><br><span class="line">where </span><br><span class="line">exists (select sc_2.cid from sc as sc_2 </span><br><span class="line">where sc_1.cid = sc_2.cid </span><br><span class="line">and sc_2.sid = &#x27;1001&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名"><a href="#12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名" class="headerlink" title="12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名"></a>12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select sid,sname from student s</span><br><span class="line">left join course c</span><br><span class="line">on s.sid = c.sid</span><br><span class="line">where c.cid in (select cid from sc</span><br><span class="line">where sid = &#x27;001&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩"><a href="#13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩" class="headerlink" title="13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩"></a>13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">update sc set score = </span><br><span class="line">(select avg(sc_2.score) from sc sc_2  </span><br><span class="line">where sc_2.cid = sc.cid)</span><br><span class="line">where cid in </span><br><span class="line">(select c.cid from course c </span><br><span class="line">left join teacher t on t.tid = c.tid </span><br><span class="line">where t.tname = &#x27;叶平&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名"><a href="#14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名" class="headerlink" title="14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名"></a>14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">select sc_1.sid </span><br><span class="line">from (select cid from sc where sid = &#x27;1002&#x27;) a</span><br><span class="line">left join sc sc_1 on a.cid = sc_1.cid</span><br><span class="line">where sc_1.sid &lt;&gt; &#x27;1002&#x27; </span><br><span class="line">group by sc_1.sid </span><br><span class="line">having count(sc_1.cid) = </span><br><span class="line">(select count(cid) from sc where sid = &#x27;1002&#x27;);</span><br><span class="line"></span><br><span class="line">select a.sid,s.sname from </span><br><span class="line">(select sid,GROUP_CONCAT(cid order by cid separator &#x27;,&#x27;) as cid_str </span><br><span class="line">from sc where sid = &#x27;1002&#x27;)b,</span><br><span class="line">(select sid,GROUP_CONCAT(cid order by cid separator &#x27;,&#x27;) as cid_str </span><br><span class="line">from sc group by sid)a</span><br><span class="line">left join student s </span><br><span class="line">on a.sid = s.sid</span><br><span class="line">where a.cid_str = b.cid_str and a.sid &lt;&gt; &#x27;1002&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="15、删除学习“叶平”老师课的SC表记录"><a href="#15、删除学习“叶平”老师课的SC表记录" class="headerlink" title="15、删除学习“叶平”老师课的SC表记录"></a>15、删除学习“叶平”老师课的SC表记录</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">delete from sc where</span><br><span class="line">cid in (</span><br><span class="line">select c.cid from course c </span><br><span class="line">left join teacher t on c.tid = t.tid </span><br><span class="line">where t.tname = &#x27;叶平&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩"><a href="#16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩" class="headerlink" title="16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩"></a>16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">insert into sc select sid,&#x27;002&#x27;,</span><br><span class="line">(select avg(score) from sc where cid = &#x27;0022&#x27;)</span><br><span class="line">from student </span><br><span class="line">where sid not in (select sid from sc where cid = &#x27;002&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分"><a href="#17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分" class="headerlink" title="17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分"></a>17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">select sid as 学生id,</span><br><span class="line">(SELECT score from sc </span><br><span class="line">where sc.sid = t.sid and cid = &#x27;004&#x27;) as 数据库,</span><br><span class="line">(select score from sc </span><br><span class="line">where sc.sid = t.sid and cid = &#x27;001&#x27;) as 企业管理,</span><br><span class="line">(select score from sc </span><br><span class="line">where sc.sid = t.sid and cid = &#x27;015&#x27;) as 英语,</span><br><span class="line">count(cid) as 有效课程数, avg(t.score) as 平均成绩</span><br><span class="line">from sc as t </span><br><span class="line">group by sid</span><br><span class="line">order by avg(t.score);</span><br></pre></td></tr></table></figure>
+
+<h2 id="18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分"><a href="#18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分" class="headerlink" title="18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分"></a>18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">select l.cid as 课程id,l.score as 最高分,</span><br><span class="line">r.score as 最低分</span><br><span class="line">from sc l,sc r</span><br><span class="line">where l.cid = r.cid</span><br><span class="line">and l.score = </span><br><span class="line">(select max(t.score) from sc t </span><br><span class="line">where l.cid = t.cid group by t.cid)</span><br><span class="line">and r.score = (select min(t.score) from sc t </span><br><span class="line">where r.cid = t.cid group by t.cid)</span><br><span class="line">order by l.cid;</span><br><span class="line"></span><br><span class="line">select cid as 课程id,max(score) as 最高分,</span><br><span class="line">min(score) as 最低分</span><br><span class="line">from sc </span><br><span class="line">group by cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="19、按各科平均成绩从低到高和及格率的百分数从高到低顺序"><a href="#19、按各科平均成绩从低到高和及格率的百分数从高到低顺序" class="headerlink" title="19、按各科平均成绩从低到高和及格率的百分数从高到低顺序"></a>19、按各科平均成绩从低到高和及格率的百分数从高到低顺序</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SELECT t.cid as 课程号,</span><br><span class="line">c.cname as 课程名,</span><br><span class="line">COALESCE(avg(score),0) as 平均成绩,</span><br><span class="line">100*sum(case </span><br><span class="line">when COALESCE(score,0) &gt;= 60 </span><br><span class="line">then 1 else 0 END)/count(*) as 及格百分数</span><br><span class="line">from sc t</span><br><span class="line">left join course c </span><br><span class="line">on t.cid = c.cid</span><br><span class="line">group by t.cid</span><br><span class="line">order by 100*sum(case </span><br><span class="line">when COALESCE(score,0) &gt;= 60 </span><br><span class="line">then 1 else 0 END)/count(*);</span><br></pre></td></tr></table></figure>
+
+<h2 id="20、查询如下课程平均成绩和及格率的百分数-用”1行”显示-企业管理（001），马克思（002），OO-amp-UML（003），数据库（004）"><a href="#20、查询如下课程平均成绩和及格率的百分数-用”1行”显示-企业管理（001），马克思（002），OO-amp-UML（003），数据库（004）" class="headerlink" title="20、查询如下课程平均成绩和及格率的百分数(用”1行”显示): 企业管理（001），马克思（002），OO&amp;UML（003），数据库（004）"></a>20、查询如下课程平均成绩和及格率的百分数(用”1行”显示): 企业管理（001），马克思（002），OO&amp;UML（003），数据库（004）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select c.cname,avg(sc.score),</span><br><span class="line">100*sum(case </span><br><span class="line">when COALESCE(score,0) &gt;= 60 </span><br><span class="line">then 1 else 0 END)/count(*)</span><br><span class="line">from course c</span><br><span class="line">left join sc</span><br><span class="line">on c.cid = sc.cid</span><br><span class="line">group by c.cname</span><br><span class="line">having c.cid in (&#x27;001&#x27;,&#x27;002&#x27;,&#x27;003&#x27;,&#x27;004&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="21、查询不同老师所教不同课程平均分从高到低显示"><a href="#21、查询不同老师所教不同课程平均分从高到低显示" class="headerlink" title="21、查询不同老师所教不同课程平均分从高到低显示"></a>21、查询不同老师所教不同课程平均分从高到低显示</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select t.tid as 教师id,</span><br><span class="line">t.tname as 教师姓名,</span><br><span class="line">sc.cid as 课程id,</span><br><span class="line">avg(score) as 平均成绩</span><br><span class="line">from sc as sc</span><br><span class="line">LEFT JOIN course c on sc.cid = c.cid</span><br><span class="line">left join teacher t on c.tid = t.tid</span><br><span class="line">group by sc.cid </span><br><span class="line">order by avg(sc.score) desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理-001-，马克思-002-，UML-003-，数据库-004"><a href="#22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理-001-，马克思-002-，UML-003-，数据库-004" class="headerlink" title="22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理(001)，马克思(002)，UML(003)，数据库(004)"></a>22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理(001)，马克思(002)，UML(003)，数据库(004)</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select sid,cid,score</span><br><span class="line">from sc </span><br><span class="line">where cid in (&#x27;001&#x27;,&#x27;002&#x27;,&#x27;003&#x27;,&#x27;004&#x27;)</span><br><span class="line">order by score desc</span><br><span class="line">limit 2,4;</span><br></pre></td></tr></table></figure>
+
+<h2 id="23、统计下列各科成绩，各分数段人数：课程ID，课程名称，-100-85-85-70-70-60-小于60"><a href="#23、统计下列各科成绩，各分数段人数：课程ID，课程名称，-100-85-85-70-70-60-小于60" class="headerlink" title="23、统计下列各科成绩，各分数段人数：课程ID，课程名称，[100-85],[85-70],[70-60],[ 小于60]"></a>23、统计下列各科成绩，各分数段人数：课程ID，课程名称，[100-85],[85-70],[70-60],[ 小于60]</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">select sc.cid as 课程id,cname as 课程名称,</span><br><span class="line">sum(case when score between 85 and 100 then 1 else 0 end) as &#x27;[100-85]&#x27;,</span><br><span class="line">sum(case when score between 70 and 85 then 1 else 0 end) as &#x27;[85-70]&#x27;,</span><br><span class="line">sum(case when score between 60 and 70 then 1 else 0 end) as &#x27;[70-60]&#x27;,</span><br><span class="line">sum(case when score &lt; 60 then 1 else 0 end) as &#x27;[60-0]&#x27;</span><br><span class="line">from sc as sc </span><br><span class="line">left join course as c</span><br><span class="line">on sc.cid = c.cid</span><br><span class="line">group by sc.cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="24、查询学生平均成绩及其名次"><a href="#24、查询学生平均成绩及其名次" class="headerlink" title="24、查询学生平均成绩及其名次"></a>24、查询学生平均成绩及其名次</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select 1 + (select count(distinct 平均成绩) </span><br><span class="line">from (select sid,avg(score) as 平均成绩 </span><br><span class="line">from sc group by sid)t1 </span><br><span class="line">where 平均成绩 &gt; t2.平均成绩) as 名次,</span><br><span class="line">sid as 学生学号,平均成绩 </span><br><span class="line">from (select sid,avg(score) 平均成绩 from sc group by sid) as t2</span><br><span class="line">order by 平均成绩 desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="25、查询各科成绩前三名的记录（不考虑成绩并列情况）"><a href="#25、查询各科成绩前三名的记录（不考虑成绩并列情况）" class="headerlink" title="25、查询各科成绩前三名的记录（不考虑成绩并列情况）"></a>25、查询各科成绩前三名的记录（不考虑成绩并列情况）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select sid,cid,score</span><br><span class="line">from sc sc_1</span><br><span class="line">where (</span><br><span class="line">select count(3) from sc sc_2 </span><br><span class="line">where sc_1.cid = sc_2.cid </span><br><span class="line">and sc_2.score &gt;= sc_1.score) &lt;= 2 </span><br><span class="line">order by sc_1.cid</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="26、查询每门课程被选修的学生数"><a href="#26、查询每门课程被选修的学生数" class="headerlink" title="26、查询每门课程被选修的学生数"></a>26、查询每门课程被选修的学生数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select cid, count(sid)</span><br><span class="line">from sc </span><br><span class="line">group by cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="27、查询出只选修一门课程的全部学生的学号和姓名"><a href="#27、查询出只选修一门课程的全部学生的学号和姓名" class="headerlink" title="27、查询出只选修一门课程的全部学生的学号和姓名"></a>27、查询出只选修一门课程的全部学生的学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select sc.sid,s.sname,</span><br><span class="line">count(sc.cid) as 课程数</span><br><span class="line">from sc as sc</span><br><span class="line">LEFT JOIN student as s</span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">group by sc.sid</span><br><span class="line">having count(sc.cid) = 1;</span><br></pre></td></tr></table></figure>
+
+<h2 id="28、查询男生、女生人数"><a href="#28、查询男生、女生人数" class="headerlink" title="28、查询男生、女生人数"></a>28、查询男生、女生人数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select count(ssex) as 男生人数</span><br><span class="line">from student</span><br><span class="line">group by ssex</span><br><span class="line">having ssex = &#x27;男&#x27;;</span><br><span class="line">select count(2) from student</span><br><span class="line">where ssex = &#x27;女&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="29、查询姓“张”的学生名单"><a href="#29、查询姓“张”的学生名单" class="headerlink" title="29、查询姓“张”的学生名单"></a>29、查询姓“张”的学生名单</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from student </span><br><span class="line">where sname like &#x27;张%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="30、查询同名同姓的学生名单，并统计同名人数"><a href="#30、查询同名同姓的学生名单，并统计同名人数" class="headerlink" title="30、查询同名同姓的学生名单，并统计同名人数"></a>30、查询同名同姓的学生名单，并统计同名人数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select sname,count(8)</span><br><span class="line">from student </span><br><span class="line">group by sname</span><br><span class="line">having count(8) &gt; 1;</span><br></pre></td></tr></table></figure>
+
+<h2 id="31、1981年出生的学生名单（注：student表中sage列的类型是datetime）"><a href="#31、1981年出生的学生名单（注：student表中sage列的类型是datetime）" class="headerlink" title="31、1981年出生的学生名单（注：student表中sage列的类型是datetime）"></a>31、1981年出生的学生名单（注：student表中sage列的类型是datetime）</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from student</span><br><span class="line">where trunc(sage,&#x27;YYYY&#x27;) = &#x27;1981&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩"><a href="#32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩" class="headerlink" title="32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩"></a>32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select s.sname,sc.sid,avg(sc.score) as 平均成绩</span><br><span class="line">from sc as sc</span><br><span class="line">left join student as s </span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">group by sc.sid </span><br><span class="line">having avg(sc.score)&gt;85;</span><br></pre></td></tr></table></figure>
+
+<h2 id="33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列"><a href="#33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列" class="headerlink" title="33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列"></a>33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select cid,avg(score)</span><br><span class="line">from sc </span><br><span class="line">group by cid</span><br><span class="line">order by avg(score),cid desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="34、查询课程名称为“数据库”，且分数低于60的学生名字和分数"><a href="#34、查询课程名称为“数据库”，且分数低于60的学生名字和分数" class="headerlink" title="34、查询课程名称为“数据库”，且分数低于60的学生名字和分数"></a>34、查询课程名称为“数据库”，且分数低于60的学生名字和分数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select c.cname,s.sid,s.sname,sc.score</span><br><span class="line">from course c</span><br><span class="line">left join sc on sc.cid = c.cid</span><br><span class="line">LEFT JOIN student s on s.sid = sc.sid</span><br><span class="line">where c.cname = &#x27;数据库&#x27; and sc.score&lt;60;</span><br></pre></td></tr></table></figure>
+
+<h2 id="35、查询所有学生的选课情况"><a href="#35、查询所有学生的选课情况" class="headerlink" title="35、查询所有学生的选课情况"></a>35、查询所有学生的选课情况</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select sc.sid,sc.cid,s.sname,c.cname</span><br><span class="line">from sc </span><br><span class="line">LEFT JOIN course c on sc.cid = c.cid</span><br><span class="line">left join student s on sc.sid = s.sid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数"><a href="#36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数" class="headerlink" title="36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数"></a>36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select distinct s.sid,s.sname,sc.cid,sc.score</span><br><span class="line">from sc </span><br><span class="line">left join student s on sc.sid = s.sid</span><br><span class="line">left join course c on sc.cid = c.cid</span><br><span class="line">where sc.score&gt;70;</span><br></pre></td></tr></table></figure>
+
+<h2 id="37、查询不及格的课程，并按课程号从大到小的排列"><a href="#37、查询不及格的课程，并按课程号从大到小的排列" class="headerlink" title="37、查询不及格的课程，并按课程号从大到小的排列"></a>37、查询不及格的课程，并按课程号从大到小的排列</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select cid</span><br><span class="line">from sc </span><br><span class="line">where score&lt;60</span><br><span class="line">ORDER BY cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名"><a href="#38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名" class="headerlink" title="38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名"></a>38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select sc.sid,s.sname </span><br><span class="line">from sc </span><br><span class="line">left join student s on sc.sid = s.sid</span><br><span class="line">where sc.cid = &#x27;003&#x27; and sc.score&gt;80;</span><br></pre></td></tr></table></figure>
+
+<h2 id="39、求选了课程的学生人数"><a href="#39、求选了课程的学生人数" class="headerlink" title="39、求选了课程的学生人数"></a>39、求选了课程的学生人数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select count(2) from </span><br><span class="line">(select distinct sid from sc)a;</span><br></pre></td></tr></table></figure>
+
+<h2 id="40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩"><a href="#40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩" class="headerlink" title="40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩"></a>40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select s.sname,sc.score</span><br><span class="line">from sc sc </span><br><span class="line">left join student s on sc.sid = s.sid</span><br><span class="line">left join course c on sc.cid = c.cid</span><br><span class="line">left join teacher t on c.tid = t.tid</span><br><span class="line">where t.tname = &#x27;叶平&#x27;</span><br><span class="line">and sc.score = (</span><br><span class="line">select max(score) </span><br><span class="line">from sc sc_1 </span><br><span class="line">where sc.cid = sc_1.cid)</span><br></pre></td></tr></table></figure>
+
+<h2 id="41、查询各个课程及相应的选修人数"><a href="#41、查询各个课程及相应的选修人数" class="headerlink" title="41、查询各个课程及相应的选修人数"></a>41、查询各个课程及相应的选修人数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select cid,count(*) from sc group by cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="42、查询不同课程成绩相同的学生和学号、课程号、学生成绩"><a href="#42、查询不同课程成绩相同的学生和学号、课程号、学生成绩" class="headerlink" title="42、查询不同课程成绩相同的学生和学号、课程号、学生成绩"></a>42、查询不同课程成绩相同的学生和学号、课程号、学生成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select DISTINCT a.sid,a.cid,a.score</span><br><span class="line">from sc as a ,sc as b </span><br><span class="line">where a.score = b.score</span><br><span class="line">and a.cid &lt;&gt; b.cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="43、查询每门课程成绩最好的前两名"><a href="#43、查询每门课程成绩最好的前两名" class="headerlink" title="43、查询每门课程成绩最好的前两名"></a>43、查询每门课程成绩最好的前两名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="45、检索至少选修两门课程的学生学号"><a href="#45、检索至少选修两门课程的学生学号" class="headerlink" title="45、检索至少选修两门课程的学生学号"></a>45、检索至少选修两门课程的学生学号</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select sid</span><br><span class="line">from sc</span><br><span class="line">group by sid</span><br><span class="line">having count(8)&gt;=2;</span><br></pre></td></tr></table></figure>
+
+<h2 id="46、查询全部学生选修的课程和课程号和课程名"><a href="#46、查询全部学生选修的课程和课程号和课程名" class="headerlink" title="46、查询全部学生选修的课程和课程号和课程名"></a>46、查询全部学生选修的课程和课程号和课程名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select cid,cname</span><br><span class="line">from course </span><br><span class="line">where cid in (select cid from sc group by cid);</span><br></pre></td></tr></table></figure>
+
+<h2 id="47、查询没学过”叶平”老师讲授的任一门课程的学生姓名"><a href="#47、查询没学过”叶平”老师讲授的任一门课程的学生姓名" class="headerlink" title="47、查询没学过”叶平”老师讲授的任一门课程的学生姓名"></a>47、查询没学过”叶平”老师讲授的任一门课程的学生姓名</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">select sname </span><br><span class="line">from student </span><br><span class="line">where sid not in (</span><br><span class="line">    select sid </span><br><span class="line">    from sc,course,teacher </span><br><span class="line">    where course.tid = teacher.tid and sc.cid = course.cid </span><br><span class="line">    and teacher.tname = &#x27;叶平&#x27;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="48、查询两门以上不及格课程的同学的学号以及其平均成绩"><a href="#48、查询两门以上不及格课程的同学的学号以及其平均成绩" class="headerlink" title="48、查询两门以上不及格课程的同学的学号以及其平均成绩"></a>48、查询两门以上不及格课程的同学的学号以及其平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select sid,avg(COALESCE(score,0))</span><br><span class="line">from sc</span><br><span class="line">where sid in (</span><br><span class="line">    select sid </span><br><span class="line">    from sc </span><br><span class="line">    where score&lt;60 </span><br><span class="line">    group by sid </span><br><span class="line">    having count(8)&gt;2</span><br><span class="line">)</span><br><span class="line">group by sid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="49、检索“004”课程分数小于60，按分数降序排列的同学学号"><a href="#49、检索“004”课程分数小于60，按分数降序排列的同学学号" class="headerlink" title="49、检索“004”课程分数小于60，按分数降序排列的同学学号"></a>49、检索“004”课程分数小于60，按分数降序排列的同学学号</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">select sid,score</span><br><span class="line">from sc</span><br><span class="line">where cid=&#x27;004&#x27;</span><br><span class="line">and score&lt;60</span><br><span class="line">order by score desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="50、删除“002”同学的“001”课程的成绩"><a href="#50、删除“002”同学的“001”课程的成绩" class="headerlink" title="50、删除“002”同学的“001”课程的成绩"></a>50、删除“002”同学的“001”课程的成绩</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">delete from sc</span><br><span class="line">where sid = &#x27;002&#x27;</span><br><span class="line">and cid = &#x27;001&#x27;;</span><br></pre></td></tr></table></figure>
+                    </article>
+
+                    <!-- blog -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- title -->
+                            <h5 class="trm-mb-40 trm-title-with-divider">
+                                其他文章
+                                <span data-number="02"></span>
+                            </h5>
+                        </div>
+                        
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/sql-keyword/" class="trm-cover-frame trm-anima-link">
+            <img src="/img/block.jpg" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/sql-keyword/" class="trm-anima-link">
+                    sql常用关键字笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    数据库笔记
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/11/05 09:02
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    994
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                    </div>
+                    <!-- blog end -->
+
+                     
+    
+
+                    
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#container").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'limenggen',
+      repo: 'limenggen.github.io',
+      oauth: {
+        client_id: '92fb67debfc9e0bbb634',
+        client_secret: 'e86d6c1d9379307d4afbb6e6a1546b22b7d7511e'
+      }
+    });
+    gitment.render('container');
+  }
+
+  showGitment();
+</script>
+
+
+                    <div class="trm-divider trm-mb-40"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+    <div class="trm-label">
+        ©  2020- 2022-07-27 ·
+        <span class="trm-accent-color">
+            初月二三
+        </span>
+    </div>
+    <div class="trm-label">
+        本站已维护:
+        <span id="since" class="trm-accent-color"></span>
+        天
+    </div>
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("09/25/2020 14:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+                    <!-- footer end -->
+                </div>
+                <!-- content end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+  
+  
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+      <!-- mode switcher -->
+      <div class="trm-hidden-switcher">
+        <div class="trm-mode-switcher"><i class="far fa-sun"></i>
+          <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+          <label class="trm-swich" for="trm-swich"></label>
+          <i class="far fa-moon"></i>
+        </div>
+      </div>
+      <!-- mode switcher end -->
+  </div>
+  <!-- app wrapper end -->
+  
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/plugins/swup.min.js"></script>
+<script src="/js/plugins/locomotive-scroll.js"></script>
+<script src="/js/plugins/typing.js"></script>
+<script src="/js/plugins/fancybox.min.js"></script>
+<script src="/js/plugins/swiper.min.js"></script>
+
+
+<!-- 评论插件 -->
+ 
+    
+        <script type="text/javascript" src="//imgcache.qq.com/qcloud/cloudbase-js-sdk/1.7.1/cloudbase.full.js"></script>
+        <script type="text/javascript" src="//unpkg.com/b-comments@0.0.12/dist/index.all.min.js"></script>
+    
+
+
+<!-- Service Worker -->
+
+    <script>
+        "serviceWorker" in navigator ? navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+
+<script src="/js/main.js?v=1.0.2"></script>
+
+
+</body>
+
+</html>

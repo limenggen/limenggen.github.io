@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="">
+<meta name="description" content="sql的优化是sql语句书写的重中之重，好的sql语句可以带来不一样的使用体验，所以好好学习呀本篇主要记录一些sql优化的常见优化方案">
+<meta property="og:type" content="article">
+<meta property="og:title" content="sql常用优化方案">
+<meta property="og:url" content="http://limenggen.github.io/sql-optimize/index.html">
+<meta property="og:site_name" content="初月二三">
+<meta property="og:description" content="sql的优化是sql语句书写的重中之重，好的sql语句可以带来不一样的使用体验，所以好好学习呀本篇主要记录一些sql优化的常见优化方案">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-11-05T13:02:30.000Z">
+<meta property="article:modified_time" content="2022-07-27T05:34:38.266Z">
+<meta property="article:author" content="初月二三">
+<meta property="article:tag" content="sql">
+<meta property="article:tag" content="数据库笔记">
+<meta name="twitter:card" content="summary">
+
+    <meta name="description" content="情怀仍在，纵然往事早已下落不明">
+
+<title>
+    sql常用优化方案
+</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+
+<link rel="preload" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.css">
+
+
+<link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
+<link rel="stylesheet" href="/css/plugins/locomotive-scroll.css">
+<link rel="stylesheet" href="/css/plugins/swiper.min.css">
+<link rel="stylesheet" href="/css/plugins/fancybox.min.css">
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+<!-- variable -->
+<script>window.TYPED_TEXT=[
+  "好好生活 慢慢相遇"
+]</script>
+<script>window.FAVICON={
+  "icon16": "https://limenggen.gitee.io/img/favicon.png",
+  "icon32": "https://limenggen.gitee.io/img/favicon.png",
+  "appleTouchIcon": null,
+  "webmanifest": null,
+  "visibilitychange": false,
+  "hidden": null,
+  "showText": "(/≧▽≦/)咦！又好了！",
+  "hideText": "(●—●)喔哟，崩溃啦！"
+}</script>
+<script>window.HTMEM_VERSION='1.0.2'</script>
+<link data-theme-type="style-light" rel="stylesheet" href="/css/style-light.css?v=1.0.2" id="trm-switch-style">
+<link data-theme-type="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.0.2" id="trm-switch-style">
+
+<!-- theme css -->
+<script>
+    let themeMode = localStorage.getItem('theme-mode') === 'style-dark' ? 'style-light' : 'style-dark';
+    let linkdom = document.querySelector('[data-theme-type='+themeMode+']');
+    if(linkdom) linkdom.remove();
+</script>
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="初月二三" type="application/atom+xml">
+</head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation"><i class="far fa-sun"></i>
+        <div class="trm-horizon"></div>
+        <i class="far fa-moon"></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+            <!-- top bar -->
+            <div class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target="#content" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				<img src="https://limenggen.gitee.io/img/favicon.png" alt="logo">
+				<div class="trm-logo-text">
+					初月
+					<span>二三</span>
+				</div>
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/">
+								首页
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/">
+								归档
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/categories/Linux/">
+								分类
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/links/">
+								友链
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/share/">
+								分享
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/comment/">
+								评论
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/">
+								关于
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+
+			<!-- mode switcher place -->
+			<div class="trm-mode-switcher-place"></div>
+			<!-- mode switcher place end -->
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</div>
+            <!-- top bar end -->
+
+            <!-- body -->
+            <div class="trm-content-start">
+
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    <!-- banner cover -->
+    <img src="https://limenggen.gitee.io/img/media.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <!-- banner cover end -->
+
+    <!-- banner slideshow cover-->
+    <!-- <div class="swiper-container trm-slideshow" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/img/blog/b1.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b2.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b3.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+        </div>
+    </div> -->
+    <!-- banner slideshow cover end -->
+
+    <!-- banner video cover -->
+    <!-- <video autoplay="autoplay" loop muted playsinline webkit-playinginline class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <source src="img/banner.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="img/banner.webm" type='video/webm; codecs="vp8, vorbis"'>
+        <source src="img/banner.ogg" type='video/ogg; codecs="theora, vorbis"'>
+        Your browser does not support HTML5 video.
+    </video> -->
+    <!-- banner video cover end -->
+
+    <!-- banner cover end -->
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            sql常用优化方案
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        sql-optimize
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- main card -->
+                <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
+        <!-- card header -->
+        <div class="trm-mc-header">
+            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://limenggen.gitee.io/img/head.jpg" alt="Avatar"> </div>
+            <h5 class="trm-name trm-mb-15">
+                初月二三
+            </h5>
+            <div class="trm-label">
+                Live
+                <span class="trm-typed-text">
+                    <!-- Words for theme.user.typedText -->
+                </span>
+            </div>
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+                    <!-- categories -->
+                    <div class="row">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    文章
+                                </h6>
+                                <a href="/archives" class="trm-label">
+                                    13
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    分类
+                                </h6>
+                                <a href="/categories/Linux/" class="trm-label">
+                                    5
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                    </div>
+                    <!-- categories end -->
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+            
+                <a href="https://github.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            
+                <a href="https://gitee.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-gitee"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-weibo"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            
+                <a href="https://limenggen.gitee.io/img/weixin_.jpg" rel="nofollow" target="_blank">
+                    <i class="fa fa-comments"></i>
+                </a>
+            
+        </div>
+        <!-- sidebar social end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- info -->
+        <ul class="trm-table trm-mb-20">
+            
+                <li>
+                    <div class="trm-label">
+                        个人:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        囊中羞涩，不知市井繁华
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        生活:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        白天归顺生活，夜晚臣服灵魂
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        选择:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        晚上11点前睡觉
+                    </div>
+                </li>
+            
+        </ul>
+        
+        <!-- info end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- action button -->
+        <div class="text-center">
+            <a href="/atom.xml" class="trm-btn">
+                订阅我
+                <i class="fa fa-rss"></i>
+            </a>
+        </div>
+        <!-- action button end -->
+        
+    </div>
+</div>
+                <!-- main card end -->
+            </div>
+            <div class="col-lg-8">
+                <!-- content -->
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-calendar-alt trm-icon"></i><br>
+                                2020/11/05
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-clock trm-icon"></i><br>
+                                09:02
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-user trm-icon"></i><br>
+                                初月二三
+                            </div>
+                        </div>
+                    </div>
+
+                    <article class="trm-card trm-publication">
+                        <blockquote>
+<p>sql的优化是sql语句书写的重中之重，好的sql语句可以带来不一样的使用体验，所以好好学习呀<br>本篇主要记录一些sql优化的常见优化方案</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、sql语句的优化"><a href="#一、sql语句的优化" class="headerlink" title="一、sql语句的优化"></a>一、sql语句的优化</h1><h2 id="1、索引"><a href="#1、索引" class="headerlink" title="1、索引"></a>1、索引</h2><p>①、对查询进行优化，要精良避免全表扫描，首先应考虑在where及order by涉及的列上建立索引<br>②、若查询条件使用 like “%”,前面加入%会导致全表扫描<br>③、使用group by，不会使用全表扫描，可以禁止排序order by null，提高效率<br>④、若使用or，or中所有的条件必须加索引，否则会全表扫描<br>⑤、select * 中使用具体的字段列表代替“*”，不要返回无用字段</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 例：(一个字段有索引，一个字段没索引)</span><br><span class="line">	select id from t where num=10 or name=&#x27;admin&#x27;</span><br><span class="line"># 可换为：</span><br><span class="line">	select id from t where num=10</span><br><span class="line">	union all</span><br><span class="line">	select id from t where name=&#x27;admin&#x27;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>索引并不是越多越好，索引固然能提高相应的select的效率，但同时也降低了insert及update的效率，因为insert或update时有可能会重建索引，所以怎样建索引需要慎重考虑，视情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建索引要是否必</p>
+<p>应尽可能避免更新clustered索引数据列，因为clustered索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新clustered索引数据列，那么需要考虑是否应将该索引建为clustered索引</p>
+</blockquote>
+<h2 id="2、操作符的使用"><a href="#2、操作符的使用" class="headerlink" title="2、操作符的使用"></a>2、操作符的使用</h2><p>①、避免在where子句中使用 ！= 或 &lt;&gt;操作符，否则引擎将放弃使用索引而进行全表扫描<br>例：可将 a&lt;&gt;0 修改为 a&gt;0 or a&lt;0<br>②、应尽量避免在where子句中对字段进行null值半段，否则将导致引擎放弃使用索引而镜像全表扫描<br>③、char(100)类型，在字段建立时，空间就固定了，不管是否插入值(NULL也包含在内)，都占用100个字符的空间；varchar类型，是变长字段，null不占用空间</p>
+<blockquote>
+<p>尽量使用 数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和链接的性能，并会增加存储开销。这里因为引擎再处理查询和来连接时会逐个比较字符串中每一个字符，而对于数字型只需比较一次</p>
+</blockquote>
+<h2 id="3、in-和-exists"><a href="#3、in-和-exists" class="headerlink" title="3、in 和 exists"></a>3、in 和 exists</h2><p>①、in 先执行子查询，子查询去重后，再执行主查询<br>②、exists 用于检查子查询是否至少返回一行数据，该子查询实际上并不返回仍和 数据，而是返回值True或False<br>③、若两张表数据一样大，那么用in和exists差别不大，但是若不一样大，子查询小的用in，主查询小的用exists<br>④、避免不必要的类型转换，比如将字符串与数字类型标胶，这样会将字符串进行转换，导致全表扫描</p>
+<h2 id="4、where子句"><a href="#4、where子句" class="headerlink" title="4、where子句"></a>4、where子句</h2><p>在where子句中使用参数，也会导致全表扫描，因sql只有再运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时，它必须再编译时进行选择。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select id from t where num=@num</span><br><span class="line">select id from t with(index(索引名)) where num=@num</span><br></pre></td></tr></table></figure>
+<p>应尽量避免再where子句中对字段进行表达式/函数操作，这将导致引擎放弃使用索引而进行全表扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 例：</span><br><span class="line">select id from t where num/2 = 100</span><br><span class="line"># 改为：</span><br><span class="line">select id from t where num = 100*2</span><br><span class="line"></span><br><span class="line"># 例：</span><br><span class="line">select id from t where substring(name,1,3)=&#x27;abc&#x27;</span><br><span class="line">select id from t wherre datediff(day,createdate,&#x27;2005-11-30&#x27;) = 0</span><br><span class="line"></span><br><span class="line"># 改为：</span><br><span class="line">select id from t where name like &#x27;abc%&#x27;</span><br><span class="line">select id from t where createdate &gt;= &#x27;2005-11-30&#x27; and createdate &lt; &#x27;2005-12-1&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、创建表"><a href="#5、创建表" class="headerlink" title="5、创建表"></a>5、创建表</h2><p>①、避免频繁创建和删除临时表，以减少系统表资源的消耗。<br>②、在新建临时表，若一次性插入数据量很大，那么可以使用select into代替create table，避免造成大量log，以提高速度；若数据量不大，可先create table，然后insert</p>
+<p>③、若使用到了临时表，再存储过程的最后无比将所有的临时表显示删除，先truncate table，然后drop table，这样可避免系统表的较长时间锁定</p>
+<h2 id="6、游标"><a href="#6、游标" class="headerlink" title="6、游标"></a>6、游标</h2><p>①、尽量避免使用游标，因为游标的效率较差，若游标操作的数据超过1万行，应考虑改写<br>②、使用基于游标的方法或临时表方法之前，应先照基于集的解决方案来解决问题，基于集的方法通常更有效</p>
+<h2 id="7、其他"><a href="#7、其他" class="headerlink" title="7、其他"></a>7、其他</h2><p>①、在所有的存储过程和触发器的开始处设置 set nocount on ,在结束时设置 set nocount off 。无序在执行存储过程和触发器的每个语句后向客户端发送done_in_proc消息</p>
+<p>②、尽量避免大事务操作，提高系统并发能力</p>
+
+                    </article>
+
+                    <!-- blog -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- title -->
+                            <h5 class="trm-mb-40 trm-title-with-divider">
+                                其他文章
+                                <span data-number="02"></span>
+                            </h5>
+                        </div>
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/sql-keyword/" class="trm-cover-frame trm-anima-link">
+            <img src="/img/block.jpg" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/sql-keyword/" class="trm-anima-link">
+                    sql常用关键字笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    数据库笔记
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/11/05 09:02
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    994
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/sql-function/" class="trm-cover-frame trm-anima-link">
+            <img src="/img/block.jpg" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/sql-function/" class="trm-anima-link">
+                    sql常用函数笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    数据库笔记
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/11/03 08:36
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    1k
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                    </div>
+                    <!-- blog end -->
+
+                     
+    
+
+                    
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#container").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'limenggen',
+      repo: 'limenggen.github.io',
+      oauth: {
+        client_id: '92fb67debfc9e0bbb634',
+        client_secret: 'e86d6c1d9379307d4afbb6e6a1546b22b7d7511e'
+      }
+    });
+    gitment.render('container');
+  }
+
+  showGitment();
+</script>
+
+
+                    <div class="trm-divider trm-mb-40"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+    <div class="trm-label">
+        ©  2020- 2022-07-27 ·
+        <span class="trm-accent-color">
+            初月二三
+        </span>
+    </div>
+    <div class="trm-label">
+        本站已维护:
+        <span id="since" class="trm-accent-color"></span>
+        天
+    </div>
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("09/25/2020 14:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+                    <!-- footer end -->
+                </div>
+                <!-- content end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+  
+  
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+      <!-- mode switcher -->
+      <div class="trm-hidden-switcher">
+        <div class="trm-mode-switcher"><i class="far fa-sun"></i>
+          <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+          <label class="trm-swich" for="trm-swich"></label>
+          <i class="far fa-moon"></i>
+        </div>
+      </div>
+      <!-- mode switcher end -->
+  </div>
+  <!-- app wrapper end -->
+  
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/plugins/swup.min.js"></script>
+<script src="/js/plugins/locomotive-scroll.js"></script>
+<script src="/js/plugins/typing.js"></script>
+<script src="/js/plugins/fancybox.min.js"></script>
+<script src="/js/plugins/swiper.min.js"></script>
+
+
+<!-- 评论插件 -->
+ 
+    
+        <script type="text/javascript" src="//imgcache.qq.com/qcloud/cloudbase-js-sdk/1.7.1/cloudbase.full.js"></script>
+        <script type="text/javascript" src="//unpkg.com/b-comments@0.0.12/dist/index.all.min.js"></script>
+    
+
+
+<!-- Service Worker -->
+
+    <script>
+        "serviceWorker" in navigator ? navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+
+<script src="/js/main.js?v=1.0.2"></script>
+
+
+</body>
+
+</html>

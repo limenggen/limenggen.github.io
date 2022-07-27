@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="">
+<meta name="description" content="本章介绍了hexo的使用及Github&#x2F;Gitee部署本案例使用环境：CentOS:7.4，node:12.13.1，hexo-cli:4.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用GitHub&#x2F;Gitee搭建个人博客（二）">
+<meta property="og:url" content="http://limenggen.github.io/build_blog02/index.html">
+<meta property="og:site_name" content="初月二三">
+<meta property="og:description" content="本章介绍了hexo的使用及Github&#x2F;Gitee部署本案例使用环境：CentOS:7.4，node:12.13.1，hexo-cli:4.2">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+<meta property="article:published_time" content="2020-09-25T07:47:18.000Z">
+<meta property="article:modified_time" content="2022-07-24T11:46:09.621Z">
+<meta property="article:author" content="初月二三">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="GitHub">
+<meta property="article:tag" content="Gitee">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+
+    <meta name="description" content="情怀仍在，纵然往事早已下落不明">
+
+<title>
+    使用GitHub/Gitee搭建个人博客（二）
+</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+
+<link rel="preload" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.css">
+
+
+<link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
+<link rel="stylesheet" href="/css/plugins/locomotive-scroll.css">
+<link rel="stylesheet" href="/css/plugins/swiper.min.css">
+<link rel="stylesheet" href="/css/plugins/fancybox.min.css">
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+<!-- variable -->
+<script>window.TYPED_TEXT=[
+  "好好生活 慢慢相遇"
+]</script>
+<script>window.FAVICON={
+  "icon16": "https://limenggen.gitee.io/img/favicon.png",
+  "icon32": "https://limenggen.gitee.io/img/favicon.png",
+  "appleTouchIcon": null,
+  "webmanifest": null,
+  "visibilitychange": false,
+  "hidden": null,
+  "showText": "(/≧▽≦/)咦！又好了！",
+  "hideText": "(●—●)喔哟，崩溃啦！"
+}</script>
+<script>window.HTMEM_VERSION='1.0.2'</script>
+<link data-theme-type="style-light" rel="stylesheet" href="/css/style-light.css?v=1.0.2" id="trm-switch-style">
+<link data-theme-type="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.0.2" id="trm-switch-style">
+
+<!-- theme css -->
+<script>
+    let themeMode = localStorage.getItem('theme-mode') === 'style-dark' ? 'style-light' : 'style-dark';
+    let linkdom = document.querySelector('[data-theme-type='+themeMode+']');
+    if(linkdom) linkdom.remove();
+</script>
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="初月二三" type="application/atom+xml">
+</head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation"><i class="far fa-sun"></i>
+        <div class="trm-horizon"></div>
+        <i class="far fa-moon"></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+            <!-- top bar -->
+            <div class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target="#content" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				<img src="https://limenggen.gitee.io/img/favicon.png" alt="logo">
+				<div class="trm-logo-text">
+					初月
+					<span>二三</span>
+				</div>
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/">
+								首页
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/">
+								归档
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/categories/Linux/">
+								分类
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/links/">
+								友链
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/share/">
+								分享
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/comment/">
+								评论
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/">
+								关于
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+
+			<!-- mode switcher place -->
+			<div class="trm-mode-switcher-place"></div>
+			<!-- mode switcher place end -->
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</div>
+            <!-- top bar end -->
+
+            <!-- body -->
+            <div class="trm-content-start">
+
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    <!-- banner cover -->
+    <img src="https://limenggen.gitee.io/img/media.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <!-- banner cover end -->
+
+    <!-- banner slideshow cover-->
+    <!-- <div class="swiper-container trm-slideshow" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/img/blog/b1.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b2.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b3.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+        </div>
+    </div> -->
+    <!-- banner slideshow cover end -->
+
+    <!-- banner video cover -->
+    <!-- <video autoplay="autoplay" loop muted playsinline webkit-playinginline class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <source src="img/banner.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="img/banner.webm" type='video/webm; codecs="vp8, vorbis"'>
+        <source src="img/banner.ogg" type='video/ogg; codecs="theora, vorbis"'>
+        Your browser does not support HTML5 video.
+    </video> -->
+    <!-- banner video cover end -->
+
+    <!-- banner cover end -->
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            使用GitHub/Gitee搭建个人博客（二）
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        build_blog02
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- main card -->
+                <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
+        <!-- card header -->
+        <div class="trm-mc-header">
+            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://limenggen.gitee.io/img/head.jpg" alt="Avatar"> </div>
+            <h5 class="trm-name trm-mb-15">
+                初月二三
+            </h5>
+            <div class="trm-label">
+                Live
+                <span class="trm-typed-text">
+                    <!-- Words for theme.user.typedText -->
+                </span>
+            </div>
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+                    <!-- categories -->
+                    <div class="row">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    文章
+                                </h6>
+                                <a href="/archives" class="trm-label">
+                                    13
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    分类
+                                </h6>
+                                <a href="/categories/Linux/" class="trm-label">
+                                    5
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                    </div>
+                    <!-- categories end -->
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+            
+                <a href="https://github.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            
+                <a href="https://gitee.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-gitee"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-weibo"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            
+                <a href="https://limenggen.gitee.io/img/weixin_.jpg" rel="nofollow" target="_blank">
+                    <i class="fa fa-comments"></i>
+                </a>
+            
+        </div>
+        <!-- sidebar social end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- info -->
+        <ul class="trm-table trm-mb-20">
+            
+                <li>
+                    <div class="trm-label">
+                        个人:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        囊中羞涩，不知市井繁华
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        生活:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        白天归顺生活，夜晚臣服灵魂
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        选择:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        晚上11点前睡觉
+                    </div>
+                </li>
+            
+        </ul>
+        
+        <!-- info end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- action button -->
+        <div class="text-center">
+            <a href="/atom.xml" class="trm-btn">
+                订阅我
+                <i class="fa fa-rss"></i>
+            </a>
+        </div>
+        <!-- action button end -->
+        
+    </div>
+</div>
+                <!-- main card end -->
+            </div>
+            <div class="col-lg-8">
+                <!-- content -->
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-calendar-alt trm-icon"></i><br>
+                                2020/09/25
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-clock trm-icon"></i><br>
+                                03:47
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-user trm-icon"></i><br>
+                                初月二三
+                            </div>
+                        </div>
+                    </div>
+
+                    <article class="trm-card trm-publication">
+                        <blockquote>
+<p>本章介绍了hexo的使用及Github/Gitee部署<br>本案例使用环境：CentOS:7.4，node:12.13.1，hexo-cli:4.2</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="三、修改Hexo主题"><a href="#三、修改Hexo主题" class="headerlink" title="三、修改Hexo主题"></a>三、修改Hexo主题</h1><ul>
+<li>上章运行的是Hexo的官方默认的主题配置效果</li>
+<li>我们当然要改造成自己想要的个性主题</li>
+<li>Hexo的主题推荐：<a target="_blank" rel="noopener" href="https://hexo.io/themes/">https://hexo.io/themes/</a></li>
+</ul>
+<h2 id="1、选择喜欢的摸板-下载"><a href="#1、选择喜欢的摸板-下载" class="headerlink" title="1、选择喜欢的摸板,下载"></a>1、选择喜欢的摸板,下载</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> hexo/themes/</span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/limenggen/hexo-theme-yilia-plus</span><br><span class="line"><span class="built_in">mv</span> hexo-theme-yilia-plus yilia-plus</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>每个模板可能都有自己的插件和样式修改，具体安照模板作者(README.md)操作</li>
+</ul>
+</blockquote>
+<h2 id="2、修改hexo配置"><a href="#2、修改hexo配置" class="headerlink" title="2、修改hexo配置"></a>2、修改hexo配置</h2><p>hexo目录下的_config.yml中的theme值:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ------- _config.yml文件截取 --------</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: yilia-plus   <span class="comment"># 修改theme值</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、重新启动："><a href="#3、重新启动：" class="headerlink" title="3、重新启动："></a>3、重新启动：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、将代码上传GitHub"><a href="#四、将代码上传GitHub" class="headerlink" title="四、将代码上传GitHub"></a>四、将代码上传GitHub</h1><h2 id="1、注册一个GitHub账号"><a href="#1、注册一个GitHub账号" class="headerlink" title="1、注册一个GitHub账号"></a>1、注册一个GitHub账号</h2><p>新建一个Repositories(相当于库)，库名：<em>用户名.github.io</em></p>
+<blockquote>
+<p><img src="https://limenggen.gitee.io/images/20200925-github.jpg"></p>
+</blockquote>
+<h2 id="2、设置Pages"><a href="#2、设置Pages" class="headerlink" title="2、设置Pages"></a>2、设置Pages</h2><p>创建完仓库，进入Settings，找到GitHub pages设置</p>
+<blockquote>
+<p><img src="https://limenggen.gitee.io/images/20200925-githubpages.jpg">      <img src="https://limenggen.gitee.io/images/20200925-githubpages2.jpg"></p>
+</blockquote>
+<h2 id="3、生成公钥"><a href="#3、生成公钥" class="headerlink" title="3、生成公钥"></a>3、生成公钥</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="comment"># 获取public key，复制文件内容</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4、配置公钥"><a href="#4、配置公钥" class="headerlink" title="4、配置公钥"></a>4、配置公钥</h2><p>找到Settings -&gt; SSH and GPG keys -&gt; New SSH key：复制内容添加到Key，点击 Add SSH key</p>
+<h2 id="5、修改hexo主目录的-config-yml"><a href="#5、修改hexo主目录的-config-yml" class="headerlink" title="5、修改hexo主目录的_config.yml"></a>5、修改hexo主目录的_config.yml</h2><figure class="highlight bash"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ---------- hexo/_config.yml ------------</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo:</span><br><span class="line">    <span class="comment"># gitee: git@gitee.com:limenggen/limenggen.git</span></span><br><span class="line">    github: git@github.com:limenggen/limenggen.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、上传代码"><a href="#6、上传代码" class="headerlink" title="6、上传代码"></a>6、上传代码</h2><p>配置完后，重新生成静态页面，上传代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h1 id="五、将代码上传Gitee"><a href="#五、将代码上传Gitee" class="headerlink" title="五、将代码上传Gitee"></a>五、将代码上传Gitee</h1><h2 id="1、注册一个Gitee账号"><a href="#1、注册一个Gitee账号" class="headerlink" title="1、注册一个Gitee账号"></a>1、注册一个Gitee账号</h2><p>新建一个仓库，库名：<em>用户名.gitee.io</em></p>
+<blockquote>
+<p><img src="https://limenggen.gitee.io/images/20200925-gitee.jpg"></p>
+</blockquote>
+<h2 id="2、生成公钥："><a href="#2、生成公钥：" class="headerlink" title="2、生成公钥："></a>2、生成公钥：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="comment"># 获取public key，复制文件内容</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、配置公钥"><a href="#3、配置公钥" class="headerlink" title="3、配置公钥"></a>3、配置公钥</h2><p>进入新建库找到设置-&gt; 安全设置 -&gt; SSH公钥 -&gt; 添加公钥：将复制内容添加至公钥，确定。</p>
+<h2 id="4、上传代码"><a href="#4、上传代码" class="headerlink" title="4、上传代码"></a>4、上传代码</h2><p>配置完后，重新生成静态页面，上传代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、上传博客服务"><a href="#5、上传博客服务" class="headerlink" title="5、上传博客服务"></a>5、上传博客服务</h2><p>在新建库中找到‘_服务_’，点击‘_Gitee Pages_’点击更新即可！</p>
+<blockquote>
+<p><img src="https://limenggen.gitee.io/images/20200925-giteepages.jpg">      <img src="https://limenggen.gitee.io/images/20200925-giteepages2.jpg"></p>
+<ul>
+<li><em>Gitee每次上传代码都要再次更新！！！</em></li>
+</ul>
+</blockquote>
+<h1 id="六、使用hexo写博客"><a href="#六、使用hexo写博客" class="headerlink" title="六、使用hexo写博客"></a>六、使用hexo写博客</h1><h2 id="1、到hexo目录下："><a href="#1、到hexo目录下：" class="headerlink" title="1、到hexo目录下："></a>1、到hexo目录下：</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost hexo]<span class="comment"># hexo new &#x27;first-blog&#x27;</span></span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Created: /opt/software/hexo/source/_posts/first-blog.md</span><br><span class="line">//</span><br><span class="line">[root@localhost hexo]<span class="comment"># vi /opt/software/hexo/source/_posts/first-blog.md</span></span><br><span class="line">//</span><br><span class="line">---------- first-blog.md ------------</span><br><span class="line">---</span><br><span class="line">title: 使用GitHub/Gitee搭建个人博客（一）</span><br><span class="line"><span class="built_in">date</span>: 2020-09-25 15:47:18</span><br><span class="line">tags: hexo</span><br><span class="line">---</span><br><span class="line"><span class="comment"># 在合适位置加&lt;!--more--&gt;</span></span><br><span class="line"><span class="comment"># 在这编写博客</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>推荐一款在线博客编辑工具：<a target="_blank" rel="noopener" href="http://pandao.github.io/editor.md/">http://pandao.github.io/editor.md/</a></li>
+</ul>
+</blockquote>
+
+                    </article>
+
+                    <!-- blog -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- title -->
+                            <h5 class="trm-mb-40 trm-title-with-divider">
+                                其他文章
+                                <span data-number="02"></span>
+                            </h5>
+                        </div>
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/CentOS7_redis/" class="trm-cover-frame trm-anima-link">
+            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/CentOS7_redis/" class="trm-anima-link">
+                    CentOS安装Redis
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Linux/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    Linux
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/09/26 05:12
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    368
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/build_blog01/" class="trm-cover-frame trm-anima-link">
+            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/build_blog01/" class="trm-anima-link">
+                    使用GitHub/Gitee搭建个人博客（一）
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    搭建个人博客
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/09/25 02:48
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    848
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                    </div>
+                    <!-- blog end -->
+
+                     
+    
+
+                    
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#container").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'limenggen',
+      repo: 'limenggen.github.io',
+      oauth: {
+        client_id: '92fb67debfc9e0bbb634',
+        client_secret: 'e86d6c1d9379307d4afbb6e6a1546b22b7d7511e'
+      }
+    });
+    gitment.render('container');
+  }
+
+  showGitment();
+</script>
+
+
+                    <div class="trm-divider trm-mb-40"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+    <div class="trm-label">
+        ©  2020- 2022-07-27 ·
+        <span class="trm-accent-color">
+            初月二三
+        </span>
+    </div>
+    <div class="trm-label">
+        本站已维护:
+        <span id="since" class="trm-accent-color"></span>
+        天
+    </div>
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("09/25/2020 14:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+                    <!-- footer end -->
+                </div>
+                <!-- content end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+  
+  
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+      <!-- mode switcher -->
+      <div class="trm-hidden-switcher">
+        <div class="trm-mode-switcher"><i class="far fa-sun"></i>
+          <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+          <label class="trm-swich" for="trm-swich"></label>
+          <i class="far fa-moon"></i>
+        </div>
+      </div>
+      <!-- mode switcher end -->
+  </div>
+  <!-- app wrapper end -->
+  
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/plugins/swup.min.js"></script>
+<script src="/js/plugins/locomotive-scroll.js"></script>
+<script src="/js/plugins/typing.js"></script>
+<script src="/js/plugins/fancybox.min.js"></script>
+<script src="/js/plugins/swiper.min.js"></script>
+
+
+<!-- 评论插件 -->
+ 
+    
+        <script type="text/javascript" src="//imgcache.qq.com/qcloud/cloudbase-js-sdk/1.7.1/cloudbase.full.js"></script>
+        <script type="text/javascript" src="//unpkg.com/b-comments@0.0.12/dist/index.all.min.js"></script>
+    
+
+
+<!-- Service Worker -->
+
+    <script>
+        "serviceWorker" in navigator ? navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+
+<script src="/js/main.js?v=1.0.2"></script>
+
+
+</body>
+
+</html>

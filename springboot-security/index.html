@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="">
+<meta name="description" content="SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。本案例完成项目搭建，并作出相应测试本案例GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;limenggen&#x2F;sp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot项目整合SpringSecurity笔记">
+<meta property="og:url" content="http://limenggen.github.io/springboot-security/index.html">
+<meta property="og:site_name" content="初月二三">
+<meta property="og:description" content="SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。本案例完成项目搭建，并作出相应测试本案例GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;limenggen&#x2F;sp">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+<meta property="article:published_time" content="2020-10-10T13:17:04.000Z">
+<meta property="article:modified_time" content="2022-07-24T11:41:16.709Z">
+<meta property="article:author" content="初月二三">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+
+    <meta name="description" content="情怀仍在，纵然往事早已下落不明">
+
+<title>
+    SpringBoot项目整合SpringSecurity笔记
+</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+
+<link rel="preload" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.css">
+
+
+<link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
+<link rel="stylesheet" href="/css/plugins/locomotive-scroll.css">
+<link rel="stylesheet" href="/css/plugins/swiper.min.css">
+<link rel="stylesheet" href="/css/plugins/fancybox.min.css">
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+<!-- variable -->
+<script>window.TYPED_TEXT=[
+  "好好生活 慢慢相遇"
+]</script>
+<script>window.FAVICON={
+  "icon16": "https://limenggen.gitee.io/img/favicon.png",
+  "icon32": "https://limenggen.gitee.io/img/favicon.png",
+  "appleTouchIcon": null,
+  "webmanifest": null,
+  "visibilitychange": false,
+  "hidden": null,
+  "showText": "(/≧▽≦/)咦！又好了！",
+  "hideText": "(●—●)喔哟，崩溃啦！"
+}</script>
+<script>window.HTMEM_VERSION='1.0.2'</script>
+<link data-theme-type="style-light" rel="stylesheet" href="/css/style-light.css?v=1.0.2" id="trm-switch-style">
+<link data-theme-type="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.0.2" id="trm-switch-style">
+
+<!-- theme css -->
+<script>
+    let themeMode = localStorage.getItem('theme-mode') === 'style-dark' ? 'style-light' : 'style-dark';
+    let linkdom = document.querySelector('[data-theme-type='+themeMode+']');
+    if(linkdom) linkdom.remove();
+</script>
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="初月二三" type="application/atom+xml">
+</head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation"><i class="far fa-sun"></i>
+        <div class="trm-horizon"></div>
+        <i class="far fa-moon"></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+            <!-- top bar -->
+            <div class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target="#content" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				<img src="https://limenggen.gitee.io/img/favicon.png" alt="logo">
+				<div class="trm-logo-text">
+					初月
+					<span>二三</span>
+				</div>
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/">
+								首页
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/">
+								归档
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/categories/Linux/">
+								分类
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/links/">
+								友链
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/share/">
+								分享
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/comment/">
+								评论
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/">
+								关于
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+
+			<!-- mode switcher place -->
+			<div class="trm-mode-switcher-place"></div>
+			<!-- mode switcher place end -->
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</div>
+            <!-- top bar end -->
+
+            <!-- body -->
+            <div class="trm-content-start">
+
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    <!-- banner cover -->
+    <img src="https://limenggen.gitee.io/img/media.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <!-- banner cover end -->
+
+    <!-- banner slideshow cover-->
+    <!-- <div class="swiper-container trm-slideshow" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/img/blog/b1.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b2.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b3.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+        </div>
+    </div> -->
+    <!-- banner slideshow cover end -->
+
+    <!-- banner video cover -->
+    <!-- <video autoplay="autoplay" loop muted playsinline webkit-playinginline class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <source src="img/banner.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="img/banner.webm" type='video/webm; codecs="vp8, vorbis"'>
+        <source src="img/banner.ogg" type='video/ogg; codecs="theora, vorbis"'>
+        Your browser does not support HTML5 video.
+    </video> -->
+    <!-- banner video cover end -->
+
+    <!-- banner cover end -->
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            SpringBoot项目整合SpringSecurity笔记
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        springboot-security
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- main card -->
+                <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
+        <!-- card header -->
+        <div class="trm-mc-header">
+            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://limenggen.gitee.io/img/head.jpg" alt="Avatar"> </div>
+            <h5 class="trm-name trm-mb-15">
+                初月二三
+            </h5>
+            <div class="trm-label">
+                Live
+                <span class="trm-typed-text">
+                    <!-- Words for theme.user.typedText -->
+                </span>
+            </div>
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+                    <!-- categories -->
+                    <div class="row">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    文章
+                                </h6>
+                                <a href="/archives" class="trm-label">
+                                    13
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    分类
+                                </h6>
+                                <a href="/categories/Linux/" class="trm-label">
+                                    5
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                    </div>
+                    <!-- categories end -->
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+            
+                <a href="https://github.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            
+                <a href="https://gitee.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-gitee"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-weibo"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            
+                <a href="https://limenggen.gitee.io/img/weixin_.jpg" rel="nofollow" target="_blank">
+                    <i class="fa fa-comments"></i>
+                </a>
+            
+        </div>
+        <!-- sidebar social end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- info -->
+        <ul class="trm-table trm-mb-20">
+            
+                <li>
+                    <div class="trm-label">
+                        个人:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        囊中羞涩，不知市井繁华
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        生活:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        白天归顺生活，夜晚臣服灵魂
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        选择:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        晚上11点前睡觉
+                    </div>
+                </li>
+            
+        </ul>
+        
+        <!-- info end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- action button -->
+        <div class="text-center">
+            <a href="/atom.xml" class="trm-btn">
+                订阅我
+                <i class="fa fa-rss"></i>
+            </a>
+        </div>
+        <!-- action button end -->
+        
+    </div>
+</div>
+                <!-- main card end -->
+            </div>
+            <div class="col-lg-8">
+                <!-- content -->
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-calendar-alt trm-icon"></i><br>
+                                2020/10/10
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-clock trm-icon"></i><br>
+                                09:17
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-user trm-icon"></i><br>
+                                初月二三
+                            </div>
+                        </div>
+                    </div>
+
+                    <article class="trm-card trm-publication">
+                        <blockquote>
+<p>SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。<br>本案例完成项目搭建，并作出相应测试<br>本案例<a target="_blank" rel="noopener" href="https://github.com/limenggen/springboot-redis-demo">GitHub地址:https://github.com/limenggen/springboot-redis-demo</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、Security基本搭建"><a href="#一、Security基本搭建" class="headerlink" title="一、Security基本搭建"></a>一、Security基本搭建</h1><h2 id="1、创建springboot项目"><a href="#1、创建springboot项目" class="headerlink" title="1、创建springboot项目"></a>1、创建springboot项目</h2><blockquote>
+<ul>
+<li>项目结构<br><img src="https://cdn.jsdelivr.net/gh/limenggen/blog-file@1.0/blog/20201010-security.jpg"></li>
+</ul>
+</blockquote>
+<h2 id="2、添加项目依赖"><a href="#2、添加项目依赖" class="headerlink" title="2、添加项目依赖"></a>2、添加项目依赖</h2><p>pom.xml</p>
+<figure class="highlight xml"><figcaption><span>pom.xml >folded</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- spring security依赖 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>本案例使用的依赖版本如下：<br>spring-boot-starter:2.3.4<br>spring-boot-starter-web:2.3.4<br>spring-boot-starter-security:2.3.4</p>
+</blockquote>
+<h2 id="3、修改配置文件"><a href="#3、修改配置文件" class="headerlink" title="3、修改配置文件"></a>3、修改配置文件</h2><p>修改application.properties文件为application.yml</p>
+<ul>
+<li>若不自定义用户名，密码，Security会有一个默认用户名为：user，密码在控制台输出</li>
+<li>例如：Using generated security password: 9673fc9a-8506-4b27-8011-f5b16f068c24<figure class="highlight yml"><figcaption><span>application.yml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">security:</span></span><br><span class="line">    <span class="attr">user:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">lmg</span></span><br><span class="line">      <span class="attr">password:</span> <span class="number">123123</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4、创建Security配置类"><a href="#4、创建Security配置类" class="headerlink" title="4、创建Security配置类"></a>4、创建Security配置类</h2><p>SpringSecurityConfiguration.java</p>
+<ul>
+<li>@Configuration：注解用于定义配置类</li>
+<li>@EnableWebSecurity：注解开启Spring Security的功能<figure class="highlight java"><figcaption><span>Configuration.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringSecurityConfiguration</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    	<span class="comment">// Security提供自带的Login页面，可不用自定义，若采用自带Login页面，本行代码可注释</span></span><br><span class="line">        http.formLogin().loginPage(<span class="string">&quot;/login&quot;</span>).permitAll()</span><br><span class="line">                .and()</span><br><span class="line">                .authorizeRequests()</span><br><span class="line">                .anyRequest()</span><br><span class="line">                .authenticated();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5、创建Controller类"><a href="#5、创建Controller类" class="headerlink" title="5、创建Controller类"></a>5、创建Controller类</h2><p>IndexController.java</p>
+<ul>
+<li>若采用Security自带Login页面，可不用创建Controller类<figure class="highlight java"><figcaption><span>IndexController.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IndexController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/login&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">login</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;login&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6、定义一个静态页面"><a href="#6、定义一个静态页面" class="headerlink" title="6、定义一个静态页面"></a>6、定义一个静态页面</h2><p>index.html</p>
+<ul>
+<li>Security登录验证后，默认进入index.html页面<figure class="highlight html"><figcaption><span>index.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>SpringSecurity笔记<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>欢迎访问SpringSecurity首页<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="7、启动项目"><a href="#7、启动项目" class="headerlink" title="7、启动项目"></a>7、启动项目</h2><p>使用浏览器测试，测试地址：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
+
+                    </article>
+
+                    <!-- blog -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- title -->
+                            <h5 class="trm-mb-40 trm-title-with-divider">
+                                其他文章
+                                <span data-number="02"></span>
+                            </h5>
+                        </div>
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/spring-studyNode/" class="trm-cover-frame trm-anima-link">
+            <img src="/img/block.jpg" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/spring-studyNode/" class="trm-anima-link">
+                    Spring学习笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Spring/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    Spring
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/10/28 08:11
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    3.2k
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/springboot-redisChche/" class="trm-cover-frame trm-anima-link">
+            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/springboot-redisChche/" class="trm-anima-link">
+                    SpringBoot项目整合Redis作缓存
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/SpringBoot/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    SpringBoot
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/09/30 09:17
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    2.1k
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                    </div>
+                    <!-- blog end -->
+
+                     
+    
+
+                    
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#container").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'limenggen',
+      repo: 'limenggen.github.io',
+      oauth: {
+        client_id: '92fb67debfc9e0bbb634',
+        client_secret: 'e86d6c1d9379307d4afbb6e6a1546b22b7d7511e'
+      }
+    });
+    gitment.render('container');
+  }
+
+  showGitment();
+</script>
+
+
+                    <div class="trm-divider trm-mb-40"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+    <div class="trm-label">
+        ©  2020- 2022-07-27 ·
+        <span class="trm-accent-color">
+            初月二三
+        </span>
+    </div>
+    <div class="trm-label">
+        本站已维护:
+        <span id="since" class="trm-accent-color"></span>
+        天
+    </div>
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("09/25/2020 14:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+                    <!-- footer end -->
+                </div>
+                <!-- content end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+  
+  
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+      <!-- mode switcher -->
+      <div class="trm-hidden-switcher">
+        <div class="trm-mode-switcher"><i class="far fa-sun"></i>
+          <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+          <label class="trm-swich" for="trm-swich"></label>
+          <i class="far fa-moon"></i>
+        </div>
+      </div>
+      <!-- mode switcher end -->
+  </div>
+  <!-- app wrapper end -->
+  
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/plugins/swup.min.js"></script>
+<script src="/js/plugins/locomotive-scroll.js"></script>
+<script src="/js/plugins/typing.js"></script>
+<script src="/js/plugins/fancybox.min.js"></script>
+<script src="/js/plugins/swiper.min.js"></script>
+
+
+<!-- 评论插件 -->
+ 
+    
+        <script type="text/javascript" src="//imgcache.qq.com/qcloud/cloudbase-js-sdk/1.7.1/cloudbase.full.js"></script>
+        <script type="text/javascript" src="//unpkg.com/b-comments@0.0.12/dist/index.all.min.js"></script>
+    
+
+
+<!-- Service Worker -->
+
+    <script>
+        "serviceWorker" in navigator ? navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+
+<script src="/js/main.js?v=1.0.2"></script>
+
+
+</body>
+
+</html>

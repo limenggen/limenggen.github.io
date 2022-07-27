@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>初月二三</title>
+  
+  <subtitle>初月二三的小站</subtitle>
+  <link href="http://limenggen.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://limenggen.github.io/"/>
+  <updated>2022-07-27T06:12:10.773Z</updated>
+  <id>http://limenggen.github.io/</id>
+  
+  <author>
+    <name>初月二三</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sql数据库练习题</title>
+    <link href="http://limenggen.github.io/sql-practice/"/>
+    <id>http://limenggen.github.io/sql-practice/</id>
+    <published>2020-11-28T05:35:03.000Z</published>
+    <updated>2022-07-27T06:12:10.773Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;sql的练习题是一些sql的基本使用以及函数、关键字的常用练习&lt;br&gt;本篇主要记录一些sql常见练习题，适合sql基础不稳定的童鞋，快来跟着一起学习吧！练习后你会感受到自己sql又提升一步&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sql常用关键字笔记</title>
+    <link href="http://limenggen.github.io/sql-keyword/"/>
+    <id>http://limenggen.github.io/sql-keyword/</id>
+    <published>2020-11-05T13:02:30.000Z</published>
+    <updated>2022-07-26T13:15:39.285Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;sql关键字是使用sql的基础，掌握sql关键字才能在sql的各种需求中，完成对应任务&lt;br&gt;本篇主要记录一些sql常用关键字的知识点&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sql常用优化方案</title>
+    <link href="http://limenggen.github.io/sql-optimize/"/>
+    <id>http://limenggen.github.io/sql-optimize/</id>
+    <published>2020-11-05T13:02:30.000Z</published>
+    <updated>2022-07-27T05:34:38.266Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;sql的优化是sql语句书写的重中之重，好的sql语句可以带来不一样的使用体验，所以好好学习呀&lt;br&gt;本篇主要记录一些sql优化的常见优化方案&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sql常用函数笔记</title>
+    <link href="http://limenggen.github.io/sql-function/"/>
+    <id>http://limenggen.github.io/sql-function/</id>
+    <published>2020-11-03T12:36:33.000Z</published>
+    <updated>2022-07-26T13:01:48.217Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用&lt;br&gt;本篇主要记录一些sql常用函数的知识点&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spring学习笔记</title>
+    <link href="http://limenggen.github.io/spring-studyNode/"/>
+    <id>http://limenggen.github.io/spring-studyNode/</id>
+    <published>2020-10-28T12:11:14.000Z</published>
+    <updated>2022-07-26T12:34:51.490Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Spring是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。官网：&lt;a href=&quot;https://sping.io/%E3%80%82&quot;&gt;https://sping.io/。&lt;/a&gt;&lt;br&gt;本篇主要记录一些认为重要的知识点&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Spring" scheme="http://limenggen.github.io/categories/Spring/"/>
+    
+    
+    <category term="Spring" scheme="http://limenggen.github.io/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringBoot项目整合SpringSecurity笔记</title>
+    <link href="http://limenggen.github.io/springboot-security/"/>
+    <id>http://limenggen.github.io/springboot-security/</id>
+    <published>2020-10-10T13:17:04.000Z</published>
+    <updated>2022-07-24T11:41:16.709Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。&lt;br&gt;本案例完成项目搭建，并作出相应测试&lt;br&gt;本案例&lt;a href=&quot;https://github.com/limenggen/springboot-redis-demo&quot;&gt;GitHub地址:https://github.com/limenggen/springboot-redis-demo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="SpringBoot" scheme="http://limenggen.github.io/categories/SpringBoot/"/>
+    
+    
+    <category term="SpringBoot" scheme="http://limenggen.github.io/tags/SpringBoot/"/>
+    
+    <category term="Security" scheme="http://limenggen.github.io/tags/Security/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringBoot项目整合Redis作缓存</title>
+    <link href="http://limenggen.github.io/springboot-redisChche/"/>
+    <id>http://limenggen.github.io/springboot-redisChche/</id>
+    <published>2020-09-30T13:17:04.000Z</published>
+    <updated>2022-07-24T11:42:01.587Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;在SpringBoot项目中使用Redis作缓存，既可避免频繁读取后端数据库，又可优化读取时间&lt;br&gt;本案例使用工具：IDEA，Postman，Redis，Mysql&lt;br&gt;本案例&lt;a href=&quot;https://github.com/limenggen/springboot-redis-demo&quot;&gt;GitHub地址:https://github.com/limenggen/springboot-redis-demo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="SpringBoot" scheme="http://limenggen.github.io/categories/SpringBoot/"/>
+    
+    
+    <category term="Redis" scheme="http://limenggen.github.io/tags/Redis/"/>
+    
+    <category term="SpringBoot" scheme="http://limenggen.github.io/tags/SpringBoot/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SpringBoot项目中引入Swagger</title>
+    <link href="http://limenggen.github.io/springboot-swagger/"/>
+    <id>http://limenggen.github.io/springboot-swagger/</id>
+    <published>2020-09-30T08:24:56.000Z</published>
+    <updated>2022-07-24T11:41:36.131Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;在SpringBoot项目中引入Swagger，让接口数据可视化，尤其适用于Restful API&lt;br&gt;本案例使用工具：IDEA&lt;br&gt;本案例&lt;a href=&quot;https://github.com/limenggen/springboot-swagger-demo&quot;&gt;GitHub地址:https://github.com/limenggen/springboot-swagger-demo&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="SpringBoot" scheme="http://limenggen.github.io/categories/SpringBoot/"/>
+    
+    
+    <category term="SpringBoot" scheme="http://limenggen.github.io/tags/SpringBoot/"/>
+    
+    <category term="Swagger" scheme="http://limenggen.github.io/tags/Swagger/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS7安装mysql5.7</title>
+    <link href="http://limenggen.github.io/CentOS7-mysql5-7/"/>
+    <id>http://limenggen.github.io/CentOS7-mysql5-7/</id>
+    <published>2020-09-26T10:59:22.000Z</published>
+    <updated>2022-07-24T11:41:45.128Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本文介绍在CentOS下安装Mysql的全部过程&lt;br&gt;本案例使用环境：CentOS:7.4，Mysql:5.7&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="http://limenggen.github.io/categories/Linux/"/>
+    
+    
+    <category term="CentOS" scheme="http://limenggen.github.io/tags/CentOS/"/>
+    
+    <category term="MySQL" scheme="http://limenggen.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS安装Redis</title>
+    <link href="http://limenggen.github.io/CentOS7_redis/"/>
+    <id>http://limenggen.github.io/CentOS7_redis/</id>
+    <published>2020-09-26T09:12:30.000Z</published>
+    <updated>2022-07-24T11:41:52.488Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本文介绍在CentOS下安装Redis的全部过程&lt;br&gt;本案例使用环境：CentOS:7.4，Redis:5.0.3&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="Linux" scheme="http://limenggen.github.io/categories/Linux/"/>
+    
+    
+    <category term="CentOS" scheme="http://limenggen.github.io/tags/CentOS/"/>
+    
+    <category term="Redis" scheme="http://limenggen.github.io/tags/Redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用GitHub/Gitee搭建个人博客（二）</title>
+    <link href="http://limenggen.github.io/build_blog02/"/>
+    <id>http://limenggen.github.io/build_blog02/</id>
+    <published>2020-09-25T07:47:18.000Z</published>
+    <updated>2022-07-24T11:46:09.621Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本章介绍了hexo的使用及Github/Gitee部署&lt;br&gt;本案例使用环境：CentOS:7.4，node:12.13.1，hexo-cli:4.2&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="搭建个人博客" scheme="http://limenggen.github.io/categories/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="hexo" scheme="http://limenggen.github.io/tags/hexo/"/>
+    
+    <category term="GitHub" scheme="http://limenggen.github.io/tags/GitHub/"/>
+    
+    <category term="Gitee" scheme="http://limenggen.github.io/tags/Gitee/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用GitHub/Gitee搭建个人博客（一）</title>
+    <link href="http://limenggen.github.io/build_blog01/"/>
+    <id>http://limenggen.github.io/build_blog01/</id>
+    <published>2020-09-25T06:48:25.000Z</published>
+    <updated>2022-07-24T11:45:35.779Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本章介绍了搭建个人博客需要安装的环境（node、git、hexo的安装）&lt;br&gt;本案例使用环境：CentOS:7.4，node:12.13.1，hexo-cli:4.2&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="搭建个人博客" scheme="http://limenggen.github.io/categories/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="hexo" scheme="http://limenggen.github.io/tags/hexo/"/>
+    
+    <category term="GitHub" scheme="http://limenggen.github.io/tags/GitHub/"/>
+    
+    <category term="Gitee" scheme="http://limenggen.github.io/tags/Gitee/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hyper-V管理器创建CentOS7虚机</title>
+    <link href="http://limenggen.github.io/build-bloginit/"/>
+    <id>http://limenggen.github.io/build-bloginit/</id>
+    <published>2020-09-24T05:35:03.000Z</published>
+    <updated>2022-07-27T07:17:09.831Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;使用Windows自带的Hyper-V管理器创建CentOS7虚机&lt;br&gt;本篇主要记录一下新建虚机的操作步骤&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="搭建个人博客" scheme="http://limenggen.github.io/categories/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"/>
+    
+    
+    <category term="hexo" scheme="http://limenggen.github.io/tags/hexo/"/>
+    
+    <category term="GitHub" scheme="http://limenggen.github.io/tags/GitHub/"/>
+    
+    <category term="Gitee" scheme="http://limenggen.github.io/tags/Gitee/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="keywords" content="">
+<meta name="description" content="Spring是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。官网：https:&#x2F;&#x2F;sping.io&#x2F;。本篇主要记录一些认为重要的知识点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring学习笔记">
+<meta property="og:url" content="http://limenggen.github.io/spring-studyNode/index.html">
+<meta property="og:site_name" content="初月二三">
+<meta property="og:description" content="Spring是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。官网：https:&#x2F;&#x2F;sping.io&#x2F;。本篇主要记录一些认为重要的知识点">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-10-28T12:11:14.000Z">
+<meta property="article:modified_time" content="2022-07-26T12:34:51.490Z">
+<meta property="article:author" content="初月二三">
+<meta property="article:tag" content="Spring">
+<meta name="twitter:card" content="summary">
+
+    <meta name="description" content="情怀仍在，纵然往事早已下落不明">
+
+<title>
+    Spring学习笔记
+</title>
+
+    <link rel="icon" type="image/png" sizes="16x16" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+
+
+
+<link rel="preload" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.css">
+
+
+<link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
+<link rel="stylesheet" href="/css/plugins/locomotive-scroll.css">
+<link rel="stylesheet" href="/css/plugins/swiper.min.css">
+<link rel="stylesheet" href="/css/plugins/fancybox.min.css">
+<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
+
+
+<!-- variable -->
+<script>window.TYPED_TEXT=[
+  "好好生活 慢慢相遇"
+]</script>
+<script>window.FAVICON={
+  "icon16": "https://limenggen.gitee.io/img/favicon.png",
+  "icon32": "https://limenggen.gitee.io/img/favicon.png",
+  "appleTouchIcon": null,
+  "webmanifest": null,
+  "visibilitychange": false,
+  "hidden": null,
+  "showText": "(/≧▽≦/)咦！又好了！",
+  "hideText": "(●—●)喔哟，崩溃啦！"
+}</script>
+<script>window.HTMEM_VERSION='1.0.2'</script>
+<link data-theme-type="style-light" rel="stylesheet" href="/css/style-light.css?v=1.0.2" id="trm-switch-style">
+<link data-theme-type="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.0.2" id="trm-switch-style">
+
+<!-- theme css -->
+<script>
+    let themeMode = localStorage.getItem('theme-mode') === 'style-dark' ? 'style-light' : 'style-dark';
+    let linkdom = document.querySelector('[data-theme-type='+themeMode+']');
+    if(linkdom) linkdom.remove();
+</script>
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="初月二三" type="application/atom+xml">
+</head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation"><i class="far fa-sun"></i>
+        <div class="trm-horizon"></div>
+        <i class="far fa-moon"></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+            <!-- top bar -->
+            <div class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target="#content" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+			<a href="/" class="trm-logo-frame trm-anima-link">
+				<img src="https://limenggen.gitee.io/img/favicon.png" alt="logo">
+				<div class="trm-logo-text">
+					初月
+					<span>二三</span>
+				</div>
+			</a>
+			<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+
+			<!-- menu -->
+			<div class="trm-menu">
+				<nav>
+					<ul>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/">
+								首页
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/archives/">
+								归档
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/categories/Linux/">
+								分类
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/links/">
+								友链
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/share/">
+								分享
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/comment/">
+								评论
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
+							<a  href="/about/">
+								关于
+							</a>
+							
+						</li>
+						
+					</ul>
+				</nav>
+			</div>
+			<!-- menu end -->
+
+			<!-- mode switcher place -->
+			<div class="trm-mode-switcher-place"></div>
+			<!-- mode switcher place end -->
+
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</div>
+            <!-- top bar end -->
+
+            <!-- body -->
+            <div class="trm-content-start">
+
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    <!-- banner cover -->
+    <img src="https://limenggen.gitee.io/img/media.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <!-- banner cover end -->
+
+    <!-- banner slideshow cover-->
+    <!-- <div class="swiper-container trm-slideshow" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="/img/blog/b1.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b2.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+            <div class="swiper-slide"><img src="/img/blog/b3.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
+        </div>
+    </div> -->
+    <!-- banner slideshow cover end -->
+
+    <!-- banner video cover -->
+    <!-- <video autoplay="autoplay" loop muted playsinline webkit-playinginline class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
+        <source src="img/banner.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <source src="img/banner.webm" type='video/webm; codecs="vp8, vorbis"'>
+        <source src="img/banner.ogg" type='video/ogg; codecs="theora, vorbis"'>
+        Your browser does not support HTML5 video.
+    </video> -->
+    <!-- banner video cover end -->
+
+    <!-- banner cover end -->
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text">
+                        <div class="trm-label trm-mb-20">
+                            NEWS LETTER
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Spring学习笔记
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        spring-studyNode
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <!-- main card -->
+                <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
+        <!-- card header -->
+        <div class="trm-mc-header">
+            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://limenggen.gitee.io/img/head.jpg" alt="Avatar"> </div>
+            <h5 class="trm-name trm-mb-15">
+                初月二三
+            </h5>
+            <div class="trm-label">
+                Live
+                <span class="trm-typed-text">
+                    <!-- Words for theme.user.typedText -->
+                </span>
+            </div>
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+                    <!-- categories -->
+                    <div class="row">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    文章
+                                </h6>
+                                <a href="/archives" class="trm-label">
+                                    13
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- categories card -->
+                            <div>
+                                <h6>
+                                    分类
+                                </h6>
+                                <a href="/categories/Linux/" class="trm-label">
+                                    5
+                                </a>
+                            </div>
+                            <!-- categories card end -->
+                        </div>
+                    </div>
+                    <!-- categories end -->
+        </div>
+        <!-- card header end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- sidebar social -->
+        <div class="trm-social">
+            
+                <a href="https://github.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            
+                <a href="https://gitee.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-gitee"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="iconfont cg-weibo"></i>
+                </a>
+            
+                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            
+                <a href="https://limenggen.gitee.io/img/weixin_.jpg" rel="nofollow" target="_blank">
+                    <i class="fa fa-comments"></i>
+                </a>
+            
+        </div>
+        <!-- sidebar social end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- info -->
+        <ul class="trm-table trm-mb-20">
+            
+                <li>
+                    <div class="trm-label">
+                        个人:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        囊中羞涩，不知市井繁华
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        生活:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        白天归顺生活，夜晚臣服灵魂
+                    </div>
+                </li>
+            
+                <li>
+                    <div class="trm-label">
+                        选择:
+                    </div>
+                    <div class="trm-label trm-label-light">
+                        晚上11点前睡觉
+                    </div>
+                </li>
+            
+        </ul>
+        
+        <!-- info end -->
+        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+        <!-- action button -->
+        <div class="text-center">
+            <a href="/atom.xml" class="trm-btn">
+                订阅我
+                <i class="fa fa-rss"></i>
+            </a>
+        </div>
+        <!-- action button end -->
+        
+    </div>
+</div>
+                <!-- main card end -->
+            </div>
+            <div class="col-lg-8">
+                <!-- content -->
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+                    
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-calendar-alt trm-icon"></i><br>
+                                2020/10/28
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-clock trm-icon"></i><br>
+                                08:11
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-user trm-icon"></i><br>
+                                初月二三
+                            </div>
+                        </div>
+                    </div>
+
+                    <article class="trm-card trm-publication">
+                        <blockquote>
+<p>Spring是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。官网：<a target="_blank" rel="noopener" href="https://sping.io/%E3%80%82">https://sping.io/。</a><br>本篇主要记录一些认为重要的知识点</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、什么是Spring框架"><a href="#一、什么是Spring框架" class="headerlink" title="一、什么是Spring框架"></a>一、什么是Spring框架</h1><h2 id="1、Spring框架基本介绍"><a href="#1、Spring框架基本介绍" class="headerlink" title="1、Spring框架基本介绍"></a>1、Spring框架基本介绍</h2><p>Spring框架指的都是Spring Framework，多个模块的集合。模块：核心容器、数据访问/集成、Web、AOP(面向切面)、工具、消息和测试模块。</p>
+<p>例：Core Container中的Core组件时Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。</p>
+<p>核心技术：依赖注入(DI)，AOP，事件(events)，资源，i18n，验证，数据绑定，类型转换，SpEL<br>测试：模拟对象，TextContext框架，Spring MVC测试，WebTestClient<br>数据访问：事务，DAO支持，JDBC，ORM，编组XML<br>Web支持：Spring MVC和Spring WebFlux Web框架<br>集成：远程处理，JMS，JCA，JMX，电子邮件，任务，调度，缓存<br>语言：Kotlin，Groovy，动态语言</p>
+<h2 id="2、Spring重要模块"><a href="#2、Spring重要模块" class="headerlink" title="2、Spring重要模块"></a>2、Spring重要模块</h2><p><strong>Spring Core：</strong>基础，可以说Spring其他所有的功能都需要依赖于该类库。主要提供IoC依赖注入功能<br><strong>Spring Aspects：</strong>该模块为与AspectJ的集成提供支持<br><strong>Spring AOP：</strong>提供了面向切面的编程实现<br><strong>Spring JDBC：</strong>Java数据库连接<br><strong>Spring JMS：</strong>Java消息服务<br><strong>Spring ORM：</strong>用于支持Hibernate等ORM工具<br><strong>Spring Web：</strong>为创建Web应用程序提供支持<br><strong>Spring Test：</strong>提供了对JUnit和TestNG测试的支持</p>
+<h2 id="3、-RestController-vs-Controller"><a href="#3、-RestController-vs-Controller" class="headerlink" title="3、@RestController vs @Controller"></a>3、@RestController vs @Controller</h2><p><strong>@Controller：</strong>返回一个页面单独使用@Controller不加@ResponseBody的话一般使用在要返回一个视图的情况，这种情况属于比较传统的Spring MVC的应用（前后端不分离）</p>
+<p><strong>@ResponseBody：</strong>作用是将Controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到HTTP响应(Response)对象的body中，通常用来返回JSON或XML数据</p>
+<p>@RestController返回JSON或XML形式数据<br>@RestController只返回对象，对象数据直接以JSON或XML形式希尔HTTP响应(Response)中，这种情况属于RESTful Web服务（前后端分离）</p>
+<blockquote>
+<p>@Controller + @ResponseBody 返回JSON或XML形式数据</p>
+<p>若在Spring4之前开发RESTful Web服务，需要@Controller + @ResponseBody = @RestController（Spring4之后新加的注解）</p>
+</blockquote>
+<h1 id="二、Spring-IOC"><a href="#二、Spring-IOC" class="headerlink" title="二、Spring IOC"></a>二、Spring IOC</h1><h2 id="1、IoC基本介绍"><a href="#1、IoC基本介绍" class="headerlink" title="1、IoC基本介绍"></a>1、IoC基本介绍</h2><p><strong>IoC(Inverse of Control)：</strong>控制反转是一种设计思想，就是将原本在程序中手动创建对象的控制权，交由Spring框架来管理。<br>IoC容器时Spring用来实现IoC的载体，IoC容器实际上就是个Map(key,value)，Map中存放的时各种对象。</p>
+<p>将对象之间的相互依赖关系交给IoC容器来管理，并由IoC容器完成对象的注入。这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出现。IoC容器就像时一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件/注解即可，完全不用考虑对象时如何被创建出来的。在实际项目中一个Service类可能有几百甚至上千个类作为它的底层，假如需要实例化这个Service，可能每次都要清楚这个Service所有底层类的构造函数，若利用IoC，只需配置好，在需要位置引用，降低项目的可维护性且降低了开发难度</p>
+<blockquote>
+<p>IoC初始化过程：<br>xml -读取-&gt; Resource -解析-&gt; BeanDefinition -注册-&gt; BeanFactory</p>
+</blockquote>
+<h1 id="三、Spring-AOP"><a href="#三、Spring-AOP" class="headerlink" title="三、Spring AOP"></a>三、Spring AOP</h1><h2 id="1、AOP基本介绍"><a href="#1、AOP基本介绍" class="headerlink" title="1、AOP基本介绍"></a>1、AOP基本介绍</h2><p><strong>AOP(Aspect-Oriented Programming)：</strong>面向切面编程<br>能够将与业务无关，却为业务模块所共同调用的逻辑或责任(例如事务处理、日志管理、权限控制)封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有可拓展性和可维护性</p>
+<h2 id="2、Spring切面五种类型"><a href="#2、Spring切面五种类型" class="headerlink" title="2、Spring切面五种类型"></a>2、Spring切面五种类型</h2><p><strong>前置通知(@Before)：</strong>在目标方法被调用之前调用通知功能<br><strong>后置通知(@After)：</strong>再目标方法完成之后调用通知，不用关心方法的输出结果<br><strong>返回通知(@AfterReturning)：</strong>再目标方法成功执行之后调用通知<br><strong>异常通知(@AfterThrowing)：</strong>再目标方法抛出异常后调用通知<br><strong>环绕通知(@Around)：</strong>通知包裹了被通知的方法，再被通知的方法调用之前和调用之后执行自定义的行为</p>
+<h2 id="3、连接点-Join-point"><a href="#3、连接点-Join-point" class="headerlink" title="3、连接点(Join point)"></a>3、连接点(Join point)</h2><p>连接点是再应用执行过程中能够插入切面的一个点。这个点可以是调用方法时、抛出异常时、甚至修改一个字段时，切面代码可以利用这些点插入到应用的正常流程之中，并添加新的行为</p>
+<h2 id="4、切点-Pointcut"><a href="#4、切点-Pointcut" class="headerlink" title="4、切点(Pointcut)"></a>4、切点(Pointcut)</h2><p>切点的定义会匹配通知所要织入的一个或多个连接点。通常使用明确的类和方法名称，或是利用正则表达式定义所匹配的类和方法名称来指定这些切点。有些AOP框架允许创建动态切点，可根据运行时的决策(例如方法参数值)决定是否应用通知</p>
+<h2 id="5、切面-Aspect"><a href="#5、切面-Aspect" class="headerlink" title="5、切面(Aspect)"></a>5、切面(Aspect)</h2><p>通知 + 切点 = 切面</p>
+<h2 id="6、引入-Introduction"><a href="#6、引入-Introduction" class="headerlink" title="6、引入(Introduction)"></a>6、引入(Introduction)</h2><p>引入允许我们向现有的类添加新方法或属性</p>
+<h2 id="7、织入-Weaving"><a href="#7、织入-Weaving" class="headerlink" title="7、织入(Weaving)"></a>7、织入(Weaving)</h2><p>织入是把切脉你应用到目标对象并创建新的代理对象的过程。切面再指定的连接点被织入到目标对象中。再目标对象的生命周期里有多个点可以进行织入</p>
+<p><strong>编译期：</strong>切面再目标类编译时被织入。这种方式需要特殊的编译器。AspectJ的织入编译器就是以这种方式织入切面的<br><strong>类加载期：</strong>切面再目标类加载到JVM时被织入。这种方式需要特殊的类加载器(ClassLoader)，它可以再目标类被引入应用之前增强该目标类的字节码。AspectJ5的加载时织入(load-time weaving,LTW)就支持以这种方式织入切面<br><strong>运行期：</strong>切脉你再应用运行的某个时刻被织入。一般情况下，再织入切面时，AOP容器会为目标对象动态地创建一个代理对象。Spring AOP就时以这种方式织入切面的</p>
+<blockquote>
+<p>Spring AOP就是基于动态代理的，若要代理的对象，实现了某个接口，那么Spring AOP会使用JDK Proxy，去创建代理对象，而对于没有实现接口的对象，无法使用JDK Proxy去进行代理，这时候Spring AOP会使用Cglib，这时Spring AOP 会使用Cglib生成一个被代理对象的子类来作为代理</p>
+</blockquote>
+<p>也可使用AspectJ，Spring AOP已经集成AspectJ<br>使用AOP之后我们可以把一些通用功能抽象处理，在需要用到的地方直接使用即可，这样简化了代码量，提高了系统扩展性。日志功能、事务管理等都用到AOP。</p>
+<blockquote>
+<p>Spring AOP和AspectJ AOP区别:</p>
+<ul>
+<li>Spring AOP属于运行时增强，而AspectJ时编译时增强。</li>
+<li>Spring AOP基于代理(Proxying)，而AspectJ基于字节码操作(Bytecode Manipulation)</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Spring AOP集成了AspectJ，AspectJ相比于Spring AOP功能更加强大，但Spring AOP相对更简单。<br>若切面较少，性能差异不大，若切面较多，推荐使用AspectJ(比Spring AOP快)。</p>
+</blockquote>
+<h1 id="四、Spring-Bean"><a href="#四、Spring-Bean" class="headerlink" title="四、Spring Bean"></a>四、Spring Bean</h1><h2 id="1、Spring-Bean基本介绍"><a href="#1、Spring-Bean基本介绍" class="headerlink" title="1、Spring Bean基本介绍"></a>1、Spring Bean基本介绍</h2><p>每个类实现了Bean的规范才可以由Spring接管<br><strong>Bean规范：</strong>必须是公有(public)类，有无参构造函数，用 公共方法暴露内部成员属性(getter,setter)<br>实现这样规范的类，被称为Java Bean，既是一种可重用的组件</p>
+<h2 id="2、作用域"><a href="#2、作用域" class="headerlink" title="2、作用域"></a>2、作用域</h2><p><strong>singleton(单例，默认)：</strong>唯一Bean实例<br><strong>prototype(原型)：</strong>每次请求都会创建一个新的Bean实例<br><strong>request(请求)：</strong>每次请求都会创建一个新的Bean实例，该Bean仅在当前HTTP Request内有效<br><strong>session(会话)：</strong>每次HTTP请求产生新的Bean，该Bean仅在当前HTTP Session内有效<br><strong>global-session(全局会话)：</strong>全局session作用域，仅仅在基于Portlet的web应用中才有意义，Spring5已经没有了。Portlet是能够生成语义代码片段的小型Java Web插件。基于Portlet容器，可以像Servlet一样处理HTTP请求，但与Servlet不同，每次Portlet都有不同会话</p>
+<blockquote>
+<p>默认情况下，Spring应用上下文中所有Bean都是作为以单例(singleton)的形式创建的。既不管给定的一个Bean被注入到其他Bean多少次，每次所注入的都是同一个实例</p>
+<p>多数情况下，单例Bean是很理想的方案，初始化和垃圾回收对象实例所带来的成本只留给一些小规模任务，在这些任务中，让对象保持无状态并且在应用中反复重用这些对象可能并不合理</p>
+<p>有时候，使用的类是易变的(mutable)，它们会保持一些状态，因此重用是不安全的。这种情况下，将class声明为单例的Bean会出现问题，因为对象会被污染，稍后重用时会出现意想不到的问题</p>
+</blockquote>
+<h2 id="3、单例Bean的线程安全问题"><a href="#3、单例Bean的线程安全问题" class="headerlink" title="3、单例Bean的线程安全问题"></a>3、单例Bean的线程安全问题</h2><pre><code>单例Bean存在线程问题，当多个线程操作同一个对象时，这个对象的非静态成员变量的写操作会存在线程安全问题
+</code></pre>
+<p>解决方法：<br>①、在Bean对象中尽量避免定义可变的成员变量<br>②、在类中定义一个ThreadLocal成员变量，将需要的可变成员变量保存在ThreadLocal中</p>
+<h2 id="4、-Component和-Bean区别"><a href="#4、-Component和-Bean区别" class="headerlink" title="4、@Component和@Bean区别"></a>4、@Component和@Bean区别</h2><p>①、作用对象不同：@Component注解作用于类，而@Bean注解作用于方法<br>②、@Component通常时通过类路径扫描来自动侦测以及自动装配到Spring容器中(可使用@ComponentScan注解定义要扫描的路径从中找出标识了需要装配的类自动装配到Spring的Bean容器中)<br>@Bean注解通常是定义产生这个Bean，@Bean告诉Spring这是某个类的示例，需要时使用<br>③、@Bean注解比@Component注解的自定义性更强</p>
+<h2 id="5、将一个类声明为Spring的Bean的注解"><a href="#5、将一个类声明为Spring的Bean的注解" class="headerlink" title="5、将一个类声明为Spring的Bean的注解"></a>5、将一个类声明为Spring的Bean的注解</h2><p>@Autowired注解自动装配Bean，若想把类表示为@Autowired注解自动装配的Bean类，可采用以下注解实现：<br><strong>@Component：</strong>通用注解，可标注仍以类为Spring组件。(若一个Bean不知道属于哪一层，可使用@Component注解)<br><strong>@Repository：</strong>对应持久层既Dao层，主要用于数据库相关操作<br><strong>@Service：</strong>对应服务层，主要涉及一些复杂的逻辑，需要用到Dao层<br><strong>@Controller：</strong>对应Spring MVC控制层。主要接受用户请求并调用Service层返回数据给前端页面</p>
+<p>@Autowired不仅是对象，还有在构造器上，还能用在属性的Setter方法上不论是构造器、Setter方法还是其他的方法，Spring都会尝试满足方法参数上所声明的依赖，假如有且只有一个Bean匹配依赖需求，那么这个Bean将会被装配进来若没有匹配的Bean，那么在应用上下文创建时，Spring会抛出一个异常。为避免异常出现，可将@Autowired的required属性设置为false</p>
+<p>将required属性设置为false时，Spring会尝试执行自动装配，但若没有匹配的Bean的话，Spring将会让这个Bean处于未配置的状态。但是，把required属性设置为false时，在代码中没有进行null检查该处于为装配状态的属性可能出现NUllPointerException</p>
+<p>@Inject注解来源于Java依赖注入规范，该规范同时还为我们定义了@Named注解。在自动装配中，Spring同时支持@Inject和@Autowired。尽管@Inject和@Autowired之间有着一些细微的差别，但在大多数场景下，他们都是可以互相替换的</p>
+<h2 id="6、Bean的生命周期"><a href="#6、Bean的生命周期" class="headerlink" title="6、Bean的生命周期"></a>6、Bean的生命周期</h2><p>①、Spring对Bean进行实例化<br>②、Spring将值和Bean的引用注入到Bean对应的属性中<br>③、若Bean实现了BeanNameAware接口，Spring将Bean的ID传递给setBean-Name()方法<br>④、若Bean实现了BeanFacotryAware接口，Spring将调用setBeanFactory()方法，将BeanFactory容器实例传入<br>⑤、若Bean实现了ApplicationContextAware接口，Spring将调用setApplicationContext()方法，将Bean所在的应用上下文的引用传入进来<br>⑥、若Bean实现了BeanPostProcessor接口，Spring将调用他们的postProcessBeforeInitialization()方法<br>⑦、若Bean实现了InitializingBean接口，Spring将调用他们的after-PropertiesSet()方法，类似地，若Bean使用init-method声明了初始化方法，该方法也会被调用<br>⑧、若Bean实现了BeanPostProcessor接口，Spring将调用他们的post-ProcessAfterInitialization()方法<br>⑨、此时，Bean已经准备就绪，可被应用程序使用，他们将一直驻留在应用上下文中，知道应用上下文被销毁<br>⑩、若Bean实现了DisposableBean接口，Spring将调用它的destroy()接口方法。同样，若Bean使用destroy-method声明了销毁方法，该方法也会被调用</p>
+
+                    </article>
+
+                    <!-- blog -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- title -->
+                            <h5 class="trm-mb-40 trm-title-with-divider">
+                                其他文章
+                                <span data-number="02"></span>
+                            </h5>
+                        </div>
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/sql-function/" class="trm-cover-frame trm-anima-link">
+            <img src="/img/block.jpg" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/sql-function/" class="trm-anima-link">
+                    sql常用函数笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    数据库笔记
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/11/03 08:36
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    1k
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/springboot-security/" class="trm-cover-frame trm-anima-link">
+            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/springboot-security/" class="trm-anima-link">
+                    SpringBoot项目整合SpringSecurity笔记
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/SpringBoot/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    SpringBoot
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/10/10 09:17
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    534
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+                        
+                    </div>
+                    <!-- blog end -->
+
+                     
+    
+
+                    
+<div id="gitment_title" class="gitment_title"></div>
+<div id="container" style="display:none"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  const myTheme = {
+    render(state, instance) {
+      const container = document.createElement('div');
+      container.lang = "en-US";
+      container.className = 'gitment-container gitment-root-container';
+      container.appendChild(instance.renderHeader(state, instance));
+      container.appendChild(instance.renderEditor(state, instance));
+      container.appendChild(instance.renderComments(state, instance));
+      container.appendChild(instance.renderFooter(state, instance));
+      return container;
+    }
+  }
+
+  function showGitment() {
+    $("#gitment_title").attr("style", "display:none");
+    $("#container").attr("style", "").addClass("gitment_container");
+    var gitment = new Gitment({
+      id: decodeURI(window.location.pathname),
+      theme: myTheme,
+      owner: 'limenggen',
+      repo: 'limenggen.github.io',
+      oauth: {
+        client_id: '92fb67debfc9e0bbb634',
+        client_secret: 'e86d6c1d9379307d4afbb6e6a1546b22b7d7511e'
+      }
+    });
+    gitment.render('container');
+  }
+
+  showGitment();
+</script>
+
+
+                    <div class="trm-divider trm-mb-40"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+    <div class="trm-label">
+        ©  2020- 2022-07-27 ·
+        <span class="trm-accent-color">
+            初月二三
+        </span>
+    </div>
+    <div class="trm-label">
+        本站已维护:
+        <span id="since" class="trm-accent-color"></span>
+        天
+    </div>
+</footer>
+
+<script>
+    function show_date_time () {
+        BirthDay = new Date("09/25/2020 14:00:00");
+        today = new Date();
+        timeold = (today.getTime() - BirthDay.getTime());
+        msPerDay = 24 * 60 * 60 * 1000
+        day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+                    <!-- footer end -->
+                </div>
+                <!-- content end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    
+  
+  
+            <!-- body end -->
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+      <!-- mode switcher -->
+      <div class="trm-hidden-switcher">
+        <div class="trm-mode-switcher"><i class="far fa-sun"></i>
+          <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+          <label class="trm-swich" for="trm-swich"></label>
+          <i class="far fa-moon"></i>
+        </div>
+      </div>
+      <!-- mode switcher end -->
+  </div>
+  <!-- app wrapper end -->
+  
+<script src="/js/plugins/jquery.min.js"></script>
+<script src="/js/plugins/swup.min.js"></script>
+<script src="/js/plugins/locomotive-scroll.js"></script>
+<script src="/js/plugins/typing.js"></script>
+<script src="/js/plugins/fancybox.min.js"></script>
+<script src="/js/plugins/swiper.min.js"></script>
+
+
+<!-- 评论插件 -->
+ 
+    
+        <script type="text/javascript" src="//imgcache.qq.com/qcloud/cloudbase-js-sdk/1.7.1/cloudbase.full.js"></script>
+        <script type="text/javascript" src="//unpkg.com/b-comments@0.0.12/dist/index.all.min.js"></script>
+    
+
+
+<!-- Service Worker -->
+
+    <script>
+        "serviceWorker" in navigator ? navigator.serviceWorker.register('/sw.js').then(function () {
+            navigator.serviceWorker.controller ? 
+             console.log("Assets cached by the controlling service worker.") :
+             console.log("Please reload this page to allow the service worker to handle network operations.")
+        }).catch(function (e) {
+            console.log("ERROR: " + e)
+        }) : console.log("Service workers are not supported in the current browser.")
+    </script>
+
+
+<script src="/js/main.js?v=1.0.2"></script>
+
+
+</body>
+
+</html>
