@@ -125,10 +125,12 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 a,
-img {
+img,
+button {
   cursor: url(/img/ayuda.cur), default;
 }
-p {
+p,
+input {
   cursor: url(/img/texto.cur), default;
 }
 a,
@@ -714,8 +716,8 @@ pre .javascript .function {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background-color: #02162b;
   box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.6);
   transition: 0.4s ease-in-out;
@@ -743,6 +745,7 @@ pre .javascript .function {
   z-index: 0;
   position: relative;
   z-index: 1;
+  margin-bottom: 50px;
 }
 .trm-app-frame .container {
   position: relative;
