@@ -169,7 +169,7 @@
 						
 						<li class="menu-item-has-children ">
 							<a  href="/comment/">
-								评论
+								踩踩
 							</a>
 							
 						</li>
@@ -581,33 +581,60 @@
                         
                     </div>
 
-                     
-    
-        <!-- bComments -->
-        
-            <div class="row trm-scroll-animation comment-container" data-scroll data-scroll-offset="50">
-                <div class="col-lg-12">
-                    <h5 class="trm-mb-40 trm-title-with-divider">
-                        留言板
-                        <span data-number="03"></span>
-                    </h5>
-                </div>
-                <div class="col-lg-12">
-                    <div class="trm-card trm-p-10">
-                        <com-comment env='true' hash='1591383544785'></com-comment>
-                    </div>
-                </div>
-            </div>
-        
-    
+                    
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.staticfile.org/valine/1.4.16/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz",
+    app_key: "idtOYJV7ebRuAUkGztfhrusL",
+    avatar: "robohash",
+    placeholder: "想说什么，在这里留言吧(๑•̀ㅂ•́)و✧",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
 
 
                     <div class="trm-divider trm-mb-40"></div>
 
                     <!-- footer -->
-                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+                    <footer class="row trm-scroll-animation" data-scroll data-scroll-offset="50">
     <div class="trm-label">
-        ©  2020- 2022-07-27 ·
+        ©  2020- 2022 ·
         <span class="trm-accent-color">
             初月二三
         </span>
@@ -666,20 +693,6 @@
 <script src="/js/plugins/fancybox.min.js"></script>
 <script src="/js/plugins/swiper.min.js"></script>
 
-
-<!-- 评论插件 -->
- 
-        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
-        <script>
-        new Valine({
-            el: '#vcomments',
-            appId: 'IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz',
-            appKey: 'idtOYJV7ebRuAUkGztfhrusL',
-            placeholder: '欢迎畅所欲言',
-            avatar: 'robohash',
-            pageSize: '10'
-        })
-        </script>
 
 
 <!-- Service Worker -->
