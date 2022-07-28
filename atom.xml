@@ -113,19 +113,17 @@
     <link href="http://limenggen.github.io/spring-studyNode/"/>
     <id>http://limenggen.github.io/spring-studyNode/</id>
     <published>2020-10-28T12:11:14.000Z</published>
-    <updated>2022-07-26T12:34:51.490Z</updated>
+    <updated>2022-07-28T06:56:49.436Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;Spring是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。官网：&lt;a href=&quot;https://sping.io/%E3%80%82&quot;&gt;https://sping.io/。&lt;/a&gt;&lt;br&gt;本篇主要记录一些认为重要的知识点&lt;/p&gt;
+&lt;p&gt;Spring是一种轻量级开发框架,旨在提高开发人员的开发效率以及系统的可维护性。&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
     
     <category term="Spring" scheme="http://limenggen.github.io/categories/Spring/"/>
     
-    
-    <category term="Spring" scheme="http://limenggen.github.io/tags/Spring/"/>
     
   </entry>
   
@@ -134,11 +132,11 @@
     <link href="http://limenggen.github.io/springboot-security/"/>
     <id>http://limenggen.github.io/springboot-security/</id>
     <published>2020-10-10T13:17:04.000Z</published>
-    <updated>2022-07-24T11:41:16.709Z</updated>
+    <updated>2022-07-28T06:21:19.918Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。&lt;br&gt;本案例完成项目搭建，并作出相应测试&lt;br&gt;本案例&lt;a href=&quot;https://github.com/limenggen/springboot-redis-demo&quot;&gt;GitHub地址:https://github.com/limenggen/springboot-redis-demo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。&lt;br&gt;本案例完成项目搭建，并作出相应测试&lt;/p&gt;
 &lt;/blockquote&gt;</summary>
     
     
@@ -157,7 +155,7 @@
     <link href="http://limenggen.github.io/springboot-redisChche/"/>
     <id>http://limenggen.github.io/springboot-redisChche/</id>
     <published>2020-09-30T13:17:04.000Z</published>
-    <updated>2022-07-24T11:42:01.587Z</updated>
+    <updated>2022-07-28T06:15:31.669Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;

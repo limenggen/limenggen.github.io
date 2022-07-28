@@ -8,16 +8,16 @@
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
 <meta name="keywords" content="">
-<meta name="description" content="SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。本案例完成项目搭建，并作出相应测试本案例GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;limenggen&#x2F;sp">
+<meta name="description" content="SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。本案例完成项目搭建，并作出相应测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot项目整合SpringSecurity笔记">
 <meta property="og:url" content="http://limenggen.github.io/springboot-security/index.html">
 <meta property="og:site_name" content="初月二三">
-<meta property="og:description" content="SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。本案例完成项目搭建，并作出相应测试本案例GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;limenggen&#x2F;sp">
+<meta property="og:description" content="SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。本案例完成项目搭建，并作出相应测试">
 <meta property="og:locale">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
 <meta property="article:published_time" content="2020-10-10T13:17:04.000Z">
-<meta property="article:modified_time" content="2022-07-24T11:41:16.709Z">
+<meta property="article:modified_time" content="2022-07-28T06:21:19.918Z">
 <meta property="article:author" content="初月二三">
 <meta property="article:tag" content="SpringBoot">
 <meta property="article:tag" content="Security">
@@ -167,13 +167,6 @@
 						<li class="menu-item-has-children ">
 							<a  href="/share/">
 								分享
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children ">
-							<a  href="/comment/">
-								踩踩
 							</a>
 							
 						</li>
@@ -437,7 +430,7 @@
 
                     <article class="trm-card trm-publication">
                         <blockquote>
-<p>SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。<br>本案例完成项目搭建，并作出相应测试<br>本案例<a target="_blank" rel="noopener" href="https://github.com/limenggen/springboot-redis-demo">GitHub地址:https://github.com/limenggen/springboot-redis-demo</a></p>
+<p>SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。<br>本案例完成项目搭建，并作出相应测试</p>
 </blockquote>
 <span id="more"></span>
 
@@ -547,54 +540,22 @@
                     </div>
                     <!-- blog end -->
 
-                    <!-- comment -->
-                    
-                    	<div id="gitalk-container"></div>
-                    	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
-<script src="https://priesttomb.github.io/js/md5.min.js"></script>
-<script type="text/javascript">
-    new Gitalk({
-        clientID: '',
-        clientSecret: '',
-        repo: 'limenggen.github.io',
-        owner: 'limenggen',
-        admin: 'limenggen',
-        id: md5(location.pathname),
-        distractionFreeMode: true
-    }).render('gitalk-container')
-</script>
-                    
-                    <!-- comment end -->
-                    <div class="trm-divider trm-mb-40"></div>
-
-                    <!-- footer -->
-                    <footer class="row trm-scroll-animation" data-scroll data-scroll-offset="50">
-    <div class="trm-label">
-        ©  2020- 2022 ·
-        <span class="trm-accent-color">
-            初月二三
-        </span>
+                     
+    <!-- valine -->
+    <div class="row trm-mb-20 trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <div class="col-lg-12">
+            <h5 class="trm-mb-40 trm-title-with-divider">
+                评论
+                <span data-number="03"></span>
+            </h5>
+            <div class="trm-service-icon-box trm-contrast trm-active-el" >
+                <div id="vcomments"></div>
+            </div>
+        </div>
     </div>
-    <div class="trm-label">
-        本站已维护:
-        <span id="since" class="trm-accent-color"></span>
-        天
-    </div>
-</footer>
+    <!-- valine end -->
 
-<script>
-    function show_date_time () {
-        BirthDay = new Date("09/25/2020 14:00:00");
-        today = new Date();
-        timeold = (today.getTime() - BirthDay.getTime());
-        msPerDay = 24 * 60 * 60 * 1000
-        day = Math.floor(timeold / msPerDay)
-        since.innerHTML = day
-    }
-    show_date_time()
-</script>
-                    <!-- footer end -->
+
                 </div>
                 <!-- content end -->
             </div>
@@ -621,8 +582,10 @@
         </div>
       </div>
       <!-- mode switcher end -->
+
   </div>
   <!-- app wrapper end -->
+
   
 <script src="/js/plugins/jquery.min.js"></script>
 <script src="/js/plugins/swup.min.js"></script>
@@ -631,6 +594,23 @@
 <script src="/js/plugins/fancybox.min.js"></script>
 <script src="/js/plugins/swiper.min.js"></script>
 
+
+<!-- 评论插件 -->
+
+
+<!-- 评论插件 -->
+ 
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
+        <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz',
+            appKey: 'idtOYJV7ebRuAUkGztfhrusL',
+            placeholder: '想说什么，在这里留言吧(๑•̀ㅂ•́)و✧',
+            avatar: 'robohash',
+            pageSize: '10'
+        })
+        </script>
 
 
 <!-- Service Worker -->

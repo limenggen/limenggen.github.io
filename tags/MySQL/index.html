@@ -166,13 +166,6 @@
 						</li>
 						
 						<li class="menu-item-has-children ">
-							<a  href="/comment/">
-								踩踩
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children ">
 							<a  href="/about/">
 								关于
 							</a>
@@ -472,7 +465,7 @@
                     <div class="trm-divider trm-mb-40"></div>
 
                     <!-- footer -->
-                    <footer class="row trm-scroll-animation" data-scroll data-scroll-offset="50">
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
     <div class="trm-label">
         ©  2020- 2022 ·
         <span class="trm-accent-color">
@@ -485,7 +478,6 @@
         天
     </div>
 </footer>
-
 <script>
     function show_date_time () {
         BirthDay = new Date("09/25/2020 14:00:00");
@@ -521,8 +513,10 @@
         </div>
       </div>
       <!-- mode switcher end -->
+
   </div>
   <!-- app wrapper end -->
+
   
 <script src="/js/plugins/jquery.min.js"></script>
 <script src="/js/plugins/swup.min.js"></script>
@@ -531,6 +525,23 @@
 <script src="/js/plugins/fancybox.min.js"></script>
 <script src="/js/plugins/swiper.min.js"></script>
 
+
+<!-- 评论插件 -->
+
+
+<!-- 评论插件 -->
+ 
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
+        <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz',
+            appKey: 'idtOYJV7ebRuAUkGztfhrusL',
+            placeholder: '想说什么，在这里留言吧(๑•̀ㅂ•́)و✧',
+            avatar: 'robohash',
+            pageSize: '10'
+        })
+        </script>
 
 
 <!-- Service Worker -->

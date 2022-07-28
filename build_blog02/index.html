@@ -173,13 +173,6 @@
 						</li>
 						
 						<li class="menu-item-has-children ">
-							<a  href="/comment/">
-								踩踩
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children ">
 							<a  href="/about/">
 								关于
 							</a>
@@ -573,54 +566,22 @@
                     </div>
                     <!-- blog end -->
 
-                    <!-- comment -->
-                    
-                    	<div id="gitalk-container"></div>
-                    	<link rel="stylesheet" href="https://unpkg.com/gitalk@latest/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk@latest/dist/gitalk.min.js"></script>
-<script src="https://priesttomb.github.io/js/md5.min.js"></script>
-<script type="text/javascript">
-    new Gitalk({
-        clientID: '',
-        clientSecret: '',
-        repo: 'limenggen.github.io',
-        owner: 'limenggen',
-        admin: 'limenggen',
-        id: md5(location.pathname),
-        distractionFreeMode: true
-    }).render('gitalk-container')
-</script>
-                    
-                    <!-- comment end -->
-                    <div class="trm-divider trm-mb-40"></div>
-
-                    <!-- footer -->
-                    <footer class="row trm-scroll-animation" data-scroll data-scroll-offset="50">
-    <div class="trm-label">
-        ©  2020- 2022 ·
-        <span class="trm-accent-color">
-            初月二三
-        </span>
+                     
+    <!-- valine -->
+    <div class="row trm-mb-20 trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <div class="col-lg-12">
+            <h5 class="trm-mb-40 trm-title-with-divider">
+                评论
+                <span data-number="03"></span>
+            </h5>
+            <div class="trm-service-icon-box trm-contrast trm-active-el" >
+                <div id="vcomments"></div>
+            </div>
+        </div>
     </div>
-    <div class="trm-label">
-        本站已维护:
-        <span id="since" class="trm-accent-color"></span>
-        天
-    </div>
-</footer>
+    <!-- valine end -->
 
-<script>
-    function show_date_time () {
-        BirthDay = new Date("09/25/2020 14:00:00");
-        today = new Date();
-        timeold = (today.getTime() - BirthDay.getTime());
-        msPerDay = 24 * 60 * 60 * 1000
-        day = Math.floor(timeold / msPerDay)
-        since.innerHTML = day
-    }
-    show_date_time()
-</script>
-                    <!-- footer end -->
+
                 </div>
                 <!-- content end -->
             </div>
@@ -647,8 +608,10 @@
         </div>
       </div>
       <!-- mode switcher end -->
+
   </div>
   <!-- app wrapper end -->
+
   
 <script src="/js/plugins/jquery.min.js"></script>
 <script src="/js/plugins/swup.min.js"></script>
@@ -657,6 +620,23 @@
 <script src="/js/plugins/fancybox.min.js"></script>
 <script src="/js/plugins/swiper.min.js"></script>
 
+
+<!-- 评论插件 -->
+
+
+<!-- 评论插件 -->
+ 
+        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
+        <script>
+        new Valine({
+            el: '#vcomments',
+            appId: 'IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz',
+            appKey: 'idtOYJV7ebRuAUkGztfhrusL',
+            placeholder: '想说什么，在这里留言吧(๑•̀ㅂ•́)و✧',
+            avatar: 'robohash',
+            pageSize: '10'
+        })
+        </script>
 
 
 <!-- Service Worker -->
