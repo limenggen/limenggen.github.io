@@ -15,14 +15,14 @@
 <meta property="og:site_name" content="初月二三">
 <meta property="og:description" content="在SpringBoot项目中引入Swagger，让接口数据可视化，尤其适用于Restful API本案例使用工具：IDEA本案例GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;limenggen&#x2F;springboot-swagger-demo">
 <meta property="og:locale">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+<meta property="og:image" content="https://s6.jpg.cm/2022/07/29/PQqAX4.jpg">
 <meta property="article:published_time" content="2020-09-30T08:24:56.000Z">
-<meta property="article:modified_time" content="2022-07-24T11:41:36.131Z">
+<meta property="article:modified_time" content="2022-07-29T12:55:37.988Z">
 <meta property="article:author" content="初月二三">
 <meta property="article:tag" content="SpringBoot">
 <meta property="article:tag" content="Swagger">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+<meta name="twitter:image" content="https://s6.jpg.cm/2022/07/29/PQqAX4.jpg">
 
     <meta name="description" content="情怀仍在，纵然往事早已下落不明">
 
@@ -30,10 +30,10 @@
     SpringBoot项目中引入Swagger
 </title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.0.2">
 
 
-    <link rel="icon" type="image/png" sizes="32x32" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.0.2">
 
 
 
@@ -53,8 +53,8 @@
   "好好生活 慢慢相遇"
 ]</script>
 <script>window.FAVICON={
-  "icon16": "https://limenggen.gitee.io/img/favicon.png",
-  "icon32": "https://limenggen.gitee.io/img/favicon.png",
+  "icon16": "https://s6.jpg.cm/2022/07/29/PQRdBW.png",
+  "icon32": "https://s6.jpg.cm/2022/07/29/PQRdBW.png",
   "appleTouchIcon": null,
   "webmanifest": null,
   "visibilitychange": false,
@@ -121,7 +121,7 @@
 		<div class="trm-left-side">
 			<!-- logo -->
 			<a href="/" class="trm-logo-frame trm-anima-link">
-				<img src="https://limenggen.gitee.io/img/favicon.png" alt="logo">
+				<img src="https://s6.jpg.cm/2022/07/29/PQRdBW.png" alt="logo">
 				<div class="trm-logo-text">
 					初月
 					<span>二三</span>
@@ -172,6 +172,13 @@
 						</li>
 						
 						<li class="menu-item-has-children ">
+							<a  href="/comment/">
+								留言
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
 							<a  href="/about/">
 								关于
 							</a>
@@ -201,7 +208,7 @@
     <!-- banner -->
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
     <!-- banner cover -->
-    <img src="https://limenggen.gitee.io/img/media.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <img src="https://s6.jpg.cm/2022/07/29/PQReM2.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
     <!-- banner cover end -->
 
     <!-- banner slideshow cover-->
@@ -279,7 +286,7 @@
     <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
         <!-- card header -->
         <div class="trm-mc-header">
-            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://limenggen.gitee.io/img/head.jpg" alt="Avatar"> </div>
+            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://s6.jpg.cm/2022/07/29/PQR68H.jpg" alt="Avatar"> </div>
             <h5 class="trm-name trm-mb-15">
                 初月二三
             </h5>
@@ -347,11 +354,11 @@
                     <i class="iconfont cg-weibo"></i>
                 </a>
             
-                <a href="mailto:limgsoul@163.com" rel="nofollow" target="_blank">
+                <a href="mailto:lmgsoul@163.com" rel="nofollow" target="_blank">
                     <i class="fa fa-envelope"></i>
                 </a>
             
-                <a href="https://limenggen.gitee.io/img/weixin_.jpg" rel="nofollow" target="_blank">
+                <a href="https://s6.jpg.cm/2022/07/29/PQRQuS.jpg" rel="nofollow" target="_blank">
                     <i class="fa fa-comments"></i>
                 </a>
             
@@ -436,7 +443,7 @@
 
 <h2 id="1、创建一个SpringBoot项目"><a href="#1、创建一个SpringBoot项目" class="headerlink" title="1、创建一个SpringBoot项目"></a>1、创建一个SpringBoot项目</h2><blockquote>
 <ul>
-<li>项目结构<br><img src="https://limenggen.gitee.io/images/20200930-swagger.jpg"></li>
+<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWeFL.png"></li>
 </ul>
 </blockquote>
 <h2 id="2、引入swagger依赖"><a href="#2、引入swagger依赖" class="headerlink" title="2、引入swagger依赖"></a>2、引入swagger依赖</h2><p>pom.xml</p>
@@ -473,7 +480,7 @@
 </ul>
 <h2 id="7、启动项目"><a href="#7、启动项目" class="headerlink" title="7、启动项目"></a>7、启动项目</h2><p>项目访问地址：<a target="_blank" rel="noopener" href="http://localhost:8081/swagger-ui.html">http://localhost:8081/swagger-ui.html</a></p>
 <blockquote>
-<p><img src="https://limenggen.gitee.io/images/20200930-swagger2.jpg"></p>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWV5U.png"></p>
 </blockquote>
 
                     </article>
@@ -490,12 +497,12 @@
                         
                             <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
-        <a href="/springboot-redisChche/" class="trm-cover-frame trm-anima-link">
-            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+        <a href="/springboot-redisCache/" class="trm-cover-frame trm-anima-link">
+            <img src="https://s6.jpg.cm/2022/07/29/PQq7rC.jpg" alt="cover">
         </a>
         <div class="trm-card-descr">
             <h5>
-                <a href="/springboot-redisChche/" class="trm-anima-link">
+                <a href="/springboot-redisCache/" class="trm-anima-link">
                     SpringBoot项目整合Redis作缓存
                 </a>
             </h5>
@@ -522,7 +529,7 @@
                             <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
         <a href="/CentOS7-mysql5-7/" class="trm-cover-frame trm-anima-link">
-            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+            <img src="https://s6.jpg.cm/2022/07/29/PQqQKt.jpg" alt="cover">
         </a>
         <div class="trm-card-descr">
             <h5>
@@ -561,7 +568,7 @@
                 <span data-number="03"></span>
             </h5>
             <div class="trm-service-icon-box trm-contrast trm-active-el">
-                <div id="vcomments" class="card-content" style="display: grid"></div>
+                <div id="vcomments"></div>
             </div>
         </div>
     </div>
@@ -635,9 +642,6 @@
 
 
 <!-- 评论插件 -->
-
-
-<!-- 评论插件 -->
  
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
         <script>
@@ -647,7 +651,8 @@
             appKey: 'idtOYJV7ebRuAUkGztfhrusL',
             placeholder: '想说什么，在这里留言吧(๑•̀ㅂ•́)و✧',
             avatar: 'robohash',
-            pageSize: '10'
+            pageSize: '10',
+            enableQQ: 'ture'
         })
         </script>
 

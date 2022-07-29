@@ -11,18 +11,18 @@
 <meta name="description" content="在SpringBoot项目中使用Redis作缓存，既可避免频繁读取后端数据库，又可优化读取时间本案例使用工具：IDEA，Postman，Redis，Mysql本案例GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;limenggen&#x2F;springboot-redis-demo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot项目整合Redis作缓存">
-<meta property="og:url" content="http://limenggen.github.io/springboot-redisChche/index.html">
+<meta property="og:url" content="http://limenggen.github.io/springboot-redisCache/index.html">
 <meta property="og:site_name" content="初月二三">
 <meta property="og:description" content="在SpringBoot项目中使用Redis作缓存，既可避免频繁读取后端数据库，又可优化读取时间本案例使用工具：IDEA，Postman，Redis，Mysql本案例GitHub地址:https:&#x2F;&#x2F;github.com&#x2F;limenggen&#x2F;springboot-redis-demo">
 <meta property="og:locale">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+<meta property="og:image" content="https://s6.jpg.cm/2022/07/29/PQq7rC.jpg">
 <meta property="article:published_time" content="2020-09-30T13:17:04.000Z">
-<meta property="article:modified_time" content="2022-07-28T06:15:31.669Z">
+<meta property="article:modified_time" content="2022-07-29T12:51:37.586Z">
 <meta property="article:author" content="初月二三">
 <meta property="article:tag" content="Redis">
 <meta property="article:tag" content="SpringBoot">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png">
+<meta name="twitter:image" content="https://s6.jpg.cm/2022/07/29/PQq7rC.jpg">
 
     <meta name="description" content="情怀仍在，纵然往事早已下落不明">
 
@@ -30,10 +30,10 @@
     SpringBoot项目整合Redis作缓存
 </title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.0.2">
 
 
-    <link rel="icon" type="image/png" sizes="32x32" href="https://limenggen.gitee.io/img/favicon.png?v=1.0.2">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.0.2">
 
 
 
@@ -53,8 +53,8 @@
   "好好生活 慢慢相遇"
 ]</script>
 <script>window.FAVICON={
-  "icon16": "https://limenggen.gitee.io/img/favicon.png",
-  "icon32": "https://limenggen.gitee.io/img/favicon.png",
+  "icon16": "https://s6.jpg.cm/2022/07/29/PQRdBW.png",
+  "icon32": "https://s6.jpg.cm/2022/07/29/PQRdBW.png",
   "appleTouchIcon": null,
   "webmanifest": null,
   "visibilitychange": false,
@@ -121,7 +121,7 @@
 		<div class="trm-left-side">
 			<!-- logo -->
 			<a href="/" class="trm-logo-frame trm-anima-link">
-				<img src="https://limenggen.gitee.io/img/favicon.png" alt="logo">
+				<img src="https://s6.jpg.cm/2022/07/29/PQRdBW.png" alt="logo">
 				<div class="trm-logo-text">
 					初月
 					<span>二三</span>
@@ -172,6 +172,13 @@
 						</li>
 						
 						<li class="menu-item-has-children ">
+							<a  href="/comment/">
+								留言
+							</a>
+							
+						</li>
+						
+						<li class="menu-item-has-children ">
 							<a  href="/about/">
 								关于
 							</a>
@@ -201,7 +208,7 @@
     <!-- banner -->
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
     <!-- banner cover -->
-    <img src="https://limenggen.gitee.io/img/media.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <img src="https://s6.jpg.cm/2022/07/29/PQReM2.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
     <!-- banner cover end -->
 
     <!-- banner slideshow cover-->
@@ -248,7 +255,7 @@
                                 </li>
                                 <li>
                                     <span>
-                                        springboot-redisChche
+                                        springboot-redisCache
                                     </span
                                 ></li>
                             </ul>
@@ -279,7 +286,7 @@
     <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
         <!-- card header -->
         <div class="trm-mc-header">
-            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://limenggen.gitee.io/img/head.jpg" alt="Avatar"> </div>
+            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://s6.jpg.cm/2022/07/29/PQR68H.jpg" alt="Avatar"> </div>
             <h5 class="trm-name trm-mb-15">
                 初月二三
             </h5>
@@ -347,11 +354,11 @@
                     <i class="iconfont cg-weibo"></i>
                 </a>
             
-                <a href="mailto:limgsoul@163.com" rel="nofollow" target="_blank">
+                <a href="mailto:lmgsoul@163.com" rel="nofollow" target="_blank">
                     <i class="fa fa-envelope"></i>
                 </a>
             
-                <a href="https://limenggen.gitee.io/img/weixin_.jpg" rel="nofollow" target="_blank">
+                <a href="https://s6.jpg.cm/2022/07/29/PQRQuS.jpg" rel="nofollow" target="_blank">
                     <i class="fa fa-comments"></i>
                 </a>
             
@@ -436,7 +443,7 @@
 
 <h2 id="1、开启redis远程访问"><a href="#1、开启redis远程访问" class="headerlink" title="1、开启redis远程访问"></a>1、开启redis远程访问</h2><p><code>vi redis.conf</code><br>修改bing 127.0.0.1注释掉<br>修改protected-mode 属性值为no<br>修改daemonize属性值为yes（启动后台运行）</p>
 <blockquote>
-<p>Redis安装过程：<a target="_blank" rel="noopener" href="https://limenggen.gitee.io/2020/09/26/CentOS7_redis/">https://limenggen.gitee.io/2020/09/26/CentOS7_redis/</a></p>
+<p>Redis安装过程：<a href="https://limenggen.github.io/CentOS7_redis/">https://limenggen.github.io/CentOS7_redis/</a></p>
 </blockquote>
 <h2 id="2、启动redis"><a href="#2、启动redis" class="headerlink" title="2、启动redis"></a>2、启动redis</h2><p><code> ./redis-server redis.conf</code></p>
 <ul>
@@ -446,11 +453,11 @@
 <h2 id="3、创建测试数据"><a href="#3、创建测试数据" class="headerlink" title="3、创建测试数据"></a>3、创建测试数据</h2><p>在mysql数据库中创建测试数据</p>
 <figure class="highlight sql"><figcaption><span>users.sql</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> NAMES utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for users</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `users`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `users`  (</span><br><span class="line">  `uid` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `username` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_bin <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `password` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_bin <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `salary` <span class="type">int</span>(<span class="number">40</span>) <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`uid`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">=</span> utf8mb4 <span class="keyword">COLLATE</span> <span class="operator">=</span> utf8mb4_bin ROW_FORMAT <span class="operator">=</span> <span class="keyword">Dynamic</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Records of users</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `users` <span class="keyword">VALUES</span> (<span class="number">123</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;miaomiao&#x27;</span>, <span class="number">4000</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>Mysql安装过程：<a target="_blank" rel="noopener" href="https://limenggen.gitee.io/2020/09/26/CentOS7-mysql5-7/">https://limenggen.gitee.io/2020/09/26/CentOS7-mysql5-7/</a></p>
+<p>Mysql安装过程：<a href="https://limenggen.github.io/CentOS7-mysql5-7/">https://limenggen.github.io/CentOS7-mysql5-7/</a></p>
 </blockquote>
 <h2 id="4、创建springboot项目"><a href="#4、创建springboot项目" class="headerlink" title="4、创建springboot项目"></a>4、创建springboot项目</h2><blockquote>
 <ul>
-<li>项目结构<br><img src="https://limenggen.gitee.io/images/20200930-redis.jpg"></li>
+<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWljf.png"></li>
 </ul>
 </blockquote>
 <h2 id="5、添加pom-xml依赖"><a href="#5、添加pom-xml依赖" class="headerlink" title="5、添加pom.xml依赖"></a>5、添加pom.xml依赖</h2><figure class="highlight xml"><figcaption><span>pom.xml >folded</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 快速搭建并开发web项目 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- mybatis 与 spring boot 2.x的整合包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql JDBC驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- redis --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 统一不同的缓存技术 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加lombok插件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -500,7 +507,7 @@
 
 <h2 id="12、启动项目"><a href="#12、启动项目" class="headerlink" title="12、启动项目"></a>12、启动项目</h2><p>使用postman测试访问：<a target="_blank" rel="noopener" href="http://localhost:8081/redis/queryAll">http://localhost:8081/redis/queryAll</a></p>
 <blockquote>
-<p><img src="https://limenggen.gitee.io/images/20200930-redis2.jpg"></p>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQW8tO.png"></p>
 </blockquote>
 
                     </article>
@@ -518,7 +525,7 @@
                             <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
         <a href="/springboot-security/" class="trm-cover-frame trm-anima-link">
-            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+            <img src="https://s6.jpg.cm/2022/07/29/PQq6gu.jpg" alt="cover">
         </a>
         <div class="trm-card-descr">
             <h5>
@@ -549,7 +556,7 @@
                             <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
         <a href="/springboot-swagger/" class="trm-cover-frame trm-anima-link">
-            <img src="https://cdn.jsdelivr.net/gh/removeif/blog_image/img/2019/20190919221611.png" alt="cover">
+            <img src="https://s6.jpg.cm/2022/07/29/PQqAX4.jpg" alt="cover">
         </a>
         <div class="trm-card-descr">
             <h5>
@@ -588,7 +595,7 @@
                 <span data-number="03"></span>
             </h5>
             <div class="trm-service-icon-box trm-contrast trm-active-el">
-                <div id="vcomments" class="card-content" style="display: grid"></div>
+                <div id="vcomments"></div>
             </div>
         </div>
     </div>
@@ -662,9 +669,6 @@
 
 
 <!-- 评论插件 -->
-
-
-<!-- 评论插件 -->
  
         <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
         <script>
@@ -674,7 +678,8 @@
             appKey: 'idtOYJV7ebRuAUkGztfhrusL',
             placeholder: '想说什么，在这里留言吧(๑•̀ㅂ•́)و✧',
             avatar: 'robohash',
-            pageSize: '10'
+            pageSize: '10',
+            enableQQ: 'ture'
         })
         </script>
 
