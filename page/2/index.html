@@ -297,19 +297,19 @@
                         
                         
                         
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <!-- categories card -->
                             <div>
                                 <h6>
                                     文章
                                 </h6>
                                 <a href="/archives" class="trm-label">
-                                    13
+                                    14
                                 </a>
                             </div>
                             <!-- categories card end -->
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <!-- categories card -->
                             <div>
                                 <h6>
@@ -457,6 +457,36 @@
                                 <span data-number="01"></span>
                             </h5>
                         </div>
+                        
+                            <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/CentOS7_redis/" class="trm-cover-frame trm-anima-link">
+            <img src="https://s6.jpg.cm/2022/07/29/PQq5e5.jpg" alt="cover">
+        </a>
+        <div class="trm-card-descr">
+            <h5>
+                <a href="/CentOS7_redis/" class="trm-anima-link">
+                    CentOS安装Redis
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" /categories/Linux/">
+                    <i class="fas fa-tags has-text-grey"></i>
+                    Linux
+                </a>
+            </div>
+            <ul class="trm-card-data trm-label">
+                <li><i class="far fa-calendar-plus"></i>
+                    2020/09/26 05:12
+                </li>
+                <li><i class="fas fa-pencil-alt"></i>
+                    368
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
                         
                             <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
@@ -621,6 +651,32 @@
 
 
 <!-- 评论插件 -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
+    <script>
+        function loadValine () {
+        var GUEST_INFO = ['nick', 'mail', 'link'];
+        var guest_info = 'nick,mail,link';
+        
+        guest_info = guest_info.split(',').filter(function(item) {
+            return GUEST_INFO.indexOf(item) > -1;
+        });
+        new Valine({
+            el: '#vcomments',
+            appId: 'IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz',
+            appKey: 'idtOYJV7ebRuAUkGztfhrusL',
+            placeholder: '想说什么，在这里留言吧(๑•̀ㅂ•́)و✧',
+            avatar: 'robohash',
+            pageSize: '10',
+            enableQQ: 'ture'
+        })
+        }
+        
+        if (false) {
+        loadValine();
+        } else {
+        window.addEventListener('DOMContentLoaded', loadValine, false);
+        }
+    </script>
 
 
 <!-- Service Worker -->

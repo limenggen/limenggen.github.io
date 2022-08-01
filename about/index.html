@@ -308,19 +308,19 @@
                         
                         
                         
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <!-- categories card -->
                             <div>
                                 <h6>
                                     文章
                                 </h6>
                                 <a href="/archives" class="trm-label">
-                                    13
+                                    14
                                 </a>
                             </div>
                             <!-- categories card end -->
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <!-- categories card -->
                             <div>
                                 <h6>
@@ -632,9 +632,15 @@
 
 
 <!-- 评论插件 -->
- 
-        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
-        <script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
+    <script>
+        function loadValine () {
+        var GUEST_INFO = ['nick', 'mail', 'link'];
+        var guest_info = 'nick,mail,link';
+        
+        guest_info = guest_info.split(',').filter(function(item) {
+            return GUEST_INFO.indexOf(item) > -1;
+        });
         new Valine({
             el: '#vcomments',
             appId: 'IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz',
@@ -644,7 +650,14 @@
             pageSize: '10',
             enableQQ: 'ture'
         })
-        </script>
+        }
+        
+        if (false) {
+        loadValine();
+        } else {
+        window.addEventListener('DOMContentLoaded', loadValine, false);
+        }
+    </script>
 
 
 <!-- Service Worker -->

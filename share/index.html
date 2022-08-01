@@ -309,19 +309,19 @@
                         
                         
                         
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <!-- categories card -->
                             <div>
                                 <h6>
                                     文章
                                 </h6>
                                 <a href="/archives" class="trm-label">
-                                    13
+                                    14
                                 </a>
                             </div>
                             <!-- categories card end -->
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                             <!-- categories card -->
                             <div>
                                 <h6>
@@ -574,6 +574,54 @@
                                 </a>
                             </div>
                         
+                            <div class="col-lg-6">
+                                <a href='//colorme.io/' target='_blank' rel="nofollow">
+                                    <div class="trm-service-icon-box trm-scroll-animation trm-p-20" data-scroll data-scroll-offset="40">
+                                        <div class="trm-service-content">
+                                            <div class="trm-icon">
+                                                <img draggable="false" alt="ColorMe" src="//colorme.io/static/media/bgTransparent.e6317315.svg">
+                                            </div>
+                                            <div class="trm-service-text">
+                                                <h6 class="trm-mb-10">ColorMe</h6>
+                                                <div>用来查看色号的方便之选</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                            <div class="col-lg-6">
+                                <a href='//pandao.github.io/editor.md/' target='_blank' rel="nofollow">
+                                    <div class="trm-service-icon-box trm-scroll-animation trm-p-20" data-scroll data-scroll-offset="40">
+                                        <div class="trm-service-content">
+                                            <div class="trm-icon">
+                                                <img draggable="false" alt="Markdown 编辑器" src="//pandao.github.io/editor.md/images/logos/editormd-logo-64x64.png">
+                                            </div>
+                                            <div class="trm-service-text">
+                                                <h6 class="trm-mb-10">Markdown 编辑器</h6>
+                                                <div>开源在线 Markdown 编辑器</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
+                            <div class="col-lg-6">
+                                <a href='//tool.lu/' target='_blank' rel="nofollow">
+                                    <div class="trm-service-icon-box trm-scroll-animation trm-p-20" data-scroll data-scroll-offset="40">
+                                        <div class="trm-service-content">
+                                            <div class="trm-icon">
+                                                <img draggable="false" alt="在线工具合集" src="//qn14.tool.lu/202111/23/130717W3m1rqDVJif85Pq1_512x512.svg">
+                                            </div>
+                                            <div class="trm-service-text">
+                                                <h6 class="trm-mb-10">在线工具合集</h6>
+                                                <div>大部分常用的工具在里面都可以找到</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        
                     </div>
 
                     
@@ -645,9 +693,15 @@
 
 
 <!-- 评论插件 -->
- 
-        <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
-        <script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/valine@1.5.1/dist/Valine.min.js"></script>
+    <script>
+        function loadValine () {
+        var GUEST_INFO = ['nick', 'mail', 'link'];
+        var guest_info = 'nick,mail,link';
+        
+        guest_info = guest_info.split(',').filter(function(item) {
+            return GUEST_INFO.indexOf(item) > -1;
+        });
         new Valine({
             el: '#vcomments',
             appId: 'IBKuN3aUgkY8it7OQp3lIN2N-gzGzoHsz',
@@ -657,7 +711,14 @@
             pageSize: '10',
             enableQQ: 'ture'
         })
-        </script>
+        }
+        
+        if (false) {
+        loadValine();
+        } else {
+        window.addEventListener('DOMContentLoaded', loadValine, false);
+        }
+    </script>
 
 
 <!-- Service Worker -->

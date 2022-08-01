@@ -6,7 +6,7 @@
   <link href="http://limenggen.github.io/atom.xml" rel="self"/>
   
   <link href="http://limenggen.github.io/"/>
-  <updated>2022-07-29T12:58:03.813Z</updated>
+  <updated>2022-08-01T02:29:30.481Z</updated>
   <id>http://limenggen.github.io/</id>
   
   <author>
@@ -15,6 +15,25 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数据库导数笔记</title>
+    <link href="http://limenggen.github.io/sql-import/"/>
+    <id>http://limenggen.github.io/sql-import/</id>
+    <published>2022-08-01T01:33:05.000Z</published>
+    <updated>2022-08-01T02:29:30.481Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;因工作使用数据库日常开发，所以在这里备份导数操作&lt;br&gt;本篇主要说明db2库、oracle库导数操作&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>sql数据库练习题</title>
