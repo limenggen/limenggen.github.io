@@ -6,7 +6,7 @@
   <link href="http://limenggen.github.io/atom.xml" rel="self"/>
   
   <link href="http://limenggen.github.io/"/>
-  <updated>2022-08-01T02:29:30.481Z</updated>
+  <updated>2022-08-03T08:06:28.005Z</updated>
   <id>http://limenggen.github.io/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>sql关于计算字符串类型的&#39;时长&#39;思路</title>
+    <link href="http://limenggen.github.io/sql-question01/"/>
+    <id>http://limenggen.github.io/sql-question01/</id>
+    <published>2022-08-03T07:54:56.000Z</published>
+    <updated>2022-08-03T08:06:28.005Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本篇是记录完成一段sql逻辑计算的思路&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>数据库导数笔记</title>
     <link href="http://limenggen.github.io/sql-import/"/>
     <id>http://limenggen.github.io/sql-import/</id>
     <published>2022-08-01T01:33:05.000Z</published>
-    <updated>2022-08-01T02:29:30.481Z</updated>
+    <updated>2022-08-01T03:02:35.368Z</updated>
     
     
     <summary type="html">&lt;blockquote&gt;
