@@ -6,7 +6,7 @@
   <link href="http://limenggen.github.io/atom.xml" rel="self"/>
   
   <link href="http://limenggen.github.io/"/>
-  <updated>2022-08-03T08:06:28.005Z</updated>
+  <updated>2022-08-28T00:19:01.986Z</updated>
   <id>http://limenggen.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>db2 reorg pending state</title>
+    <link href="http://limenggen.github.io/db2-question01/"/>
+    <id>http://limenggen.github.io/db2-question01/</id>
+    <published>2022-08-27T23:41:02.000Z</published>
+    <updated>2022-08-28T00:19:01.986Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;最近操作db2库时遇到了一些问题，在这里记录一下&lt;br&gt;本篇介绍一下db2的REORG命令的处理方法&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+    
+    <category term="sql" scheme="http://limenggen.github.io/tags/sql/"/>
+    
+    <category term="数据库笔记" scheme="http://limenggen.github.io/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>sql关于计算字符串类型的&#39;时长&#39;思路</title>
