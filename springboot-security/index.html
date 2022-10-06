@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh-Hans">
 
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -7,7 +7,6 @@
 <meta name="full-screen" content="yes">
 <meta name="theme-color" content="#317EFB" />
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="keywords" content="">
 <meta name="description" content="SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。本案例完成项目搭建，并作出相应测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot项目整合SpringSecurity笔记">
@@ -24,54 +23,72 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s6.jpg.cm/2022/07/29/PQq6gu.jpg">
 
-    <meta name="description" content="情怀仍在，纵然往事早已下落不明">
 
-<title>
-    SpringBoot项目整合SpringSecurity笔记
-</title>
+<title >SpringBoot项目整合SpringSecurity笔记</title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.0.2">
+<!-- Favicon -->
 
-
-    <link rel="icon" type="image/png" sizes="32x32" href="https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.0.2">
+    <link href='https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.1.1' rel='icon' type='image/png' sizes='16x16' ></link>
 
 
-
-<link rel="preload" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.css">
+    <link href='https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.1.1' rel='icon' type='image/png' sizes='32x32' ></link>
 
 
-<link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
-<link rel="stylesheet" href="/css/plugins/locomotive-scroll.css">
-<link rel="stylesheet" href="/css/plugins/swiper.min.css">
-<link rel="stylesheet" href="/css/plugins/fancybox.min.css">
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css">
+
+
+    
+
+    
+
+
+
+<!-- Icon -->
+
+    
 <link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
 
 
-<!-- variable -->
-<script>window.TYPED_TEXT=[
-  "好好生活 慢慢相遇"
-]</script>
-<script>window.FAVICON={
-  "icon16": "https://s6.jpg.cm/2022/07/29/PQRdBW.png",
-  "icon32": "https://s6.jpg.cm/2022/07/29/PQRdBW.png",
-  "appleTouchIcon": null,
-  "webmanifest": null,
-  "visibilitychange": false,
-  "hidden": null,
-  "showText": "(/≧▽≦/)咦！又好了！",
-  "hideText": "(●—●)喔哟，崩溃啦！"
-}</script>
-<script>window.HTMEM_VERSION='1.0.2'</script>
-<link data-theme-type="style-light" rel="stylesheet" href="/css/style-light.css?v=1.0.2" id="trm-switch-style">
-<link data-theme-type="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.0.2" id="trm-switch-style">
 
-<!-- theme css -->
-<script>
-    let themeMode = localStorage.getItem('theme-mode') === 'style-dark' ? 'style-light' : 'style-dark';
-    let linkdom = document.querySelector('[data-theme-type='+themeMode+']');
-    if(linkdom) linkdom.remove();
-</script>
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"limenggen.github.io","author":"初月二三","root":"/","typed_text":["好好生活 慢慢相遇"],"favicon":{"logo":"https://s6.jpg.cm/2022/07/29/PQRdBW.png","icon16":"https://s6.jpg.cm/2022/07/29/PQRdBW.png","icon32":"https://s6.jpg.cm/2022/07/29/PQRdBW.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":null,"showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"theme_version":"1.1.1","theme":{"switch":true,"default":"style-light"},"search":{"enable":true,"type":"local","href":"https://www.google.com/search?q=site:","domain":"limenggen.github.io","path":"search.xml"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
+
+<!-- Theme mode css -->
+
+    <link data-swup-theme="style-light" rel="stylesheet" href="/css/style-light.css?v=1.1.1" id="trm-switch-style">
+    <link data-swup-theme="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.1.1" id="trm-switch-style">
+    <script>
+        let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+        let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+        let themeMode = catchMode === 'style-dark' ? 'style-light' : 'style-dark';
+        let linkdom = document.querySelector('[data-swup-theme='+themeMode+']');
+        if(linkdom) linkdom.remove();
+    </script>
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+
 
 <!-- Site Analytics -->
  
@@ -104,9 +121,10 @@
 
     <!-- change mode preloader -->
     <div class="trm-mode-swich-animation-frame">
-    <div class="trm-mode-swich-animation"><i class="far fa-sun"></i>
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><i class="far fa-sun"></i></i>
         <div class="trm-horizon"></div>
-        <i class="far fa-moon"></i>
+        <i class="i-moon"><i class="far fa-moon"></i></i>
     </div>
 </div>
     <!-- change mode preloader end -->
@@ -115,17 +133,23 @@
       <div id="trm-dynamic-content" class="trm-swup-animation">
         <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
           <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style=" position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
             <!-- top bar -->
-            <div class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target="#content" data-scroll-offset="-10">
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
 	<div class="container">
 		<div class="trm-left-side">
 			<!-- logo -->
 			<a href="/" class="trm-logo-frame trm-anima-link">
-				<img src="https://s6.jpg.cm/2022/07/29/PQRdBW.png" alt="logo">
-				<div class="trm-logo-text">
-					初月
-					<span>二三</span>
-				</div>
+				
+					<img src="https://s6.jpg.cm/2022/07/29/PQRdBW.png" alt="logo">
+				
+				
+					<div class="trm-logo-text">
+						初月<span>二三</span>
+					</div>
+				
 			</a>
 			<!-- logo end -->
 		</div>
@@ -137,49 +161,83 @@
 					<ul>
 						
 						<li class="menu-item-has-children ">
-							<a  href="/">
+							<a  href="/" target="">
 								首页
 							</a>
 							
 						</li>
 						
 						<li class="menu-item-has-children ">
-							<a  href="/archives/">
-								归档
+							<a  href="/archives/" target="">
+								随笔
 							</a>
+							
+							<ul>
+								
+								<li>
+									<a  href="/archives/" target="">
+										归档
+									</a>
+								</li>
+								
+								<li>
+									<a  href="/categories/Linux/" target="">
+										分类
+									</a>
+								</li>
+								
+							</ul>
 							
 						</li>
 						
 						<li class="menu-item-has-children ">
-							<a  href="/links/">
-								友链
+							<a  href="/links/" target="">
+								收录
 							</a>
+							
+							<ul>
+								
+								<li>
+									<a  href="/links/" target="">
+										左邻
+									</a>
+								</li>
+								
+								<li>
+									<a  href="/share/" target="">
+										分享
+									</a>
+								</li>
+								
+							</ul>
 							
 						</li>
 						
 						<li class="menu-item-has-children ">
-							<a  href="/share/">
-								分享
+							<a  href="/comment/" target="">
+								踩踩
 							</a>
+							
+							<ul>
+								
+								<li>
+									<a  href="/say/" target="">
+										碎念
+									</a>
+								</li>
+								
+								<li>
+									<a  href="/comment/" target="">
+										留言
+									</a>
+								</li>
+								
+							</ul>
 							
 						</li>
 						
 						<li class="menu-item-has-children ">
-							<a  href="/say/">
-								碎念
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children ">
-							<a  href="/comment/">
-								留言
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children ">
-							<a  href="/about/">
+							<a  href="/about/" target="">
 								关于
 							</a>
 							
@@ -189,58 +247,60 @@
 				</nav>
 			</div>
 			<!-- menu end -->
-
+			
 			<!-- mode switcher place -->
-			<div class="trm-mode-switcher-place"></div>
+			
+			<div class="trm-mode-switcher-place">
+				<!-- <div class="trm-hidden-switcher"> -->
+					<div class="trm-mode-switcher">
+					  <i class="far fa-sun"></i>
+					  <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+					  <label class="trm-swich" for="trm-swich"></label>
+					  <i class="far fa-moon"></i>
+					</div>
+				  <!-- </div> -->
+			</div>
+			
 			<!-- mode switcher place end -->
+
+			
+				
+				<div id="trm-search-btn" class="trm-search-btn">
+					<i class="fas fa-search"></i>
+				</div>
+				 
+			 
 
 		</div>
 		<div class="trm-menu-btn">
 			<span></span>
 		</div>
 	</div>
-</div>
+</header>
             <!-- top bar end -->
 
             <!-- body -->
-            <div class="trm-content-start">
-
+            
+<div class="trm-content-start">
     <!-- banner -->
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
     <!-- banner cover -->
     <img src="https://s6.jpg.cm/2022/07/29/PQReM2.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
     <!-- banner cover end -->
-
-    <!-- banner slideshow cover-->
-    <!-- <div class="swiper-container trm-slideshow" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="/img/blog/b1.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
-            <div class="swiper-slide"><img src="/img/blog/b2.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
-            <div class="swiper-slide"><img src="/img/blog/b3.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
-        </div>
-    </div> -->
-    <!-- banner slideshow cover end -->
-
-    <!-- banner video cover -->
-    <!-- <video autoplay="autoplay" loop muted playsinline webkit-playinginline class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
-        <source src="img/banner.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-        <source src="img/banner.webm" type='video/webm; codecs="vp8, vorbis"'>
-        <source src="img/banner.ogg" type='video/ogg; codecs="theora, vorbis"'>
-        Your browser does not support HTML5 video.
-    </video> -->
-    <!-- banner video cover end -->
-
-    <!-- banner cover end -->
+    
 
     <!-- banner content -->
     <div class="trm-banner-content trm-overlay">
         <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
             <div class="row">
+                
                 <div class="col-lg-4"></div>
+                
                 <div class="col-lg-8">
 
                     <!-- banner title -->
-                    <div class="trm-banner-text">
+                    <div class="trm-banner-text ">
                         <div class="trm-label trm-mb-20">
                             NEWS LETTER
                         </div>
@@ -277,26 +337,30 @@
     <!-- banner content end -->
 </div>
     <!-- banner end -->
-
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <!-- main card -->
-                <div class="trm-main-card-frame trm-sidebar">
-    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
+            
+                <div class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    <div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
         <!-- card header -->
-        <div class="trm-mc-header">
-            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://s6.jpg.cm/2022/07/29/PQR68H.jpg" alt="Avatar"> </div>
-            <h5 class="trm-name trm-mb-15">
-                初月二三
-            </h5>
-            <div class="trm-label">
-                Live
-                <span class="trm-typed-text">
-                    <!-- Words for theme.user.typedText -->
-                </span>
-            </div>
-        </div>
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://s6.jpg.cm/2022/07/29/PQR68H.jpg" alt="Avatar"> </div>
+    <h5 class="trm-name trm-mb-15">
+        初月二三
+    </h5>
+    
+    <div class="trm-label">
+        Live
+        <span class="trm-typed-text">
+            <!-- Words for theme.user.typedText -->
+        </span>
+    </div>
+    
+</div>
+<!-- card header end -->
         <!-- card header end -->
         <div class="trm-divider trm-mb-40 trm-mt-40"></div>
         <!-- sidebar social -->
@@ -338,112 +402,119 @@
                     <!-- categories end -->
         </div>
         <!-- card header end -->
-        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
-        <!-- sidebar social -->
-        <div class="trm-social">
-            
-                <a href="https://github.com/limenggen" rel="nofollow" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-            
-                <a href="https://gitee.com/limenggen" rel="nofollow" target="_blank">
-                    <i class="iconfont cg-gitee"></i>
-                </a>
-            
-                <a href="https://weibo.com/limenggen" rel="nofollow" target="_blank">
-                    <i class="iconfont cg-weibo"></i>
-                </a>
-            
-                <a href="mailto:lmgsoul@163.com" rel="nofollow" target="_blank">
-                    <i class="fa fa-envelope"></i>
-                </a>
-            
-                <a href="https://s6.jpg.cm/2022/07/29/PQRQuS.jpg" rel="nofollow" target="_blank">
-                    <i class="fa fa-comments"></i>
-                </a>
-            
-        </div>
-        <!-- sidebar social end -->
-        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
-        <!-- info -->
-        <ul class="trm-table trm-mb-20">
-            
-                <li>
-                    <div class="trm-label">
-                        个人:
-                    </div>
-                    <div class="trm-label trm-label-light">
-                        囊中羞涩，不知市井繁华
-                    </div>
-                </li>
-            
-                <li>
-                    <div class="trm-label">
-                        生活:
-                    </div>
-                    <div class="trm-label trm-label-light">
-                        白天归顺生活，夜晚臣服灵魂
-                    </div>
-                </li>
-            
-                <li>
-                    <div class="trm-label">
-                        选择:
-                    </div>
-                    <div class="trm-label trm-label-light">
-                        晚上11点前睡觉
-                    </div>
-                </li>
-            
-        </ul>
-        
-        <!-- info end -->
-        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
-        <!-- action button -->
-        <div class="text-center">
-            <a href="/atom.xml" class="trm-btn">
-                订阅我
-                <i class="fa fa-rss"></i>
-            </a>
-        </div>
-        <!-- action button end -->
-        
+<!-- sidebar social -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+
+<div class="trm-social">
+    
+        <a href="https://github.com/limenggen" title="" rel="nofollow" target="_blank">
+            <i class="fab fa-github"></i>
+        </a>
+    
+        <a href="https://gitee.com/limenggen" title="" rel="nofollow" target="_blank">
+            <i class="fab fa-gofore"></i>
+        </a>
+    
+        <a href="https://weibo.com/limenggen" title="" rel="nofollow" target="_blank">
+            <i class="fab fa-weibo"></i>
+        </a>
+    
+        <a href="mailto:lmgsoul@163.com" title="" rel="nofollow" target="_blank">
+            <i class="fa fa-envelope"></i>
+        </a>
+    
+        <a href="https://s6.jpg.cm/2022/07/29/PQRQuS.jpg" title="" rel="nofollow" target="_blank">
+            <i class="fa fa-comments"></i>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+
+<!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                个人:
+            </div>
+            <div class="trm-label trm-label-light">
+                囊中羞涩，不知市井繁华
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                生活:
+            </div>
+            <div class="trm-label trm-label-light">
+                白天归顺生活，夜晚臣服灵魂
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                选择:
+            </div>
+            <div class="trm-label trm-label-light">
+                晚上11点前睡觉
+            </div>
+        </li>
+    
+</ul>
+
+<!-- info end -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<!-- action button -->
+<div class="text-center">
+    <a href="/atom.xml" class="trm-btn" target="_blank">
+        订阅我
+        <i class="fas fa-rss"></i>
+    </a>
+</div>
+<!-- action button end -->
+
+    
     </div>
 </div>
-                <!-- main card end -->
-            </div>
+                    <!-- main card end -->
+                </div>
+            
             <div class="col-lg-8">
-                <!-- content -->
                 <div class="trm-content" id="trm-content">
                     <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
-                    
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-calendar-alt trm-icon"></i><br>
-                                2020/10/10
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-clock trm-icon"></i><br>
-                                09:17
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="trm-card trm-label trm-label-light text-center"><i class="far fa-user trm-icon"></i><br>
-                                初月二三
-                            </div>
-                        </div>
-                    </div>
 
-                    <article class="trm-card trm-publication">
-                        <blockquote>
+                    <div class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="far fa-calendar-alt trm-icon"></i><br>
+            2020/10/10
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="far fa-clock trm-icon"></i><br>
+            09:17
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <i class="far fa-user trm-icon"></i><br>
+            初月二三
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article class="trm-publication">
+    <blockquote>
 <p>SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。<br>本案例完成项目搭建，并作出相应测试</p>
 </blockquote>
 <span id="more"></span>
 
 <h1 id="一、Security基本搭建"><a href="#一、Security基本搭建" class="headerlink" title="一、Security基本搭建"></a>一、Security基本搭建</h1><h2 id="1、创建springboot项目"><a href="#1、创建springboot项目" class="headerlink" title="1、创建springboot项目"></a>1、创建springboot项目</h2><blockquote>
 <ul>
-<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWd6H.png"></li>
+<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWd6H.png" loading="lazy"></li>
 </ul>
 </blockquote>
 <h2 id="2、添加项目依赖"><a href="#2、添加项目依赖" class="headerlink" title="2、添加项目依赖"></a>2、添加项目依赖</h2><p>pom.xml</p>
@@ -471,19 +542,46 @@
 </ul>
 <h2 id="7、启动项目"><a href="#7、启动项目" class="headerlink" title="7、启动项目"></a>7、启动项目</h2><p>使用浏览器测试，测试地址：<a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></p>
 
-                    </article>
+</article>
+    
+    <div class="trm-reward">
+        
+            <span class="trm-reward-btn trm-glow" onclick='var qr = document.getElementById("qr"); qr.style.display = (qr.style.display === "none") ? "block" : "none";'>
+                <i class="fas fa-hand-holding-usd"></i>
+            </span>
+        
+        <p class="trm-reward-comment">I'm so cute. Please give me money.</p>
+        <div id="qr" style="display:none;">
+            
+                <div style="display:inline-block">
+                    <a rel="noopener" href='' target='_blank' >
+                       <img src="/null" alt="支付宝" loading="lazy">
+                    </a>
+                    <p>支付宝</p>
+                </div>
+            
+                <div style="display:inline-block">
+                    <a rel="noopener" href='' target='_blank' >
+                       <img src="/null" alt="微信" loading="lazy">
+                    </a>
+                    <p>微信</p>
+                </div>
+            
+        </div>
+    </div>
 
-                    <!-- blog -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <!-- title -->
-                            <h5 class="trm-mb-40 trm-title-with-divider">
-                                其他文章
-                                <span data-number="02"></span>
-                            </h5>
-                        </div>
-                        
-                            <div class="col-lg-6">
+    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-mb-40 trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
         <a href="/spring-studyNode/" class="trm-cover-frame trm-anima-link">
             <img src="https://s6.jpg.cm/2022/07/29/PQq8GG.jpg" alt="cover">
@@ -503,18 +601,18 @@
             </div>
             <ul class="trm-card-data trm-label">
                 <li><i class="far fa-calendar-plus"></i>
-                    2020/10/28
-                </li>
+                2020/10/28</li>
                 <li><i class="fas fa-pencil-alt"></i>
-                    3.2k
-                </li>
+                
+                    3.2k</li>
+                
             </ul>
         </div>
     </div>
 </div>
-                        
-                        
-                            <div class="col-lg-6">
+    
+    
+        <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
         <a href="/springboot-redisCache/" class="trm-cover-frame trm-anima-link">
             <img src="https://s6.jpg.cm/2022/07/29/PQq7rC.jpg" alt="cover">
@@ -534,20 +632,20 @@
             </div>
             <ul class="trm-card-data trm-label">
                 <li><i class="far fa-calendar-plus"></i>
-                    2020/09/30
-                </li>
+                2020/09/30</li>
                 <li><i class="fas fa-pencil-alt"></i>
-                    2.1k
-                </li>
+                
+                    2.1k</li>
+                
             </ul>
         </div>
     </div>
 </div>
-                        
-                    </div>
-                    <!-- blog end -->
-
-                        <!-- valine -->
+    
+</div>
+ 
+    <!-- valine -->
+        
     <div class="row trm-mb-20 trm-scroll-animation comment-container" data-scroll data-scroll-offset="40">
         <div class="col-lg-12">
             <h5 class="trm-mb-40 trm-title-with-divider">
@@ -560,22 +658,31 @@
         </div>
     </div>
     <!-- valine end -->
+        
+
+
                     <div class="trm-divider trm-mb-40"></div>
 
                     <!-- footer -->
                     <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
-    <div class="trm-label">
-        ©  2020- 2022 ·
-        <span class="trm-accent-color">
-            初月二三
-        </span>
-    </div>
-    <div class="trm-label">
+
+    
+        <div class="trm-footer-item">
+            <span>© 2020- 2022</span>
+            <span class="footer-separator">·</span>
+            <span class="trm-accent-color">初月二三</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
         本站已维护:
         <span id="since" class="trm-accent-color"></span>
         天
-    </div>
+        </div>
+     
 </footer>
+
 <script>
     function show_date_time () {
         BirthDay = new Date("09/25/2020 14:00:00");
@@ -587,45 +694,72 @@
     }
     show_date_time()
 </script>
+ 
                     <!-- footer end -->
+
                 </div>
-                <!-- content end -->
             </div>
         </div>
     </div>
 </div>
-
-
-    
-  
-  
             <!-- body end -->
           </div>
         </div>
       </div>
       <!-- scroll container end -->
 
-      <!-- mode switcher -->
-      <div class="trm-hidden-switcher">
-        <div class="trm-mode-switcher"><i class="far fa-sun"></i>
-          <input class="tgl tgl-light" id="trm-swich" type="checkbox">
-          <label class="trm-swich" for="trm-swich"></label>
-          <i class="far fa-moon"></i>
-        </div>
-      </div>
-      <!-- mode switcher end -->
-
   </div>
   <!-- app wrapper end -->
 
+  <div id="trm-back-top" class="trm-back-top">
+    <a href="#"><img src="/img/scroll.png" /></a>
+</div>
   
-<script src="/js/plugins/jquery.min.js"></script>
-<script src="/js/plugins/swup.min.js"></script>
-<script src="/js/plugins/locomotive-scroll.js"></script>
-<script src="/js/plugins/typing.js"></script>
-<script src="/js/plugins/fancybox.min.js"></script>
-<script src="/js/plugins/swiper.min.js"></script>
-<script src="/js/Valine.min.js"></script>
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <i class="fas fa-times"></i>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
+  <!-- Plugin -->
+
+
+
+    
+    
+
+    
+<script src="//cdn.jsdelivr.net/npm/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="//cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+
+    
+
+    
+        <script src="/js/plugins/typing.js?v=1.1.1"></script>
+    
+
+    
+        
+<script src="//cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=1.1.1"></script>
+    
+
+<script src="//cdn.jsdelivr.net/npm/valine@1.3.9/dist/Valine.min.js?v=1.1.1"></script>
+
+    
+
 
 
 <!-- 评论插件 -->
@@ -655,22 +789,40 @@
         }
     </script>
 
+<!-- CDN -->
 
-<!-- Service Worker -->
 
-    <script>
-        "serviceWorker" in navigator ? navigator.serviceWorker.register('/sw.js').then(function () {
-            navigator.serviceWorker.controller ? 
-             console.log("Assets cached by the controlling service worker.") :
-             console.log("Please reload this page to allow the service worker to handle network operations.")
-        }).catch(function (e) {
-            console.log("ERROR: " + e)
-        }) : console.log("Service workers are not supported in the current browser.")
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+    <script data-swup-reload-script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            }
+            else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
     </script>
 
 
-<script src="/js/main.js?v=1.0.2"></script>
 
+<script id="async-script" src="/js/main.js?v=1.1.1"></script>
 
 </body>
 

@@ -1,0 +1,1196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>CentOS7安装mysql5.7</title>
+    <url>/CentOS7-mysql5-7/</url>
+    <content><![CDATA[<blockquote>
+<p>本文介绍在CentOS下安装Mysql的全部过程<br>本案例使用环境：CentOS:7.4，Mysql:5.7</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1、下载mysql"><a href="#1、下载mysql" class="headerlink" title="1、下载mysql"></a>1、下载mysql</h2><p>下载并安装官方的 yum repository （新建了mysql文件夹）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget -i -c http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>安装前需要清理CentOS自带的mysql<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -qa | grep mysql    <span class="comment"># 检查是否安装过mysql</span></span><br><span class="line">rpm -e --nodeps mysql-****</span><br><span class="line">rpm -qa | grep mysql</span><br><span class="line">whereis mysql  <span class="comment"># 查询所有mysql对应文件夹</span></span><br><span class="line">find / -name mysql</span><br><span class="line"><span class="built_in">rm</span> -rf ****    <span class="comment"># 删除相关目录或文件</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h2 id="2、安装相关依赖包"><a href="#2、安装相关依赖包" class="headerlink" title="2、安装相关依赖包"></a>2、安装相关依赖包</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install mysql57-community-release-el7-10.noarch.rpm</span><br></pre></td></tr></table></figure>
+<h2 id="3、yum安装mysql"><a href="#3、yum安装mysql" class="headerlink" title="3、yum安装mysql"></a>3、yum安装mysql</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure>
+<h2 id="4、启动mysql"><a href="#4、启动mysql" class="headerlink" title="4、启动mysql"></a>4、启动mysql</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service mysqld start</span><br></pre></td></tr></table></figure>
+<h2 id="5-查看是否启动成功"><a href="#5-查看是否启动成功" class="headerlink" title="5 查看是否启动成功"></a>5 查看是否启动成功</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">service mysqld status</span><br></pre></td></tr></table></figure>
+<h2 id="6、查看初始密码"><a href="#6、查看初始密码" class="headerlink" title="6、查看初始密码"></a>6、查看初始密码</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">grep <span class="string">&quot;password&quot;</span> /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
+<h2 id="7、进入数据库"><a href="#7、进入数据库" class="headerlink" title="7、进入数据库"></a>7、进入数据库</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<h2 id="8、修改初始密码"><a href="#8、修改初始密码" class="headerlink" title="8、修改初始密码"></a>8、修改初始密码</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;new password&#x27;</span>   <span class="comment"># 注意密码需要有大小写字母数字</span></span><br></pre></td></tr></table></figure>
+<h2 id="9、授权远程登录"><a href="#9、授权远程登录" class="headerlink" title="9、授权远程登录"></a>9、授权远程登录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">grant all on *.* to root@<span class="string">&#x27;%&#x27;</span> identified by <span class="string">&#x27;new password&#x27;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>linux CentOS7下 mysql5.7.25 密码改简单的方法<br>在 vim /etc/my.cnf配置文件中增加：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">----------- my.cnf -------------</span><br><span class="line">validate_password=off</span><br><span class="line">default_password_lifetime=0</span><br><span class="line">//</span><br><span class="line"><span class="comment"># 重新启动mysql</span></span><br><span class="line"><span class="comment"># 在sql中执行：</span></span><br><span class="line">update mysql.user <span class="built_in">set</span> authentication_string=password(<span class="string">&#x27;123456&#x27;</span>) <span class="built_in">where</span> user=<span class="string">&#x27;root&#x27;</span> ;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>CentOS</tag>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CentOS安装Redis</title>
+    <url>/CentOS7_redis/</url>
+    <content><![CDATA[<blockquote>
+<p>本文介绍在CentOS下安装Redis的全部过程<br>本案例使用环境：CentOS:7.4，Redis:5.0.3</p>
+</blockquote>
+<span id="more"></span>
+<h2 id="1、检测gcc依赖"><a href="#1、检测gcc依赖" class="headerlink" title="1、检测gcc依赖"></a>1、检测gcc依赖</h2><blockquote>
+<ul>
+<li>由于redis时用C语言开发，安装之前确认是否安装gcc环境(gcc -v)，如果没有安装，执行以下命令安装</li>
+</ul>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y gcc</span><br></pre></td></tr></table></figure>
+<h2 id="2、下载并解压安装包"><a href="#2、下载并解压安装包" class="headerlink" title="2、下载并解压安装包"></a>2、下载并解压安装包</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-5.0.3.tar.gz</span><br><span class="line">tar -zxvf redis-5.0.3.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="3、执行编译"><a href="#3、执行编译" class="headerlink" title="3、执行编译"></a>3、执行编译</h2><p>切换到redis目录下，执行编译</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> redis-5.0.3</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h2 id="4、安装并指定安装目录"><a href="#4、安装并指定安装目录" class="headerlink" title="4、安装并指定安装目录"></a>4、安装并指定安装目录</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">make install PREFIX=/usr/local/redis</span><br></pre></td></tr></table></figure>
+<h2 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h2><ul>
+<li><p>前台启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/redis/bin/</span><br><span class="line">./redis-server</span><br></pre></td></tr></table></figure></li>
+<li><p>后台启动</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span> /usr/local/redis-5.0.3/redis.conf /usr/local/redis/bin/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改redis.conf文件，把daemonize no改为daemonize yes</span></span><br><span class="line">./redis-server redis.conf</span><br><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6、设置开机启动"><a href="#6、设置开机启动" class="headerlink" title="6、设置开机启动"></a>6、设置开机启动</h2><p>添加开机启动服务</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vi /etc/systemd/system/redis.service</span><br><span class="line"></span><br><span class="line">----- redis.service -------</span><br><span class="line">[Unit]</span><br><span class="line">Description=redis-server</span><br><span class="line">After=network.target</span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/usr/local/redis/bin/redis-server /usr/local/redis/bin/redis.conf</span><br><span class="line">PrivateTmp=<span class="literal">true</span></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>注意：ExecStart配置成自己的路径</li>
+</ul>
+</blockquote>
+<h2 id="7、创建redis命令软连接"><a href="#7、创建redis命令软连接" class="headerlink" title="7、创建redis命令软连接"></a>7、创建redis命令软连接</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /usr/local/redis/bin/redis-cli /usr/bin/redis</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、启动redis"><a href="#8、启动redis" class="headerlink" title="8、启动redis"></a>8、启动redis</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redis</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>需要注意的操作命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 设置开机启动</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl start redis.service</span><br><span class="line">systemctl <span class="built_in">enable</span> redis.service</span><br><span class="line">//</span><br><span class="line"><span class="comment"># 服务操作命令</span></span><br><span class="line">systemctl start redis.service    <span class="comment"># 启动redis服务</span></span><br><span class="line">systemctl stop redis.service     <span class="comment"># 停止redis服务</span></span><br><span class="line">systemctl restart redis.service  <span class="comment"># 重新启动服务</span></span><br><span class="line">systemctl status redis.service   <span class="comment"># 查看服务当前状态</span></span><br><span class="line">systemctl <span class="built_in">enable</span> redis.service   <span class="comment"># 设置开机自启动</span></span><br><span class="line">systemctl <span class="built_in">disable</span> redis.service  <span class="comment"># 停止开机自启动</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>CentOS</tag>
+        <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hyper-V管理器创建CentOS7虚机</title>
+    <url>/build-bloginit/</url>
+    <content><![CDATA[<blockquote>
+<p>使用Windows自带的Hyper-V管理器创建CentOS7虚机<br>本篇主要记录一下新建虚机的操作步骤</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、开启Hyper-V"><a href="#一、开启Hyper-V" class="headerlink" title="一、开启Hyper-V"></a>一、开启Hyper-V</h1><h2 id="1、打开-‘控制面板’-–-gt-‘程序’-–-gt-‘启用或关闭Windows功能’-–-gt-‘Hyper-V’"><a href="#1、打开-‘控制面板’-–-gt-‘程序’-–-gt-‘启用或关闭Windows功能’-–-gt-‘Hyper-V’" class="headerlink" title="1、打开 ‘控制面板’  –&gt;  ‘程序’  –&gt;  ‘启用或关闭Windows功能’  –&gt;  ‘Hyper-V’"></a>1、打开 ‘控制面板’  –&gt;  ‘程序’  –&gt;  ‘启用或关闭Windows功能’  –&gt;  ‘Hyper-V’</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQq9zz.png" loading="lazy"></p>
+</blockquote>
+<h2 id="2、重启电脑"><a href="#2、重启电脑" class="headerlink" title="2、重启电脑"></a>2、重启电脑</h2><h2 id="3、准备一个CentOS-7-x86-64-DVD-2009-iso-镜像"><a href="#3、准备一个CentOS-7-x86-64-DVD-2009-iso-镜像" class="headerlink" title="3、准备一个CentOS-7-x86_64-DVD-2009.iso 镜像"></a>3、准备一个CentOS-7-x86_64-DVD-2009.iso 镜像</h2><p>  下载地址：<a href="http://mirrors.aliyun.com/centos/7/isos/x86_64/">http://mirrors.aliyun.com/centos/7/isos/x86_64/</a>  (阿里云 开源镜像站)</p>
+<h1 id="二、使用Hyper-V创建-虚拟机"><a href="#二、使用Hyper-V创建-虚拟机" class="headerlink" title="二、使用Hyper-V创建 虚拟机"></a>二、使用Hyper-V创建 虚拟机</h1><h2 id="1、’Windows开始菜单’-–-gt-‘Windows管理工具’-–-gt-‘Hyper-V管理器’"><a href="#1、’Windows开始菜单’-–-gt-‘Windows管理工具’-–-gt-‘Hyper-V管理器’" class="headerlink" title="1、’Windows开始菜单’  –&gt;  ‘Windows管理工具’  –&gt;  ‘Hyper-V管理器’"></a>1、’Windows开始菜单’  –&gt;  ‘Windows管理工具’  –&gt;  ‘Hyper-V管理器’</h2><h2 id="2、在Hyper-V管理器右侧，点击新建虚拟机"><a href="#2、在Hyper-V管理器右侧，点击新建虚拟机" class="headerlink" title="2、在Hyper-V管理器右侧，点击新建虚拟机"></a>2、在Hyper-V管理器右侧，点击新建虚拟机</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWGj6.png" loading="lazy"></p>
+</blockquote>
+<h2 id="3、指定虚拟机名称和存储位置-可以不放在C盘"><a href="#3、指定虚拟机名称和存储位置-可以不放在C盘" class="headerlink" title="3、指定虚拟机名称和存储位置(可以不放在C盘)"></a>3、指定虚拟机名称和存储位置(可以不放在C盘)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqaIu.png" loading="lazy"></p>
+</blockquote>
+<h2 id="4、指定代数-这里选择的是第二代"><a href="#4、指定代数-这里选择的是第二代" class="headerlink" title="4、指定代数(这里选择的是第二代)"></a>4、指定代数(这里选择的是第二代)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqiUG.png" loading="lazy"></p>
+</blockquote>
+<h2 id="5、分配内存-可以分配大一点，2048MB"><a href="#5、分配内存-可以分配大一点，2048MB" class="headerlink" title="5、分配内存(可以分配大一点，2048MB)"></a>5、分配内存(可以分配大一点，2048MB)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqytR.png" loading="lazy"></p>
+</blockquote>
+<h2 id="6、配置网络-暂时不动"><a href="#6、配置网络-暂时不动" class="headerlink" title="6、配置网络(暂时不动)"></a>6、配置网络(暂时不动)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqxw4.png" loading="lazy"></p>
+</blockquote>
+<h2 id="7、选择虚拟硬盘-可以先分配30GB"><a href="#7、选择虚拟硬盘-可以先分配30GB" class="headerlink" title="7、选择虚拟硬盘(可以先分配30GB)"></a>7、选择虚拟硬盘(可以先分配30GB)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqZEp.png" loading="lazy"></p>
+</blockquote>
+<h2 id="8、安装选项-选中第一步下载的镜像"><a href="#8、安装选项-选中第一步下载的镜像" class="headerlink" title="8、安装选项(选中第一步下载的镜像)"></a>8、安装选项(选中第一步下载的镜像)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqDxX.png" loading="lazy"></p>
+</blockquote>
+<h2 id="9、摘要-核对一下刚刚设置的内容-，点击完成"><a href="#9、摘要-核对一下刚刚设置的内容-，点击完成" class="headerlink" title="9、摘要(核对一下刚刚设置的内容)，点击完成"></a>9、摘要(核对一下刚刚设置的内容)，点击完成</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqOlD.png" loading="lazy"></p>
+</blockquote>
+<h2 id="10、不使用安全启动-避免启动虚机报UEFI"><a href="#10、不使用安全启动-避免启动虚机报UEFI" class="headerlink" title="10、不使用安全启动(避免启动虚机报UEFI)"></a>10、不使用安全启动(避免启动虚机报UEFI)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWLnT.png" loading="lazy"></p>
+</blockquote>
+<h1 id="三、安装CentOS7"><a href="#三、安装CentOS7" class="headerlink" title="三、安装CentOS7"></a>三、安装CentOS7</h1><h2 id="1、正常安装-可以选择中文语言，设置root密码和新建用户"><a href="#1、正常安装-可以选择中文语言，设置root密码和新建用户" class="headerlink" title="1、正常安装 可以选择中文语言，设置root密码和新建用户"></a>1、正常安装 可以选择中文语言，设置root密码和新建用户</h2><h1 id="四、Hyper-V网络连接配置"><a href="#四、Hyper-V网络连接配置" class="headerlink" title="四、Hyper-V网络连接配置"></a>四、Hyper-V网络连接配置</h1><h2 id="1、配置虚拟机网络"><a href="#1、配置虚拟机网络" class="headerlink" title="1、配置虚拟机网络"></a>1、配置虚拟机网络</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWPtE.png" loading="lazy"></p>
+</blockquote>
+<h2 id="2、新建虚拟网络交换机-内部"><a href="#2、新建虚拟网络交换机-内部" class="headerlink" title="2、新建虚拟网络交换机(内部)"></a>2、新建虚拟网络交换机(内部)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWR0Q.png" loading="lazy"></p>
+</blockquote>
+<h2 id="3、设置名称，点击应用"><a href="#3、设置名称，点击应用" class="headerlink" title="3、设置名称，点击应用"></a>3、设置名称，点击应用</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWWIh.png" loading="lazy"></p>
+</blockquote>
+<h2 id="4、配置网络适配器"><a href="#4、配置网络适配器" class="headerlink" title="4、配置网络适配器"></a>4、配置网络适配器</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWnUS.png" loading="lazy"></p>
+</blockquote>
+<h2 id="5、点击应用即可"><a href="#5、点击应用即可" class="headerlink" title="5、点击应用即可"></a>5、点击应用即可</h2><h2 id="6、配置本地网络连接-共享网络"><a href="#6、配置本地网络连接-共享网络" class="headerlink" title="6、配置本地网络连接(共享网络)"></a>6、配置本地网络连接(共享网络)</h2><blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQW5oW.png" loading="lazy"></p>
+</blockquote>
+<h2 id="7、设置CentOS7虚机中网络"><a href="#7、设置CentOS7虚机中网络" class="headerlink" title="7、设置CentOS7虚机中网络"></a>7、设置CentOS7虚机中网络</h2><p><code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code></p>
+<blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQW7x2.png" loading="lazy"></p>
+</blockquote>
+<h2 id="8、Esc退出输入模式，用’-wq’-命令保存修改"><a href="#8、Esc退出输入模式，用’-wq’-命令保存修改" class="headerlink" title="8、Esc退出输入模式，用’:wq’ 命令保存修改"></a>8、Esc退出输入模式，用’:wq’ 命令保存修改</h2><h2 id="9、重启网关"><a href="#9、重启网关" class="headerlink" title="9、重启网关"></a>9、重启网关</h2><p><code>service network restart</code></p>
+<h2 id="10、可以关闭防火墙"><a href="#10、可以关闭防火墙" class="headerlink" title="10、可以关闭防火墙"></a>10、可以关闭防火墙</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看防火墙状态</span><br><span class="line">systemctl status firewalld</span><br><span class="line">service iptables status</span><br><span class="line"></span><br><span class="line">暂时关闭防火墙</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">service iptables stop</span><br><span class="line"></span><br><span class="line">永久关闭防火墙</span><br><span class="line">systemctl disable firewalld</span><br><span class="line">chkconfig iptables off</span><br><span class="line"></span><br><span class="line">重启防火墙</span><br><span class="line">systemctl enable firewalld</span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="11、测试-ping-www-baidu-com-是否可以联网"><a href="#11、测试-ping-www-baidu-com-是否可以联网" class="headerlink" title="11、测试 ping www.baidu.com 是否可以联网"></a>11、测试 ping <a href="http://www.baidu.com/">www.baidu.com</a> 是否可以联网</h2>]]></content>
+      <categories>
+        <category>搭建个人博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>GitHub</tag>
+        <tag>Gitee</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用GitHub/Gitee搭建个人博客（一）</title>
+    <url>/build_blog01/</url>
+    <content><![CDATA[<blockquote>
+<p>本章介绍了搭建个人博客需要安装的环境（node、git、hexo的安装）<br>本案例使用环境：CentOS:7.4，node:12.13.1，hexo-cli:4.2</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、下载环境"><a href="#一、下载环境" class="headerlink" title="一、下载环境"></a>一、下载环境</h1><h2 id="1、下载node"><a href="#1、下载node" class="headerlink" title="1、下载node"></a>1、下载node</h2><p>官网地址：<a href="http://nodejs.cn/">http://nodejs.cn/</a>推荐版本： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">wget https://npm.taobao.org/mirrors/node/v12.13.1/node-v12.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>node版本不是越高越好，服务器会出现各种不兼容</li>
+</ul>
+</blockquote>
+<h2 id="2、解压node"><a href="#2、解压node" class="headerlink" title="2、解压node"></a>2、解压node</h2><p>命令为: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">tar -zxvf node-v12.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>若出现错误：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">gzip: stdin: not <span class="keyword">in</span> gzip format</span><br><span class="line">tar: Child returned status 1</span><br><span class="line">tar: Error is not recoverable: exiting now</span><br></pre></td></tr></table></figure></li>
+<li>将解压参数修改为’-xvf’: <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">tar -xvf node-v12.13.1-linux-x64.tar.xz</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h2 id="3、修改文件名："><a href="#3、修改文件名：" class="headerlink" title="3、修改文件名："></a>3、修改文件名：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mv</span> node-v12.13.1-linux-x64 nodejs</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、设置软连接"><a href="#4、设置软连接" class="headerlink" title="4、设置软连接"></a>4、设置软连接</h2><p>设置 node 和 npm 的软连接</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s /opt/software/nodejs/bin/node /usr/local/bin/node</span><br><span class="line"><span class="built_in">ln</span> -s /opt/software/nodejs/bin/npm /usr/local/bin/npm</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>由于node下载第三方依赖包是从国外服务器下载，可能会出现下载速度缓慢问题</li>
+<li>为了提高效率，把npm的镜像源替换为淘宝的镜像源<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+检测是否修改成功<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm config get registry</span><br><span class="line">// 或 npm info express</span><br></pre></td></tr></table></figure></li>
+<li>若需要还原npm仓库地址，则把镜像源修改回来就行<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npmjs.org/</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h2 id="5、查看版本"><a href="#5、查看版本" class="headerlink" title="5、查看版本"></a>5、查看版本</h2><p>查看 node 和 npm 的版本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>最终显示结局为：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># node -v</span></span><br><span class="line">v12.13.1</span><br><span class="line">[root@localhost ~]<span class="comment"># npm -v</span></span><br><span class="line">6.12.1</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="6、安装git"><a href="#6、安装git" class="headerlink" title="6、安装git"></a>6、安装git</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel</span><br><span class="line">yum -y install git-core</span><br><span class="line">git --version <span class="comment"># 查看git版本</span></span><br></pre></td></tr></table></figure>
+<h2 id="7、安装hexo"><a href="#7、安装hexo" class="headerlink" title="7、安装hexo"></a>7、安装hexo</h2><p>设置软连接：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br><span class="line"><span class="built_in">ln</span> -s /opt/software/nodejs/lib/node_modules/hexo-cli/bin/hexo /usr/local/bin/hexo</span><br></pre></td></tr></table></figure>
+<h2 id="8、查看hexo版本"><a href="#8、查看hexo版本" class="headerlink" title="8、查看hexo版本"></a>8、查看hexo版本</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>出现以下信息，安装成功<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo-cli: 4.2.0</span><br><span class="line">os: Linux 3.10.0-693.el7.x86_64 linux x64</span><br><span class="line">node: 12.13.1</span><br><span class="line">v8: 7.7.299.13-node.16</span><br><span class="line">uv: 1.33.1</span><br><span class="line">zlib: 1.2.11</span><br><span class="line">brotli: 1.0.7</span><br><span class="line">ares: 1.15.0</span><br><span class="line">modules: 72</span><br><span class="line">nghttp2: 1.39.2</span><br><span class="line">napi: 5</span><br><span class="line">llhttp: 1.1.4</span><br><span class="line">http_parser: 2.8.0</span><br><span class="line">openssl: 1.1.1d</span><br><span class="line">cldr: 35.1</span><br><span class="line">icu: 64.2</span><br><span class="line">tz: 2019c</span><br><span class="line">unicode: 12.1</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h1 id="二、部署环境"><a href="#二、部署环境" class="headerlink" title="二、部署环境"></a>二、部署环境</h1><h2 id="1、初始化hexo："><a href="#1、初始化hexo：" class="headerlink" title="1、初始化hexo："></a>1、初始化hexo：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> hexo  <span class="comment"># 创建目录</span></span><br><span class="line"><span class="built_in">cd</span> hexo     <span class="comment"># 进入目录</span></span><br><span class="line">hexo init   <span class="comment"># 初始化(等待片刻)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>hexo 常用命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate <span class="comment"># (简写：hexo g)生成静态文件到项目根目录的public文件夹中</span></span><br><span class="line">hexo server   <span class="comment"># (简写：hexo s)运行本地服务</span></span><br><span class="line">hexo deploy   <span class="comment"># (简写：hexo d)一键部署</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>执行相关命令可能会出现错误：<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">[root@localhost hexo]# hexo g</span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  =======================================</span><br><span class="line">██╗ ██████╗ █████╗ ██████╗ ██╗   ██╗███████╗</span><br><span class="line">██║██╔════╝██╔══██╗██╔══██╗██║   ██║██╔════╝</span><br><span class="line">██║██║     ███████║██████╔╝██║   ██║███████╗</span><br><span class="line">██║██║     ██╔══██║██╔══██╗██║   ██║╚════██║</span><br><span class="line">██║╚██████╗██║  ██║██║  ██║╚██████╔╝███████║</span><br><span class="line">╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝</span><br><span class="line">=============================================</span><br><span class="line">INFO  === Checking package dependencies ===</span><br><span class="line">ERROR Package bulma-stylus is not installed.</span><br><span class="line">ERROR Package hexo-renderer-inferno is not installed.</span><br><span class="line">ERROR Package hexo-component-inferno is not installed.</span><br><span class="line">ERROR Package inferno is not installed.</span><br><span class="line">ERROR Package inferno-create-element is not installed.</span><br><span class="line">ERROR Please install the missing dependencies your Hexo site root directory:</span><br><span class="line">ERROR npm install --save bulma-stylus@0.8.0 hexo-renderer-inferno@^0.1.3 hexo-component-inferno@^0.10.0 inferno@^7.3.3 inferno-create-element@^7.3.3</span><br><span class="line">ERROR or:</span><br><span class="line">ERROR yarn add bulma-stylus@0.8.0 hexo-renderer-inferno@^0.1.3 hexo-component-inferno@^0.10.0 inferno@^7.3.3 inferno-create-element@^7.3.3</span><br></pre></td></tr></table></figure></li>
+<li>按照提示安装相关依赖：<br><code>npm install --save bulma-stylus@0.8.0 hexo-component-inferno@^0.10.0 hexo-renderer-inferno@^0.1.3 inferno@^7.3.3 inferno-create-element@^7.3.3</code></li>
+</ul>
+</blockquote>
+<h2 id="2、安装deploy-git插件"><a href="#2、安装deploy-git插件" class="headerlink" title="2、安装deploy git插件"></a>2、安装deploy git插件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>若不安装此插件，使用’hexo deploy’部署代码会出现报错<figure class="highlight bash"><figcaption><span>报错信息</span></figcaption><table><tr><td class="code"><pre><span class="line">[root@localhost hexo]<span class="comment"># hexo d</span></span><br><span class="line">INFO  Validating config</span><br><span class="line">Inferno is <span class="keyword">in</span> development mode.</span><br><span class="line">INFO  =======================================</span><br><span class="line">██╗ ██████╗ █████╗ ██████╗ ██╗   ██╗███████╗</span><br><span class="line">██║██╔════╝██╔══██╗██╔══██╗██║   ██║██╔════╝</span><br><span class="line">██║██║     ███████║██████╔╝██║   ██║███████╗</span><br><span class="line">██║██║     ██╔══██║██╔══██╗██║   ██║╚════██║</span><br><span class="line">██║╚██████╗██║  ██║██║  ██║╚██████╔╝███████║</span><br><span class="line">╚═╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝</span><br><span class="line">=============================================</span><br><span class="line">INFO  === Checking package dependencies ===</span><br><span class="line">INFO  === Checking theme configurations ===</span><br><span class="line">INFO  === Registering Hexo extensions ===</span><br><span class="line">ERROR Deployer not found: git</span><br></pre></td></tr></table></figure></li>
+</ul>
+</blockquote>
+<h2 id="3、本地运行测试："><a href="#3、本地运行测试：" class="headerlink" title="3、本地运行测试："></a>3、本地运行测试：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>运行控制台输出：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost hexo]<span class="comment"># hexo s</span></span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Start processing</span><br><span class="line">INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</span><br></pre></td></tr></table></figure></li>
+<li>浏览器访问地址：<a href="http://localhost:4000/">http://localhost:4000</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>搭建个人博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>GitHub</tag>
+        <tag>Gitee</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用GitHub/Gitee搭建个人博客（二）</title>
+    <url>/build_blog02/</url>
+    <content><![CDATA[<blockquote>
+<p>本章介绍了hexo的使用及Github/Gitee部署<br>本案例使用环境：CentOS:7.4，node:12.13.1，hexo-cli:4.2</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="三、修改Hexo主题"><a href="#三、修改Hexo主题" class="headerlink" title="三、修改Hexo主题"></a>三、修改Hexo主题</h1><ul>
+<li>上章运行的是Hexo的官方默认的主题配置效果</li>
+<li>我们当然要改造成自己想要的个性主题</li>
+<li>Hexo的主题推荐：<a href="https://hexo.io/themes/">https://hexo.io/themes/</a></li>
+</ul>
+<h2 id="1、选择喜欢的摸板-下载"><a href="#1、选择喜欢的摸板-下载" class="headerlink" title="1、选择喜欢的摸板,下载"></a>1、选择喜欢的摸板,下载</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> hexo/themes/</span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/limenggen/hexo-theme-yilia-plus</span><br><span class="line"><span class="built_in">mv</span> hexo-theme-yilia-plus yilia-plus</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>每个模板可能都有自己的插件和样式修改，具体安照模板作者(README.md)操作</li>
+</ul>
+</blockquote>
+<h2 id="2、修改hexo配置"><a href="#2、修改hexo配置" class="headerlink" title="2、修改hexo配置"></a>2、修改hexo配置</h2><p>hexo目录下的_config.yml中的theme值:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># ------- _config.yml文件截取 --------</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line">theme: yilia-plus   <span class="comment"># 修改theme值</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、重新启动："><a href="#3、重新启动：" class="headerlink" title="3、重新启动："></a>3、重新启动：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<h1 id="四、将代码上传GitHub"><a href="#四、将代码上传GitHub" class="headerlink" title="四、将代码上传GitHub"></a>四、将代码上传GitHub</h1><h2 id="1、注册一个GitHub账号"><a href="#1、注册一个GitHub账号" class="headerlink" title="1、注册一个GitHub账号"></a>1、注册一个GitHub账号</h2><p>新建一个Repositories(相当于库)，库名：<em>用户名.github.io</em></p>
+<blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqNgh.png" loading="lazy"></p>
+</blockquote>
+<h2 id="2、设置Pages"><a href="#2、设置Pages" class="headerlink" title="2、设置Pages"></a>2、设置Pages</h2><p>创建完仓库，进入Settings，找到GitHub pages设置</p>
+<blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqtJQ.png" loading="lazy">      <img src="https://s6.jpg.cm/2022/07/29/PQqsv2.png" loading="lazy"></p>
+</blockquote>
+<h2 id="3、生成公钥"><a href="#3、生成公钥" class="headerlink" title="3、生成公钥"></a>3、生成公钥</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="comment"># 获取public key，复制文件内容</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4、配置公钥"><a href="#4、配置公钥" class="headerlink" title="4、配置公钥"></a>4、配置公钥</h2><p>找到Settings -&gt; SSH and GPG keys -&gt; New SSH key：复制内容添加到Key，点击 Add SSH key</p>
+<h2 id="5、修改hexo主目录的-config-yml"><a href="#5、修改hexo主目录的-config-yml" class="headerlink" title="5、修改hexo主目录的_config.yml"></a>5、修改hexo主目录的_config.yml</h2><figure class="highlight bash"><figcaption><span>_config.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment"># ---------- hexo/_config.yml ------------</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo:</span><br><span class="line">    <span class="comment"># gitee: git@gitee.com:limenggen/limenggen.git</span></span><br><span class="line">    github: git@github.com:limenggen/limenggen.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、上传代码"><a href="#6、上传代码" class="headerlink" title="6、上传代码"></a>6、上传代码</h2><p>配置完后，重新生成静态页面，上传代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h1 id="五、将代码上传Gitee"><a href="#五、将代码上传Gitee" class="headerlink" title="五、将代码上传Gitee"></a>五、将代码上传Gitee</h1><h2 id="1、注册一个Gitee账号"><a href="#1、注册一个Gitee账号" class="headerlink" title="1、注册一个Gitee账号"></a>1、注册一个Gitee账号</h2><p>新建一个仓库，库名：<em>用户名.gitee.io</em></p>
+<blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqNgh.png" loading="lazy"></p>
+</blockquote>
+<h2 id="2、生成公钥："><a href="#2、生成公钥：" class="headerlink" title="2、生成公钥："></a>2、生成公钥：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="comment"># 获取public key，复制文件内容</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="3、配置公钥"><a href="#3、配置公钥" class="headerlink" title="3、配置公钥"></a>3、配置公钥</h2><p>进入新建库找到设置-&gt; 安全设置 -&gt; SSH公钥 -&gt; 添加公钥：将复制内容添加至公钥，确定。</p>
+<h2 id="4、上传代码"><a href="#4、上传代码" class="headerlink" title="4、上传代码"></a>4、上传代码</h2><p>配置完后，重新生成静态页面，上传代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、上传博客服务"><a href="#5、上传博客服务" class="headerlink" title="5、上传博客服务"></a>5、上传博客服务</h2><p>在新建库中找到‘_服务_’，点击‘_Gitee Pages_’点击更新即可！</p>
+<blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQqrcW.png" loading="lazy">      <img src="https://s6.jpg.cm/2022/07/29/PQqYGS.png" loading="lazy"></p>
+<ul>
+<li><em>Gitee每次上传代码都要再次更新！！！</em></li>
+</ul>
+</blockquote>
+<h1 id="六、使用hexo写博客"><a href="#六、使用hexo写博客" class="headerlink" title="六、使用hexo写博客"></a>六、使用hexo写博客</h1><h2 id="1、到hexo目录下："><a href="#1、到hexo目录下：" class="headerlink" title="1、到hexo目录下："></a>1、到hexo目录下：</h2><blockquote>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost hexo]<span class="comment"># hexo new &#x27;first-blog&#x27;</span></span><br><span class="line">INFO  Validating config</span><br><span class="line">INFO  Created: /opt/software/hexo/source/_posts/first-blog.md</span><br><span class="line">//</span><br><span class="line">[root@localhost hexo]<span class="comment"># vi /opt/software/hexo/source/_posts/first-blog.md</span></span><br><span class="line">//</span><br><span class="line">---------- first-blog.md ------------</span><br><span class="line">---</span><br><span class="line">title: 使用GitHub/Gitee搭建个人博客（一）</span><br><span class="line"><span class="built_in">date</span>: 2020-09-25 15:47:18</span><br><span class="line">tags: hexo</span><br><span class="line">---</span><br><span class="line"><span class="comment"># 在合适位置加&lt;!--more--&gt;</span></span><br><span class="line"><span class="comment"># 在这编写博客</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>推荐一款在线博客编辑工具：<a href="http://pandao.github.io/editor.md/">http://pandao.github.io/editor.md/</a></li>
+</ul>
+</blockquote>
+]]></content>
+      <categories>
+        <category>搭建个人博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>GitHub</tag>
+        <tag>Gitee</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>db2 reorg pending state</title>
+    <url>/db2-question01/</url>
+    <content><![CDATA[<blockquote>
+<p>最近操作db2库时遇到了一些问题，在这里记录一下<br>本篇介绍一下db2的REORG命令的处理方法</p>
+</blockquote>
+<span id="more"></span>  
+
+<p>最近在db2库对一个表的结构进行操作，突然执行报错</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alter table &lt;tablename&gt; alter &lt;colname&gt; set data type &lt;new data type&gt;;</span><br></pre></td></tr></table></figure>
+
+<p>经过百度发现 连续三次set data type将会使该表进入reorg pending状态。</p>
+<p>可通过该语句 获取次数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT NUM_REORG_REC_ALTERS from SYSIBMADM.ADMINTABINFO where tabname = &#x27;&lt;tablename&gt;&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>可通过该语句 判断一个表是否处于reorg pending</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT REORG_PENDING FROM SYSIBMADM.ADMINTABINFO where tabname = &#x27;&lt;tablename&gt;&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p>使用改语句解除<br><code>reorg table schema.tabname;</code></p>
+<p>REORG 不是 SQL 语句，因此不能使用 SQL 接口(如 QMF)发出.您将需要使用 DB2 命令行处理器来运行它.或者，您可以使用管理存储过程，可以通过 QMF 调用:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">call sysproc.admin_cmd(&#x27;reorg table schema.tabname&#x27;);</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库笔记</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring学习笔记</title>
+    <url>/spring-studyNode/</url>
+    <content><![CDATA[<blockquote>
+<p>Spring是一种轻量级开发框架,旨在提高开发人员的开发效率以及系统的可维护性。</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、什么是Spring框架"><a href="#一、什么是Spring框架" class="headerlink" title="一、什么是Spring框架"></a>一、什么是Spring框架</h1><h2 id="1、Spring框架基本介绍"><a href="#1、Spring框架基本介绍" class="headerlink" title="1、Spring框架基本介绍"></a>1、Spring框架基本介绍</h2><p>Spring框架指的都是Spring Framework，多个模块的集合。模块：核心容器、数据访问/集成、Web、AOP(面向切面)、工具、消息和测试模块。</p>
+<p>例：Core Container中的Core组件时Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。</p>
+<p>核心技术：依赖注入(DI)，AOP，事件(events)，资源，i18n，验证，数据绑定，类型转换，SpEL<br>测试：模拟对象，TextContext框架，Spring MVC测试，WebTestClient<br>数据访问：事务，DAO支持，JDBC，ORM，编组XML<br>Web支持：Spring MVC和Spring WebFlux Web框架<br>集成：远程处理，JMS，JCA，JMX，电子邮件，任务，调度，缓存<br>语言：Kotlin，Groovy，动态语言</p>
+<h2 id="2、Spring重要模块"><a href="#2、Spring重要模块" class="headerlink" title="2、Spring重要模块"></a>2、Spring重要模块</h2><p><strong>Spring Core：</strong>基础，可以说Spring其他所有的功能都需要依赖于该类库。主要提供IoC依赖注入功能<br><strong>Spring Aspects：</strong>该模块为与AspectJ的集成提供支持<br><strong>Spring AOP：</strong>提供了面向切面的编程实现<br><strong>Spring JDBC：</strong>Java数据库连接<br><strong>Spring JMS：</strong>Java消息服务<br><strong>Spring ORM：</strong>用于支持Hibernate等ORM工具<br><strong>Spring Web：</strong>为创建Web应用程序提供支持<br><strong>Spring Test：</strong>提供了对JUnit和TestNG测试的支持</p>
+<h2 id="3、-RestController-vs-Controller"><a href="#3、-RestController-vs-Controller" class="headerlink" title="3、@RestController vs @Controller"></a>3、@RestController vs @Controller</h2><p><strong>@Controller：</strong>返回一个页面单独使用@Controller不加@ResponseBody的话一般使用在要返回一个视图的情况，这种情况属于比较传统的Spring MVC的应用（前后端不分离）</p>
+<p><strong>@ResponseBody：</strong>作用是将Controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到HTTP响应(Response)对象的body中，通常用来返回JSON或XML数据</p>
+<p>@RestController返回JSON或XML形式数据<br>@RestController只返回对象，对象数据直接以JSON或XML形式希尔HTTP响应(Response)中，这种情况属于RESTful Web服务（前后端分离）</p>
+<blockquote>
+<p>@Controller + @ResponseBody 返回JSON或XML形式数据</p>
+<p>若在Spring4之前开发RESTful Web服务，需要@Controller + @ResponseBody = @RestController（Spring4之后新加的注解）</p>
+</blockquote>
+<h1 id="二、Spring-IOC"><a href="#二、Spring-IOC" class="headerlink" title="二、Spring IOC"></a>二、Spring IOC</h1><h2 id="1、IoC基本介绍"><a href="#1、IoC基本介绍" class="headerlink" title="1、IoC基本介绍"></a>1、IoC基本介绍</h2><p><strong>IoC(Inverse of Control)：</strong>控制反转是一种设计思想，就是将原本在程序中手动创建对象的控制权，交由Spring框架来管理。<br>IoC容器时Spring用来实现IoC的载体，IoC容器实际上就是个Map(key,value)，Map中存放的时各种对象。</p>
+<p>将对象之间的相互依赖关系交给IoC容器来管理，并由IoC容器完成对象的注入。这样可以很大程度上简化应用的开发，把应用从复杂的依赖关系中解放出现。IoC容器就像时一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件/注解即可，完全不用考虑对象时如何被创建出来的。在实际项目中一个Service类可能有几百甚至上千个类作为它的底层，假如需要实例化这个Service，可能每次都要清楚这个Service所有底层类的构造函数，若利用IoC，只需配置好，在需要位置引用，降低项目的可维护性且降低了开发难度</p>
+<blockquote>
+<p>IoC初始化过程：<br>xml -读取-&gt; Resource -解析-&gt; BeanDefinition -注册-&gt; BeanFactory</p>
+</blockquote>
+<h1 id="三、Spring-AOP"><a href="#三、Spring-AOP" class="headerlink" title="三、Spring AOP"></a>三、Spring AOP</h1><h2 id="1、AOP基本介绍"><a href="#1、AOP基本介绍" class="headerlink" title="1、AOP基本介绍"></a>1、AOP基本介绍</h2><p><strong>AOP(Aspect-Oriented Programming)：</strong>面向切面编程<br>能够将与业务无关，却为业务模块所共同调用的逻辑或责任(例如事务处理、日志管理、权限控制)封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有可拓展性和可维护性</p>
+<h2 id="2、Spring切面五种类型"><a href="#2、Spring切面五种类型" class="headerlink" title="2、Spring切面五种类型"></a>2、Spring切面五种类型</h2><p><strong>前置通知(@Before)：</strong>在目标方法被调用之前调用通知功能<br><strong>后置通知(@After)：</strong>再目标方法完成之后调用通知，不用关心方法的输出结果<br><strong>返回通知(@AfterReturning)：</strong>再目标方法成功执行之后调用通知<br><strong>异常通知(@AfterThrowing)：</strong>再目标方法抛出异常后调用通知<br><strong>环绕通知(@Around)：</strong>通知包裹了被通知的方法，再被通知的方法调用之前和调用之后执行自定义的行为</p>
+<h2 id="3、连接点-Join-point"><a href="#3、连接点-Join-point" class="headerlink" title="3、连接点(Join point)"></a>3、连接点(Join point)</h2><p>连接点是再应用执行过程中能够插入切面的一个点。这个点可以是调用方法时、抛出异常时、甚至修改一个字段时，切面代码可以利用这些点插入到应用的正常流程之中，并添加新的行为</p>
+<h2 id="4、切点-Pointcut"><a href="#4、切点-Pointcut" class="headerlink" title="4、切点(Pointcut)"></a>4、切点(Pointcut)</h2><p>切点的定义会匹配通知所要织入的一个或多个连接点。通常使用明确的类和方法名称，或是利用正则表达式定义所匹配的类和方法名称来指定这些切点。有些AOP框架允许创建动态切点，可根据运行时的决策(例如方法参数值)决定是否应用通知</p>
+<h2 id="5、切面-Aspect"><a href="#5、切面-Aspect" class="headerlink" title="5、切面(Aspect)"></a>5、切面(Aspect)</h2><p>通知 + 切点 = 切面</p>
+<h2 id="6、引入-Introduction"><a href="#6、引入-Introduction" class="headerlink" title="6、引入(Introduction)"></a>6、引入(Introduction)</h2><p>引入允许我们向现有的类添加新方法或属性</p>
+<h2 id="7、织入-Weaving"><a href="#7、织入-Weaving" class="headerlink" title="7、织入(Weaving)"></a>7、织入(Weaving)</h2><p>织入是把切脉你应用到目标对象并创建新的代理对象的过程。切面再指定的连接点被织入到目标对象中。再目标对象的生命周期里有多个点可以进行织入</p>
+<p><strong>编译期：</strong>切面再目标类编译时被织入。这种方式需要特殊的编译器。AspectJ的织入编译器就是以这种方式织入切面的<br><strong>类加载期：</strong>切面再目标类加载到JVM时被织入。这种方式需要特殊的类加载器(ClassLoader)，它可以再目标类被引入应用之前增强该目标类的字节码。AspectJ5的加载时织入(load-time weaving,LTW)就支持以这种方式织入切面<br><strong>运行期：</strong>切脉你再应用运行的某个时刻被织入。一般情况下，再织入切面时，AOP容器会为目标对象动态地创建一个代理对象。Spring AOP就时以这种方式织入切面的</p>
+<blockquote>
+<p>Spring AOP就是基于动态代理的，若要代理的对象，实现了某个接口，那么Spring AOP会使用JDK Proxy，去创建代理对象，而对于没有实现接口的对象，无法使用JDK Proxy去进行代理，这时候Spring AOP会使用Cglib，这时Spring AOP 会使用Cglib生成一个被代理对象的子类来作为代理</p>
+</blockquote>
+<p>也可使用AspectJ，Spring AOP已经集成AspectJ<br>使用AOP之后我们可以把一些通用功能抽象处理，在需要用到的地方直接使用即可，这样简化了代码量，提高了系统扩展性。日志功能、事务管理等都用到AOP。</p>
+<blockquote>
+<p>Spring AOP和AspectJ AOP区别:</p>
+<ul>
+<li>Spring AOP属于运行时增强，而AspectJ时编译时增强。</li>
+<li>Spring AOP基于代理(Proxying)，而AspectJ基于字节码操作(Bytecode Manipulation)</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>Spring AOP集成了AspectJ，AspectJ相比于Spring AOP功能更加强大，但Spring AOP相对更简单。<br>若切面较少，性能差异不大，若切面较多，推荐使用AspectJ(比Spring AOP快)。</p>
+</blockquote>
+<h1 id="四、Spring-Bean"><a href="#四、Spring-Bean" class="headerlink" title="四、Spring Bean"></a>四、Spring Bean</h1><h2 id="1、Spring-Bean基本介绍"><a href="#1、Spring-Bean基本介绍" class="headerlink" title="1、Spring Bean基本介绍"></a>1、Spring Bean基本介绍</h2><p>每个类实现了Bean的规范才可以由Spring接管<br><strong>Bean规范：</strong>必须是公有(public)类，有无参构造函数，用 公共方法暴露内部成员属性(getter,setter)<br>实现这样规范的类，被称为Java Bean，既是一种可重用的组件</p>
+<h2 id="2、作用域"><a href="#2、作用域" class="headerlink" title="2、作用域"></a>2、作用域</h2><p><strong>singleton(单例，默认)：</strong>唯一Bean实例<br><strong>prototype(原型)：</strong>每次请求都会创建一个新的Bean实例<br><strong>request(请求)：</strong>每次请求都会创建一个新的Bean实例，该Bean仅在当前HTTP Request内有效<br><strong>session(会话)：</strong>每次HTTP请求产生新的Bean，该Bean仅在当前HTTP Session内有效<br><strong>global-session(全局会话)：</strong>全局session作用域，仅仅在基于Portlet的web应用中才有意义，Spring5已经没有了。Portlet是能够生成语义代码片段的小型Java Web插件。基于Portlet容器，可以像Servlet一样处理HTTP请求，但与Servlet不同，每次Portlet都有不同会话</p>
+<blockquote>
+<p>默认情况下，Spring应用上下文中所有Bean都是作为以单例(singleton)的形式创建的。既不管给定的一个Bean被注入到其他Bean多少次，每次所注入的都是同一个实例</p>
+<p>多数情况下，单例Bean是很理想的方案，初始化和垃圾回收对象实例所带来的成本只留给一些小规模任务，在这些任务中，让对象保持无状态并且在应用中反复重用这些对象可能并不合理</p>
+<p>有时候，使用的类是易变的(mutable)，它们会保持一些状态，因此重用是不安全的。这种情况下，将class声明为单例的Bean会出现问题，因为对象会被污染，稍后重用时会出现意想不到的问题</p>
+</blockquote>
+<h2 id="3、单例Bean的线程安全问题"><a href="#3、单例Bean的线程安全问题" class="headerlink" title="3、单例Bean的线程安全问题"></a>3、单例Bean的线程安全问题</h2><pre><code>单例Bean存在线程问题，当多个线程操作同一个对象时，这个对象的非静态成员变量的写操作会存在线程安全问题
+</code></pre>
+<p>解决方法：<br>①、在Bean对象中尽量避免定义可变的成员变量<br>②、在类中定义一个ThreadLocal成员变量，将需要的可变成员变量保存在ThreadLocal中</p>
+<h2 id="4、-Component和-Bean区别"><a href="#4、-Component和-Bean区别" class="headerlink" title="4、@Component和@Bean区别"></a>4、@Component和@Bean区别</h2><p>①、作用对象不同：@Component注解作用于类，而@Bean注解作用于方法<br>②、@Component通常时通过类路径扫描来自动侦测以及自动装配到Spring容器中(可使用@ComponentScan注解定义要扫描的路径从中找出标识了需要装配的类自动装配到Spring的Bean容器中)<br>@Bean注解通常是定义产生这个Bean，@Bean告诉Spring这是某个类的示例，需要时使用<br>③、@Bean注解比@Component注解的自定义性更强</p>
+<h2 id="5、将一个类声明为Spring的Bean的注解"><a href="#5、将一个类声明为Spring的Bean的注解" class="headerlink" title="5、将一个类声明为Spring的Bean的注解"></a>5、将一个类声明为Spring的Bean的注解</h2><p>@Autowired注解自动装配Bean，若想把类表示为@Autowired注解自动装配的Bean类，可采用以下注解实现：<br><strong>@Component：</strong>通用注解，可标注仍以类为Spring组件。(若一个Bean不知道属于哪一层，可使用@Component注解)<br><strong>@Repository：</strong>对应持久层既Dao层，主要用于数据库相关操作<br><strong>@Service：</strong>对应服务层，主要涉及一些复杂的逻辑，需要用到Dao层<br><strong>@Controller：</strong>对应Spring MVC控制层。主要接受用户请求并调用Service层返回数据给前端页面</p>
+<p>@Autowired不仅是对象，还有在构造器上，还能用在属性的Setter方法上不论是构造器、Setter方法还是其他的方法，Spring都会尝试满足方法参数上所声明的依赖，假如有且只有一个Bean匹配依赖需求，那么这个Bean将会被装配进来若没有匹配的Bean，那么在应用上下文创建时，Spring会抛出一个异常。为避免异常出现，可将@Autowired的required属性设置为false</p>
+<p>将required属性设置为false时，Spring会尝试执行自动装配，但若没有匹配的Bean的话，Spring将会让这个Bean处于未配置的状态。但是，把required属性设置为false时，在代码中没有进行null检查该处于为装配状态的属性可能出现NUllPointerException</p>
+<p>@Inject注解来源于Java依赖注入规范，该规范同时还为我们定义了@Named注解。在自动装配中，Spring同时支持@Inject和@Autowired。尽管@Inject和@Autowired之间有着一些细微的差别，但在大多数场景下，他们都是可以互相替换的</p>
+<h2 id="6、Bean的生命周期"><a href="#6、Bean的生命周期" class="headerlink" title="6、Bean的生命周期"></a>6、Bean的生命周期</h2><p>①、Spring对Bean进行实例化<br>②、Spring将值和Bean的引用注入到Bean对应的属性中<br>③、若Bean实现了BeanNameAware接口，Spring将Bean的ID传递给setBean-Name()方法<br>④、若Bean实现了BeanFacotryAware接口，Spring将调用setBeanFactory()方法，将BeanFactory容器实例传入<br>⑤、若Bean实现了ApplicationContextAware接口，Spring将调用setApplicationContext()方法，将Bean所在的应用上下文的引用传入进来<br>⑥、若Bean实现了BeanPostProcessor接口，Spring将调用他们的postProcessBeforeInitialization()方法<br>⑦、若Bean实现了InitializingBean接口，Spring将调用他们的after-PropertiesSet()方法，类似地，若Bean使用init-method声明了初始化方法，该方法也会被调用<br>⑧、若Bean实现了BeanPostProcessor接口，Spring将调用他们的post-ProcessAfterInitialization()方法<br>⑨、此时，Bean已经准备就绪，可被应用程序使用，他们将一直驻留在应用上下文中，知道应用上下文被销毁<br>⑩、若Bean实现了DisposableBean接口，Spring将调用它的destroy()接口方法。同样，若Bean使用destroy-method声明了销毁方法，该方法也会被调用</p>
+]]></content>
+      <categories>
+        <category>Spring</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SpringBoot项目整合Redis作缓存</title>
+    <url>/springboot-redisCache/</url>
+    <content><![CDATA[<blockquote>
+<p>在SpringBoot项目中使用Redis作缓存，既可避免频繁读取后端数据库，又可优化读取时间<br>本案例使用工具：IDEA，Postman，Redis，Mysql<br>本案例<a href="https://github.com/limenggen/springboot-redis-demo">GitHub地址:https://github.com/limenggen/springboot-redis-demo</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="1、开启redis远程访问"><a href="#1、开启redis远程访问" class="headerlink" title="1、开启redis远程访问"></a>1、开启redis远程访问</h2><p><code>vi redis.conf</code><br>修改bing 127.0.0.1注释掉<br>修改protected-mode 属性值为no<br>修改daemonize属性值为yes（启动后台运行）</p>
+<blockquote>
+<p>Redis安装过程：<a href="https://limenggen.github.io/CentOS7_redis/">https://limenggen.github.io/CentOS7_redis/</a></p>
+</blockquote>
+<h2 id="2、启动redis"><a href="#2、启动redis" class="headerlink" title="2、启动redis"></a>2、启动redis</h2><p><code> ./redis-server redis.conf</code></p>
+<ul>
+<li>测试连接</li>
+<li><code>redis-cli -h 192.168.137.101 -p 6379  # （-a 密码）</code></li>
+</ul>
+<h2 id="3、创建测试数据"><a href="#3、创建测试数据" class="headerlink" title="3、创建测试数据"></a>3、创建测试数据</h2><p>在mysql数据库中创建测试数据</p>
+<figure class="highlight sql"><figcaption><span>users.sql</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">SET</span> NAMES utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for users</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> IF <span class="keyword">EXISTS</span> `users`;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `users`  (</span><br><span class="line">  `uid` <span class="type">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `username` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_bin <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `password` <span class="type">varchar</span>(<span class="number">255</span>) <span class="type">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_bin <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  `salary` <span class="type">int</span>(<span class="number">40</span>) <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="keyword">NULL</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`uid`) <span class="keyword">USING</span> BTREE</span><br><span class="line">) ENGINE <span class="operator">=</span> InnoDB <span class="type">CHARACTER</span> <span class="keyword">SET</span> <span class="operator">=</span> utf8mb4 <span class="keyword">COLLATE</span> <span class="operator">=</span> utf8mb4_bin ROW_FORMAT <span class="operator">=</span> <span class="keyword">Dynamic</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Records of users</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> `users` <span class="keyword">VALUES</span> (<span class="number">123</span>, <span class="string">&#x27;cat&#x27;</span>, <span class="string">&#x27;miaomiao&#x27;</span>, <span class="number">4000</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS <span class="operator">=</span> <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Mysql安装过程：<a href="https://limenggen.github.io/CentOS7-mysql5-7/">https://limenggen.github.io/CentOS7-mysql5-7/</a></p>
+</blockquote>
+<h2 id="4、创建springboot项目"><a href="#4、创建springboot项目" class="headerlink" title="4、创建springboot项目"></a>4、创建springboot项目</h2><blockquote>
+<ul>
+<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWljf.png" loading="lazy"></li>
+</ul>
+</blockquote>
+<h2 id="5、添加pom-xml依赖"><a href="#5、添加pom-xml依赖" class="headerlink" title="5、添加pom.xml依赖"></a>5、添加pom.xml依赖</h2><figure class="highlight xml"><figcaption><span>pom.xml >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 快速搭建并开发web项目 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- mybatis 与 spring boot 2.x的整合包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql JDBC驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- redis --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 统一不同的缓存技术 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加lombok插件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>相关依赖需要注意版本</li>
+<li>本案例依赖版本：</li>
+<li>spring-boot-starter-web:2.3.4</li>
+<li>mybatis-spring-boot-starter:2.3.4</li>
+<li>spring-boot-starter-data-redis:2.3.4</li>
+<li>spring-boot-starter-cache:2.3.4</li>
+<li>lombok:1.18.12</li>
+</ul>
+</blockquote>
+<h2 id="6、修改application-yml"><a href="#6、修改application-yml" class="headerlink" title="6、修改application.yml"></a>6、修改application.yml</h2><p>修改application.properties文件为application.yml</p>
+<figure class="highlight yml"><figcaption><span>application.yml >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#数据库连接</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://192.168.137.102:3306/redis?useUnicode=true</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line"> </span><br><span class="line">  <span class="comment">## Redis 配置</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="comment">## Redis数据库索引（默认为0）</span></span><br><span class="line">    <span class="attr">database:</span> <span class="number">0</span></span><br><span class="line">    <span class="comment">## Redis服务器地址</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.137</span><span class="number">.102</span></span><br><span class="line">    <span class="comment">## Redis服务器连接端口</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">    <span class="comment">## Redis服务器连接密码（默认为空）</span></span><br><span class="line">    <span class="attr">password:</span></span><br><span class="line">    <span class="attr">jedis:</span></span><br><span class="line">      <span class="attr">pool:</span></span><br><span class="line">        <span class="comment">## 连接池最大连接数（使用负值表示没有限制）</span></span><br><span class="line">        <span class="comment">#spring.redis.pool.max-active=8</span></span><br><span class="line">        <span class="attr">max-active:</span> <span class="number">8</span></span><br><span class="line">        <span class="comment">## 连接池最大阻塞等待时间（使用负值表示没有限制）</span></span><br><span class="line">        <span class="comment">#spring.redis.pool.max-wait=-1</span></span><br><span class="line">        <span class="attr">max-wait:</span> <span class="number">-1</span></span><br><span class="line">        <span class="comment">## 连接池中的最大空闲连接</span></span><br><span class="line">        <span class="comment">#spring.redis.pool.max-idle=8</span></span><br><span class="line">        <span class="attr">max-idle:</span> <span class="number">8</span></span><br><span class="line">        <span class="comment">## 连接池中的最小空闲连接</span></span><br><span class="line">        <span class="comment">#spring.redis.pool.min-idle=0</span></span><br><span class="line">        <span class="attr">min-idle:</span> <span class="number">0</span></span><br><span class="line">    <span class="comment">## 连接超时时间（毫秒）</span></span><br><span class="line">    <span class="attr">timeout:</span> <span class="number">1200</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>数据库驱动版本高于6.0：com.mysql.cj.jdbc.Driver</li>
+<li>数据库驱动版本低于6.0：com.mysql.jdbc.Driver</li>
+</ul>
+</blockquote>
+<h2 id="7、创建redisConfig配置类"><a href="#7、创建redisConfig配置类" class="headerlink" title="7、创建redisConfig配置类"></a>7、创建redisConfig配置类</h2><p>RedisConfig.java</p>
+<figure class="highlight java"><figcaption><span>RedisConfig.java >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.JsonAutoDetect;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.annotation.PropertyAccessor;</span><br><span class="line"><span class="keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.CacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheConfiguration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheManager;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.cache.RedisCacheWriter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.*;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.serializer.StringRedisSerializer;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.Duration;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  redis配置类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RedisConfig</span> <span class="keyword">extends</span> <span class="title class_">CachingConfigurerSupport</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 选择redis 作为默认缓存工具</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> CacheManager <span class="title function_">cacheManager</span><span class="params">(RedisConnectionFactory redisConnectionFactory)</span>&#123;</span><br><span class="line">        <span class="type">RedisCacheConfiguration</span> <span class="variable">redisCacheConfiguration</span> <span class="operator">=</span> RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofHours(<span class="number">1</span>));<span class="comment">// 设置缓存有效期一小时</span></span><br><span class="line">        <span class="keyword">return</span> RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory)).cacheDefaults(redisCacheConfiguration).build();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * retemplate 相关配置</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;String, Object&gt; <span class="title function_">redisTemplate</span><span class="params">(RedisConnectionFactory factory)</span>&#123;</span><br><span class="line">        RedisTemplate&lt;String, Object&gt; template = <span class="keyword">new</span> <span class="title class_">RedisTemplate</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">// 配置连接工厂</span></span><br><span class="line">        template.setConnectionFactory(factory);</span><br><span class="line">        <span class="comment">// 使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值</span></span><br><span class="line">        <span class="type">Jackson2JsonRedisSerializer</span> <span class="variable">jacksonSerial</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Jackson2JsonRedisSerializer</span>(Object.class);</span><br><span class="line">        <span class="type">ObjectMapper</span> <span class="variable">om</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectMapper</span>();</span><br><span class="line">        <span class="comment">// 指定要序列化的域，field，get和set，以及修饰符范围，any是都有包括private和public</span></span><br><span class="line">        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);</span><br><span class="line">        <span class="comment">// 指定序列化输入的类型，类必须是非final修饰的，final修饰的类，比如String，Integer等会抛出异常</span></span><br><span class="line">        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);</span><br><span class="line">        jacksonSerial.setObjectMapper(om);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 值采用json序列化</span></span><br><span class="line">        template.setValueSerializer(jacksonSerial);</span><br><span class="line">        <span class="comment">// 使用SringRedisSerializer来序列化和反序列化redis的key值</span></span><br><span class="line">        template.setKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 设置hash key和value序列化模式</span></span><br><span class="line">        template.setHashKeySerializer(<span class="keyword">new</span> <span class="title class_">StringRedisSerializer</span>());</span><br><span class="line">        template.setHashValueSerializer(jacksonSerial);</span><br><span class="line">        template.afterPropertiesSet();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对hash类型的数据操作</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> redisTemplate</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> HashOperations&lt;String, String, Object&gt; <span class="title function_">hashOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate.opsForHash();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对redis字符串类型数据操作</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> redisTemplate</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> ValueOperations&lt;String, Object&gt; <span class="title function_">valueOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate.opsForValue();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对链表类型的数据操作</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> redisTemplate</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> ListOperations&lt;String, Object&gt; <span class="title function_">listOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate.opsForList();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对无序集合类型的数据操作</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> redisTemplate</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> SetOperations&lt;String, Object&gt; <span class="title function_">setOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate.opsForSet();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 对有序集合类型的数据操作</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> redisTemplate</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> ZSetOperations&lt;String, Object&gt; <span class="title function_">zSetOperations</span><span class="params">(RedisTemplate&lt;String, Object&gt; redisTemplate)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> redisTemplate.opsForZSet();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、创建实体类"><a href="#8、创建实体类" class="headerlink" title="8、创建实体类"></a>8、创建实体类</h2><p>User.java</p>
+<figure class="highlight java"><figcaption><span>User.java</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">long</span> <span class="variable">serialVerisionUID</span> <span class="operator">=</span> <span class="number">1L</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> uid;</span><br><span class="line">    <span class="keyword">private</span> String userName;</span><br><span class="line">    <span class="keyword">private</span> String passWord;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> salary;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>User类中需要添加无参构造函数，否则会报错<br>com.fasterxml.jackson.databind.exc.InvalidDefinitionException:<br>无法构造的实例 <code>com.morgan.entity.User</code> (不存在创建者，如默认构造函数): 无法从对象值反序列化</li>
+</ul>
+</blockquote>
+<h2 id="9、创建mapper接口"><a href="#9、创建mapper接口" class="headerlink" title="9、创建mapper接口"></a>9、创建mapper接口</h2><p>UserDao.java</p>
+<figure class="highlight java"><figcaption><span>UserDao.java</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.morgan.entity.User;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserDao</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from users&quot;)</span></span><br><span class="line">    List&lt;User&gt; <span class="title function_">queryAll</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from users where uid = #&#123;id&#125;&quot;)</span></span><br><span class="line">    User <span class="title function_">findUserById</span><span class="params">(<span class="type">int</span> id)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Update(&quot;update users set username = #&#123;user.userName&#125;,password = #&#123;user.password&#125;,salary = #&#123;user.salary&#125; where uid = #&#123;user.uid&#125;&quot;)</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">updateUser</span><span class="params">(<span class="meta">@Param(&quot;user&quot;)</span> User user)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Delete(&quot;delete from users where uid = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteUserById</span><span class="params">(<span class="type">int</span> id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>updateUser方法因传参为：实例类</li>
+<li>需要：@Param(“user”)</li>
+<li>SQL语句的参数需要留意书写格式</li>
+</ul>
+</blockquote>
+<h2 id="10、创建service类"><a href="#10、创建service类" class="headerlink" title="10、创建service类"></a>10、创建service类</h2><p>UserService.java</p>
+<figure class="highlight java"><figcaption><span>UserService.java >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.morgan.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.morgan.mapper.UserDao;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.ValueOperations;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserDao userDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">queryAll</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userDao.queryAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 获取用户测流：先从缓存中获取用户，没有则去数据表中数据，再将数据写入缓存</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">findUserById</span><span class="params">(<span class="type">int</span> id)</span>&#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;user_&quot;</span> + id;</span><br><span class="line">        ValueOperations&lt;String, User&gt; operations = redisTemplate.opsForValue();</span><br><span class="line">        <span class="comment">// 判断redis中是否有键位key的缓存</span></span><br><span class="line">        <span class="type">Boolean</span> <span class="variable">hasKey</span> <span class="operator">=</span> redisTemplate.hasKey(key);</span><br><span class="line">        <span class="keyword">if</span>(hasKey)&#123;</span><br><span class="line">            <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> operations.get(key);</span><br><span class="line">            <span class="keyword">return</span> user;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userDao.findUserById(id);</span><br><span class="line">            operations.set(key, user, <span class="number">5</span>, TimeUnit.HOURS);</span><br><span class="line">            <span class="keyword">return</span> user;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更新用户策略：先更新数据表，成功之后，删除原来的缓存，再更新缓存</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">updateUser</span><span class="params">(User user)</span>&#123;</span><br><span class="line">        ValueOperations&lt;String, User&gt; operations = redisTemplate.opsForValue();</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> userDao.updateUser(user);</span><br><span class="line">        System.out.println(<span class="string">&quot;result：&quot;</span>+ result);</span><br><span class="line">        <span class="keyword">if</span>(result != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;user_&quot;</span> + user.getUid();</span><br><span class="line">            <span class="type">Boolean</span> <span class="variable">hasKey</span> <span class="operator">=</span> redisTemplate.hasKey(key);</span><br><span class="line">            <span class="keyword">if</span>(hasKey)</span><br><span class="line">                redisTemplate.delete(key);</span><br><span class="line">            <span class="comment">// 再将更新后的数据加入缓存</span></span><br><span class="line">            <span class="type">User</span> <span class="variable">userById</span> <span class="operator">=</span> userDao.findUserById(user.getUid());</span><br><span class="line">            <span class="keyword">if</span>(userById != <span class="literal">null</span>)</span><br><span class="line">                operations.set(key, userById, <span class="number">3</span>, TimeUnit.HOURS);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除用户策略：删除数据表中数据，然后删除缓存</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">deleteUserById</span><span class="params">(<span class="type">int</span> id)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> userDao.deleteUserById(id);</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> <span class="string">&quot;user_&quot;</span> + id;</span><br><span class="line">        <span class="keyword">if</span>( result != <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="type">Boolean</span> <span class="variable">hasKey</span> <span class="operator">=</span> redisTemplate.hasKey(id);</span><br><span class="line">            <span class="keyword">if</span>(hasKey)</span><br><span class="line">                redisTemplate.delete(key);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="11、创建controller类"><a href="#11、创建controller类" class="headerlink" title="11、创建controller类"></a>11、创建controller类</h2><p>UserController.java</p>
+<figure class="highlight java"><figcaption><span>UserController.java >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.morgan.entity.User;</span><br><span class="line"><span class="keyword">import</span> com.morgan.service.UserService;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/redis&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/queryAll&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">queryAll</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userService.queryAll();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/findUserById&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title function_">findUserById</span><span class="params">(<span class="meta">@RequestParam</span> <span class="type">int</span> id)</span>&#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> userService.findUserById(id);</span><br><span class="line">        Map&lt;String, Object&gt; result = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        result.put(<span class="string">&quot;uid&quot;</span>, user.getUid());</span><br><span class="line">        result.put(<span class="string">&quot;username&quot;</span>, user.getUserName());</span><br><span class="line">        result.put(<span class="string">&quot;password&quot;</span>, user.getPassword());</span><br><span class="line">        result.put(<span class="string">&quot;salary&quot;</span>, user.getSalary());</span><br><span class="line">        <span class="keyword">return</span>  result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;updateUser&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">updateUser</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="number">123</span>,<span class="string">&quot;morgan&quot;</span>,<span class="string">&quot;morgan&quot;</span>,<span class="number">400</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> userService.updateUser(user);</span><br><span class="line">        <span class="keyword">if</span>(result != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;update success&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;update fail&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/deleteUserById&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">deleteUserById</span><span class="params">(<span class="meta">@RequestParam</span> <span class="type">int</span> id)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">result</span> <span class="operator">=</span> userService.deleteUserById(id);</span><br><span class="line">        <span class="keyword">if</span>(result != <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;delete success&quot;</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;delete fail&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="12、启动项目"><a href="#12、启动项目" class="headerlink" title="12、启动项目"></a>12、启动项目</h2><p>使用postman测试访问：<a href="http://localhost:8081/redis/queryAll">http://localhost:8081/redis/queryAll</a></p>
+<blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQW8tO.png" loading="lazy"></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>Redis</tag>
+        <tag>SpringBoot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot项目整合SpringSecurity笔记</title>
+    <url>/springboot-security/</url>
+    <content><![CDATA[<blockquote>
+<p>SpringSecurity是安全框架，与shiro相似。其主要功能是：用户认证(Authentication)和用户授权(Authorization)。用户登录时完成登录认证，并存储登录认证信息；用户访问接口、方法时，权限认证根据登录认证信息，通过权限信息和授权策略完成授权。<br>本案例完成项目搭建，并作出相应测试</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、Security基本搭建"><a href="#一、Security基本搭建" class="headerlink" title="一、Security基本搭建"></a>一、Security基本搭建</h1><h2 id="1、创建springboot项目"><a href="#1、创建springboot项目" class="headerlink" title="1、创建springboot项目"></a>1、创建springboot项目</h2><blockquote>
+<ul>
+<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWd6H.png" loading="lazy"></li>
+</ul>
+</blockquote>
+<h2 id="2、添加项目依赖"><a href="#2、添加项目依赖" class="headerlink" title="2、添加项目依赖"></a>2、添加项目依赖</h2><p>pom.xml</p>
+<figure class="highlight xml"><figcaption><span>pom.xml >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- spring security依赖 --&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>本案例使用的依赖版本如下：<br>spring-boot-starter:2.3.4<br>spring-boot-starter-web:2.3.4<br>spring-boot-starter-security:2.3.4</p>
+</blockquote>
+<h2 id="3、修改配置文件"><a href="#3、修改配置文件" class="headerlink" title="3、修改配置文件"></a>3、修改配置文件</h2><p>修改application.properties文件为application.yml</p>
+<ul>
+<li>若不自定义用户名，密码，Security会有一个默认用户名为：user，密码在控制台输出</li>
+<li>例如：Using generated security password: 9673fc9a-8506-4b27-8011-f5b16f068c24<figure class="highlight yml"><figcaption><span>application.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">security:</span></span><br><span class="line">    <span class="attr">user:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">lmg</span></span><br><span class="line">      <span class="attr">password:</span> <span class="number">123123</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4、创建Security配置类"><a href="#4、创建Security配置类" class="headerlink" title="4、创建Security配置类"></a>4、创建Security配置类</h2><p>SpringSecurityConfiguration.java</p>
+<ul>
+<li>@Configuration：注解用于定义配置类</li>
+<li>@EnableWebSecurity：注解开启Spring Security的功能<figure class="highlight java"><figcaption><span>Configuration.java</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableWebSecurity</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SpringSecurityConfiguration</span> <span class="keyword">extends</span> <span class="title class_">WebSecurityConfigurerAdapter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">    	<span class="comment">// Security提供自带的Login页面，可不用自定义，若采用自带Login页面，本行代码可注释</span></span><br><span class="line">        http.formLogin().loginPage(<span class="string">&quot;/login&quot;</span>).permitAll()</span><br><span class="line">                .and()</span><br><span class="line">                .authorizeRequests()</span><br><span class="line">                .anyRequest()</span><br><span class="line">                .authenticated();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="5、创建Controller类"><a href="#5、创建Controller类" class="headerlink" title="5、创建Controller类"></a>5、创建Controller类</h2><p>IndexController.java</p>
+<ul>
+<li>若采用Security自带Login页面，可不用创建Controller类<figure class="highlight java"><figcaption><span>IndexController.java</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IndexController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(&quot;/login&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">login</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;login&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6、定义一个静态页面"><a href="#6、定义一个静态页面" class="headerlink" title="6、定义一个静态页面"></a>6、定义一个静态页面</h2><p>index.html</p>
+<ul>
+<li>Security登录验证后，默认进入index.html页面<figure class="highlight html"><figcaption><span>index.html</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>SpringSecurity笔记<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">align</span>=<span class="string">&quot;center&quot;</span>&gt;</span>欢迎访问SpringSecurity首页<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="7、启动项目"><a href="#7、启动项目" class="headerlink" title="7、启动项目"></a>7、启动项目</h2><p>使用浏览器测试，测试地址：<a href="http://localhost:8080/">http://localhost:8080</a></p>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Security</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringBoot项目中引入Swagger</title>
+    <url>/springboot-swagger/</url>
+    <content><![CDATA[<blockquote>
+<p>在SpringBoot项目中引入Swagger，让接口数据可视化，尤其适用于Restful API<br>本案例使用工具：IDEA<br>本案例<a href="https://github.com/limenggen/springboot-swagger-demo">GitHub地址:https://github.com/limenggen/springboot-swagger-demo</a></p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="1、创建一个SpringBoot项目"><a href="#1、创建一个SpringBoot项目" class="headerlink" title="1、创建一个SpringBoot项目"></a>1、创建一个SpringBoot项目</h2><blockquote>
+<ul>
+<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWeFL.png" loading="lazy"></li>
+</ul>
+</blockquote>
+<h2 id="2、引入swagger依赖"><a href="#2、引入swagger依赖" class="headerlink" title="2、引入swagger依赖"></a>2、引入swagger依赖</h2><p>pom.xml</p>
+<ul>
+<li><em>引入swagger原生依赖：springfox-swagger2和springfox-swagger-ui</em><figure class="highlight xml"><figcaption><span>pom.xml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 引入swagger2依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.springfox<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>springfox-swagger-ui<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.9.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>相关依赖需要注意版本</li>
+<li>本案例依赖版本：</li>
+<li>spring-boot-starter-web:2.3.4</li>
+<li>mybatis-spring-boot-starter:2.3.4</li>
+<li>springfox-swagger2:2.9.2</li>
+<li>springfox-swagger-ui:2.9.2</li>
+<li>lombok:1.18.12</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="3、修改配置文件"><a href="#3、修改配置文件" class="headerlink" title="3、修改配置文件"></a>3、修改配置文件</h2><p>修改application.properties文件为application.yml</p>
+<figure class="highlight yml"><figcaption><span>application.yml</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line"><span class="attr">swagger:</span></span><br><span class="line">  <span class="attr">base-path:</span> <span class="string">/**</span></span><br><span class="line">  <span class="attr">base-package:</span> <span class="string">&#x27;com.morgan.controller&#x27;</span></span><br><span class="line">  <span class="attr">title:</span> <span class="string">&#x27;spring-boot-swagger&#x27;</span></span><br><span class="line">  <span class="attr">description:</span> <span class="string">&#x27;基于Swagger构建的SpringBoot RestApi 文档&#x27;</span></span><br><span class="line">  <span class="attr">version:</span> <span class="string">&#x27;1.0&#x27;</span></span><br><span class="line">  <span class="attr">contact:</span></span><br><span class="line">    <span class="attr">name:</span> <span class="string">&#x27;morgan&#x27;</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">&#x27;https://github.com/limenggen/springboot-swagger&#x27;</span></span><br><span class="line">    <span class="attr">email:</span> <span class="string">&#x27;xxx@163.com&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="4、新建一个swagger配置类"><a href="#4、新建一个swagger配置类" class="headerlink" title="4、新建一个swagger配置类"></a>4、新建一个swagger配置类</h2><p>SwaggerConfig.java</p>
+<figure class="highlight java"><figcaption><span>SwaggerConfig.java >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.ApiInfoBuilder;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.PathSelectors;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.builders.RequestHandlerSelectors;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.service.ApiInfo;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.service.Contact;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.spi.DocumentationType;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.spring.web.plugins.Docket;</span><br><span class="line"><span class="keyword">import</span> springfox.documentation.swagger2.annotations.EnableSwagger2;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger2</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SwaggerConfig</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 通过createRestApi函数构造一个DocketBean</span></span><br><span class="line"><span class="comment">    * 函数名，可以随意命名</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Docket <span class="title function_">createRestApi</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Docket</span>(DocumentationType.SWAGGER_2)</span><br><span class="line">                .apiInfo(apiInfo())<span class="comment">// 调用apiInfo方法，创建一个ApiInfo实例，里面是展示在文档页面信息</span></span><br><span class="line">                .select() <span class="comment">// 控制暴露出去的路径下的实例，若某个接口不想暴露，可以用@ApiIgnore注解，则该接口就不会出现在swagger2页面下</span></span><br><span class="line">                .apis(RequestHandlerSelectors.basePackage(<span class="string">&quot;com.morgan.controller&quot;</span>))</span><br><span class="line">                .paths(PathSelectors.any())</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 构建api文档的详细信息函数</span></span><br><span class="line">    <span class="keyword">private</span> ApiInfo <span class="title function_">apiInfo</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ApiInfoBuilder</span>()</span><br><span class="line">                .title(<span class="string">&quot;基于Swagger构建的Rest API文档&quot;</span>)</span><br><span class="line">                .description(<span class="string">&quot;更多请咨询服务开发者morgan&quot;</span>)</span><br><span class="line">                .contact(<span class="keyword">new</span> <span class="title class_">Contact</span>(<span class="string">&quot;Morgan&quot;</span>, <span class="string">&quot;http://limenggen.gitee.io&quot;</span>,<span class="string">&quot;xxx@163.com&quot;</span>))</span><br><span class="line">                .termsOfServiceUrl(<span class="string">&quot;http://limenggen.gitee.io&quot;</span>)</span><br><span class="line">                .version(<span class="string">&quot;1.0&quot;</span>)</span><br><span class="line">                .build();</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、添加实体类"><a href="#5、添加实体类" class="headerlink" title="5、添加实体类"></a>5、添加实体类</h2><p>User.java</p>
+<ul>
+<li><em>@ApiModel：描述返回对象的意义,用在返回对象类上</em></li>
+<li><em>ApiModelProperty：对象属性，    用在出入参数对象的字段上</em><figure class="highlight java"><figcaption><span>User.java</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModel;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiModelProperty;</span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@ApiModel(description = &quot;用户类&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;ID&quot;, example = &quot;100&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;姓名&quot;, example = &quot;laolunsi&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(value = &quot;是否启用&quot;, example = &quot;1&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Boolean enable;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiModelProperty(&quot;更新时间&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> Date updateTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="6、创建Controller类"><a href="#6、创建Controller类" class="headerlink" title="6、创建Controller类"></a>6、创建Controller类</h2><p>添加swagger、RestController注解</p>
+<ul>
+<li><em>@Api：协议集描述，  用于controller类上</em></li>
+<li><em>@ApiOperation：协议描述，用在controller的方法上</em><figure class="highlight java"><figcaption><span>testController.java >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> com.morgan.entity.User;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.Api;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiOperation;</span><br><span class="line"><span class="keyword">import</span> io.swagger.annotations.ApiParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.util.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Api(tags = &quot;用户管理&quot;)</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value = &quot;user&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">testController</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Map&lt;Integer, User&gt; userMap;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        userMap = <span class="keyword">new</span> <span class="title class_">ConcurrentHashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="type">User</span> <span class="variable">user</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="number">100</span>, <span class="string">&quot;admin&quot;</span>, <span class="literal">true</span>, <span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(&quot;列表查询&quot;)</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;list&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">list</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;(userMap.values());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;获取用户详细信息&quot;, notes = &quot;路径参数ID&quot;)</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">detail</span><span class="params">(<span class="meta">@PathVariable</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userMap.get(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;新增或更新用户信息&quot;, notes = &quot;insert和update共用&quot;, response = User.class)</span></span><br><span class="line">    <span class="meta">@PostMapping(value = &quot;add&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">add</span><span class="params">(<span class="meta">@RequestBody</span> User user)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(user == <span class="literal">null</span> || user.getId() == <span class="literal">null</span> || StringUtils.isEmpty(user.getName()) || userMap.containsKey(user.getId()))&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        user.setUpdateTime(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line">        userMap.put(user.getId(), user);</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ApiOperation(value = &quot;删除用户&quot;)</span></span><br><span class="line">    <span class="meta">@GetMapping(value = &quot;del/&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Boolean <span class="title function_">delete</span><span class="params">(<span class="meta">@ApiParam(name = &quot;用户ID&quot;, required = true, example = &quot;100&quot;)</span> Integer id)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(userMap.containsKey(id))&#123;</span><br><span class="line">            userMap.remove(id);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="7、启动项目"><a href="#7、启动项目" class="headerlink" title="7、启动项目"></a>7、启动项目</h2><p>项目访问地址：<a href="http://localhost:8081/swagger-ui.html">http://localhost:8081/swagger-ui.html</a></p>
+<blockquote>
+<p><img src="https://s6.jpg.cm/2022/07/29/PQWV5U.png" loading="lazy"></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>SpringBoot</tag>
+        <tag>Swagger</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql常用函数笔记</title>
+    <url>/sql-function/</url>
+    <content><![CDATA[<blockquote>
+<p>sql的函数在sql中起到举足轻重的地位，在sql语句中使用好函数，能减轻语句的臃肿，甚至还能起到优化sql语句的作用<br>本篇主要记录一些sql常用函数的知识点</p>
+</blockquote>
+<span id="more"></span>
+<h1 id="一、字符函数"><a href="#一、字符函数" class="headerlink" title="一、字符函数"></a>一、字符函数</h1><h2 id="1、-LENGTH"><a href="#1、-LENGTH" class="headerlink" title="1、 LENGTH"></a>1、 LENGTH</h2><p>获取参数值的字节个数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT LENGTH (&#x27;lala&#x27;) ;</span><br><span class="line">结果： 4</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、-CONCAT"><a href="#2、-CONCAT" class="headerlink" title="2、 CONCAT"></a>2、 CONCAT</h2><p>拼接字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT CONCAT (&#x27;asd&#x27; , &#x27;we&#x27; );</span><br><span class="line"> 结果： asdwe</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、-UPPER"><a href="#3、-UPPER" class="headerlink" title="3、 UPPER"></a>3、 UPPER</h2><p>将参数全部变为大写</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT UPPER(&#x27; abcd&#x27; );</span><br><span class="line">结果:   ABCD</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、-LOWER"><a href="#4、-LOWER" class="headerlink" title="4、 LOWER"></a>4、 LOWER</h2><p>将参数全部变为小写</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT LOWER(&#x27; ABCD&#x27; );</span><br><span class="line">结果:   abcd</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、-SUBSTR"><a href="#5、-SUBSTR" class="headerlink" title="5、 SUBSTR"></a>5、 SUBSTR</h2><p>索引从1开始，返回指定位置及其之后的字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT SUBSTR( &#x27; ABCD&#x27; , 2 ); </span><br><span class="line">结果：BCD</span><br></pre></td></tr></table></figure>
+
+<p>截取从指定索引处（第二个参数）开始，获取索引位置及其后指定字符长度的字符串（第三个参数）</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT SUBSTR( &#x27; ABCD&#x27; , 1,3 ); </span><br><span class="line">结果：ABC</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、-INSTR"><a href="#6、-INSTR" class="headerlink" title="6、 INSTR"></a>6、 INSTR</h2><p>返回第二个参数在第一个参数中第一次出现的位置，若没有出现，则返回0</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT INSTR(&#x27;ABCD&#x27; , &#x27;CD&#x27;)</span><br><span class="line">结果：  3</span><br><span class="line"></span><br><span class="line">例：SELECT INSTR(&#x27;ABCD&#x27; , &#x27;E&#x27;)</span><br><span class="line">结果：  0</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、-TRIM"><a href="#7、-TRIM" class="headerlink" title="7、 TRIM"></a>7、 TRIM</h2><p>去除首尾指定的字符，若没有指定，则表示去除空格</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT TRIM ( &#x27; ## &#x27;);</span><br><span class="line">结果：  &#x27;##&#x27;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>扩展：也可使用LTRIM和RTRIM函数<br>SELECT LTRIM(‘ ## ‘); | SELECT RTRIM(‘ ## ‘);<br>结果：’## ‘ | ‘ ##’</p>
+</blockquote>
+<h2 id="8、-LPAD"><a href="#8、-LPAD" class="headerlink" title="8、 LPAD"></a>8、 LPAD</h2><p>用指定的字符实现左填充指定长度，同时也是结果的最终长度</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT LPAD( &#x27;abc&#x27; , 4 , &#x27;#&#x27;&#x27;);</span><br><span class="line">结果:  #ABC</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、-RPAD"><a href="#9、-RPAD" class="headerlink" title="9、 RPAD"></a>9、 RPAD</h2><p>用指定的字符实现右填充指定长度，同时也是结果的最终长度</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT LPAD( &#x27;ABC&#x27; , 4 , &#x27;#&#x27;);</span><br><span class="line">结果:  ABC#</span><br><span class="line">例：SELECT LPAD( &#x27;ABC&#x27; , 2 , &#x27;#&#x27;);</span><br><span class="line">结果:  AB</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、-REPLACE"><a href="#10、-REPLACE" class="headerlink" title="10、 REPLACE"></a>10、 REPLACE</h2><p>替换所有的指定的字符串为另一个字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT REPLACE( &#x27;ABCBCD&#x27; , &#x27;BC&#x27; ,&#x27;#&#x27; ); </span><br><span class="line">结果: A##D</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、数学函数"><a href="#二、数学函数" class="headerlink" title="二、数学函数"></a>二、数学函数</h1><h2 id="1、-ROUND"><a href="#1、-ROUND" class="headerlink" title="1、 ROUND"></a>1、 ROUND</h2><p>四舍五入</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT ROUND(-1.55);</span><br><span class="line">结果：  -2 </span><br></pre></td></tr></table></figure>
+<p>保留指定小数的位数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT ROUND (1.547,2);</span><br><span class="line">结果：  1.54</span><br></pre></td></tr></table></figure>
+<h2 id="2、-CEIL"><a href="#2、-CEIL" class="headerlink" title="2、 CEIL"></a>2、 CEIL</h2><p>向上取整，返回大于等于该参数的最小整数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT CEIL (-1.0002);</span><br><span class="line">结果：  -1</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、-FLOOR"><a href="#3、-FLOOR" class="headerlink" title="3、 FLOOR"></a>3、 FLOOR</h2><p>向下取整，返回小于等于该参数的最大整数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT CEIL (9.99999);</span><br><span class="line">结果：  9</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、-TRUNCATE"><a href="#4、-TRUNCATE" class="headerlink" title="4、 TRUNCATE"></a>4、 TRUNCATE</h2><p>截断</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT TRUNCATE (1.6699,2);</span><br><span class="line">结果:  1.66</span><br></pre></td></tr></table></figure>
+<h2 id="5、-MOD"><a href="#5、-MOD" class="headerlink" title="5、 MOD"></a>5、 MOD</h2><p>取模</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT MOD(-10,-3)</span><br><span class="line">结果:  -1</span><br></pre></td></tr></table></figure>
+
+<h1 id="三、日期函数"><a href="#三、日期函数" class="headerlink" title="三、日期函数"></a>三、日期函数</h1><h2 id="1、-NOW"><a href="#1、-NOW" class="headerlink" title="1、 NOW"></a>1、 NOW</h2><p>返回当前系统日期+时间</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT NOW();</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、-CURDATE"><a href="#2、-CURDATE" class="headerlink" title="2、 CURDATE"></a>2、 CURDATE</h2><p>返回当前系统时间，不包含时间</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT CURDATE();</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、-CURTIME"><a href="#3、-CURTIME" class="headerlink" title="3、 CURTIME"></a>3、 CURTIME</h2><p>返回当前时间，不包含日期</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT CURTIME();</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、-MONTHNAME-DAYNAME-等"><a href="#4、-MONTHNAME-DAYNAME-等" class="headerlink" title="4、 MONTHNAME , DAYNAME 等"></a>4、 MONTHNAME , DAYNAME 等</h2><p>返回日期的英文名字</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT DAYNAME(NOW());</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、-STR-TO-DATE"><a href="#5、-STR-TO-DATE" class="headerlink" title="5、 STR_TO_DATE"></a>5、 STR_TO_DATE</h2><p>将字符串通过指定的格式转化为日期</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT STR_TO_DATE(&#x27;4-3#1992&#x27;, &#x27;%m-%d#%Y&#x27;);</span><br><span class="line">结果：1992-04-03</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、-DATE-FORMAT"><a href="#6、-DATE-FORMAT" class="headerlink" title="6、 DATE_FORMAT"></a>6、 DATE_FORMAT</h2><p>将日期转化为指定格式字符串</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT DATE_FORMAT(NOW(), &#x27;%m#%d#%Y&#x27;);</span><br><span class="line">结果： 04#27#2019</span><br></pre></td></tr></table></figure>
+<h1 id="三、其他函数"><a href="#三、其他函数" class="headerlink" title="三、其他函数"></a>三、其他函数</h1><p>##1、 SELECT VERSION()<br>获取sql的版本号</p>
+<h2 id="2、-SELECT-DATABASE"><a href="#2、-SELECT-DATABASE" class="headerlink" title="2、 SELECT DATABASE()"></a>2、 SELECT DATABASE()</h2><p>获取当前所在数据库名</p>
+<h2 id="3、-SELECT-USER"><a href="#3、-SELECT-USER" class="headerlink" title="3、 SELECT USER()"></a>3、 SELECT USER()</h2><p>获取登陆用户名</p>
+<h1 id="四、流程控制函数"><a href="#四、流程控制函数" class="headerlink" title="四、流程控制函数"></a>四、流程控制函数</h1><h1 id="1、-if"><a href="#1、-if" class="headerlink" title="1、 if"></a>1、 if</h1><p>一共三个参数，若第一个参数代表的表达式值为true, 则执行第二个参数代表的表达式，否则执行第三个参数代表的表达式</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">例：SELECT IF (10 &gt; 5 , &#x27;大&#x27; , &#x27;小&#x27; )；</span><br><span class="line">结果： 大</span><br></pre></td></tr></table></figure>
+
+<h1 id="2、-case"><a href="#2、-case" class="headerlink" title="2、 case"></a>2、 case</h1><p>用法一：<br>相当于switch case</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CASE 要判断的字段或者表达式</span><br><span class="line"></span><br><span class="line">WHEN 常量1 THEN 要显示的值1或者与语句1</span><br><span class="line"></span><br><span class="line">WHEN 常量2   THEN 要显示的值2或者与语句2</span><br><span class="line"></span><br><span class="line">WHEN 常量3 THEN 要显示的值3或者与语句3</span><br><span class="line"></span><br><span class="line">ELSE  要显示的值x或者与语句x</span><br><span class="line"></span><br><span class="line">END</span><br></pre></td></tr></table></figure>
+<p>用法二：<br>相当于多重if<br>相当于switch case</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CASE</span><br><span class="line"></span><br><span class="line">WHEN 条件1 THEN 要显示的值1或者与语句1</span><br><span class="line"></span><br><span class="line">WHEN 条件2   THEN 要显示的值2或者与语句2</span><br><span class="line"></span><br><span class="line">WHEN 条件3 THEN 要显示的值3或者与语句3</span><br><span class="line"></span><br><span class="line">ELSE  要显示的值x或者与语句x</span><br><span class="line"></span><br><span class="line">END</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库笔记</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库导数笔记</title>
+    <url>/sql-import/</url>
+    <content><![CDATA[<blockquote>
+<p>因工作使用数据库日常开发，所以在这里备份导数操作<br>本篇主要说明db2库、oracle库导数操作</p>
+</blockquote>
+<span id="more"></span>  
+
+<h1 id="一、Oracle导数步骤"><a href="#一、Oracle导数步骤" class="headerlink" title="一、Oracle导数步骤"></a>一、Oracle导数步骤</h1><h2 id="1、查看服务端库配置信息"><a href="#1、查看服务端库配置信息" class="headerlink" title="1、查看服务端库配置信息"></a>1、查看服务端库配置信息</h2><p><code>cat /oracle/app/oracle/product/12.1.0/client_1/network/admin/tnsnames.ora</code></p>
+<h2 id="2、执行数据导出命令"><a href="#2、执行数据导出命令" class="headerlink" title="2、执行数据导出命令"></a>2、执行数据导出命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exp username/password@oraclename tables=&#x27;schema.tablename&#x27; file=&#x27;/brcb_edp/TMPDATA/YYYYMMDD/tablename.dmp&#x27;</span><br><span class="line"> rows=y grants=n indexes=n query=\&quot;where BRCB_ETL_DATE\&lt;=to_date\(\&#x27;2020-06-30\&#x27;,\&#x27;yyyy-mm-dd\&#x27;\) </span><br><span class="line"> AND BRCB_ETL_DATE\&gt;=to_date\(\&#x27;2020-01-01\&#x27;,\&#x27;yyyy-mm-dd\&#x27;\)\&quot;</span><br><span class="line">--分区表:exp username/password@oraclename tables=&#x27;schema.tablename:PART_NAME&#x27; </span><br><span class="line">--file=&#x27;/brcb_edp/TMPDATA/YYYYMMDD/tablename.dmp&#x27; rows=y grants=n indexes=n </span><br><span class="line"></span><br><span class="line">--expdp username/password@oraclename tables=&#x27;schema.tablename&#x27; dumpfile=tablename.dmp </span><br><span class="line">--directory=TMPDATA (TMPDATA 可查看日志默认路径:/brcb_edp/TMPDATA/oracle  在数据服务器)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-执行数据导入命令"><a href="#3-执行数据导入命令" class="headerlink" title="3.执行数据导入命令"></a>3.执行数据导入命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">imp username/password@oraclename tables=&#x27;tablename&#x27; fromuser=&#x27;schema&#x27; </span><br><span class="line">file=&#x27;/brcb_edp/TMPDATA/YYYYMMDD/tablename.dmp&#x27; rows=y ignore=y buffer=819200 STATISTICS=NONE</span><br><span class="line">--impdp username/password@oraclename  directory=COBS_DIR  dumpfile=tablename.dmp   </span><br><span class="line">--REMAP_SCHEMA=schema:schema  TABLES=schema.tablename  TABLE_EXISTS_ACTION=append</span><br></pre></td></tr></table></figure>
+
+<h1 id="二、db2库-导数步骤"><a href="#二、db2库-导数步骤" class="headerlink" title="二、db2库 导数步骤"></a>二、db2库 导数步骤</h1><h2 id="1-查看相关库配置信息"><a href="#1-查看相关库配置信息" class="headerlink" title="1.查看相关库配置信息"></a>1.查看相关库配置信息</h2><p><code>db2 list node directory</code></p>
+<h2 id="2-先在服务器连接DB2库"><a href="#2-先在服务器连接DB2库" class="headerlink" title="2.先在服务器连接DB2库"></a>2.先在服务器连接DB2库</h2><p><code>db2 connect to REPDB user db2inst1 using db2inst1</code></p>
+<h2 id="3-执行"><a href="#3-执行" class="headerlink" title="3.执行"></a>3.执行</h2><p><code>    db2 -t</code></p>
+<h2 id="4-执行导出命令"><a href="#4-执行导出命令" class="headerlink" title="4.执行导出命令"></a>4.执行导出命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">export to /brcb_edp/TMPDATA/YYYYMMDD/表名.txt of del select * from 表名 where DATA_DT=&#x27;YYYY-MM-DD&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-执行导入命令"><a href="#5-执行导入命令" class="headerlink" title="5.执行导入命令"></a>5.执行导入命令</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import from /brcb_edp/limg/表名.txt of del insert into 表名;</span><br><span class="line">-- load client from /brcb_edp/limg/表名.txt of del insert into 表名;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>sql常用关键字笔记</title>
+    <url>/sql-keyword/</url>
+    <content><![CDATA[<blockquote>
+<p>sql关键字是使用sql的基础，掌握sql关键字才能在sql的各种需求中，完成对应任务<br>本篇主要记录一些sql常用关键字的知识点</p>
+</blockquote>
+<span id="more"></span>  
+
+<h3 id="1、基本类型"><a href="#1、基本类型" class="headerlink" title="1、基本类型"></a>1、基本类型</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char(n)</td>
+<td>存放固定长度的字符串，用户指定长度为n。如果没有使用n个长度则会在末尾添加空格。</td>
+</tr>
+<tr>
+<td>varchar(n)</td>
+<td>可变长度的字符串，用户指定最大长度n。char的改进版，大多数情况下我们最好使用varchar。</td>
+</tr>
+<tr>
+<td>int</td>
+<td>整数类型</td>
+</tr>
+<tr>
+<td>smallint</td>
+<td>小整数类型</td>
+</tr>
+<tr>
+<td>numeric(p,d)</td>
+<td>定点数，精度由用户指定。这个数有p位数字（包括一个符号位）d位在小数点右边。</td>
+</tr>
+<tr>
+<td>real ,double precision</td>
+<td>浮点数和双精度浮点数。</td>
+</tr>
+<tr>
+<td>float(n)</td>
+<td>精度至少位n位的浮点数</td>
+</tr>
+</tbody></table>
+<h3 id="2、特殊关键字"><a href="#2、特殊关键字" class="headerlink" title="2、特殊关键字"></a>2、特殊关键字</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>primary key</td>
+<td>主键</td>
+<td>primary key（student_id）</td>
+</tr>
+<tr>
+<td>foreign key references</td>
+<td>外键，括号中为外键，references后为外键的表</td>
+<td>foreign key(course_id) references Course</td>
+</tr>
+<tr>
+<td>not null</td>
+<td>不为空，前面为属性的定义</td>
+<td>name varchar(10) not null</td>
+</tr>
+</tbody></table>
+<h2 id="3、创建-插入-删除-修改"><a href="#3、创建-插入-删除-修改" class="headerlink" title="3、创建/插入/删除/修改"></a>3、创建/插入/删除/修改</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>create table</td>
+<td>创建一张表</td>
+</tr>
+<tr>
+<td>insert into…values    向表中插入一条信息</td>
+<td></td>
+</tr>
+<tr>
+<td>delete from</td>
+<td>从表中删除一条信息</td>
+</tr>
+<tr>
+<td>update…set…where</td>
+<td>在where的位置，更新内容为set的值</td>
+</tr>
+<tr>
+<td>drop table</td>
+<td>删除表</td>
+</tr>
+<tr>
+<td>alter table…add</td>
+<td>向表中添加某个属性</td>
+</tr>
+<tr>
+<td>alter table…drop</td>
+<td>删除某个属性</td>
+</tr>
+<tr>
+<td>truncate</td>
+<td>清空内容</td>
+</tr>
+</tbody></table>
+<h2 id="4、SQL查询语句−单表查询"><a href="#4、SQL查询语句−单表查询" class="headerlink" title="4、SQL查询语句−单表查询"></a>4、SQL查询语句−单表查询</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>select</td>
+<td>表示要查找表所含有的属性</td>
+</tr>
+<tr>
+<td>from</td>
+<td>表示要操作的表</td>
+</tr>
+<tr>
+<td>where</td>
+<td>判断条件，根据该判断条件选择信息</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>表示将结果去重</td>
+</tr>
+<tr>
+<td>all</td>
+<td>表示不去重</td>
+</tr>
+<tr>
+<td>and</td>
+<td>在where后使用and表示将判断条件连接起来</td>
+</tr>
+<tr>
+<td>or</td>
+<td>在where中使用or表示判断条件多选一</td>
+</tr>
+<tr>
+<td>not</td>
+<td>在where中使用not表示判断条件相反</td>
+</tr>
+</tbody></table>
+<h2 id="5、SQL查询语句−多表查询"><a href="#5、SQL查询语句−多表查询" class="headerlink" title="5、SQL查询语句−多表查询"></a>5、SQL查询语句−多表查询</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A,B</td>
+<td>在from后面通过逗号连接多张表，表示将这些表进行笛卡尔积运算</td>
+</tr>
+<tr>
+<td>natural join</td>
+<td>将natural join关键字前后的两张表进行自然连接运算</td>
+</tr>
+<tr>
+<td>left outer join</td>
+<td>左外连接，以左边为基准进行连接，右边没有的用NULL代替</td>
+</tr>
+<tr>
+<td>right outer join</td>
+<td>右外连接，以右边为基准进行连接，左边没有的用NULL代替</td>
+</tr>
+<tr>
+<td>full join</td>
+<td>全然外连接，将两表完全合并，没有的用NULL代替</td>
+</tr>
+<tr>
+<td>join/inner    join</td>
+<td>内连接，只连接两表皆有，其他删除</td>
+</tr>
+<tr>
+<td>corss join</td>
+<td>交叉连接，结果为两表的笛卡尔积</td>
+</tr>
+<tr>
+<td>A join B using(c)</td>
+<td>将A和B通过c属性自然连接</td>
+</tr>
+</tbody></table>
+<h2 id="6、附加运算关键字"><a href="#6、附加运算关键字" class="headerlink" title="6、附加运算关键字"></a>6、附加运算关键字</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>as</td>
+<td>将as前的关系起一个别名，在此语句中可以用别名来代指这个表</td>
+</tr>
+<tr>
+<td>*</td>
+<td>在select中表示找出这个表所有的属性</td>
+</tr>
+<tr>
+<td>order by</td>
+<td>让查询结果中的信息按照给定的属性排序（默认升序，上小下大）</td>
+</tr>
+<tr>
+<td>desc</td>
+<td>在排序后使用，表示采用降序</td>
+</tr>
+<tr>
+<td>asc</td>
+<td>在排序后使用，表示采用升序</td>
+</tr>
+<tr>
+<td>between</td>
+<td>在where中使用between表示一个数在两个数值之间取值</td>
+</tr>
+<tr>
+<td>not between</td>
+<td>between的反义词，在两个数之外取值</td>
+</tr>
+<tr>
+<td>union/union all</td>
+<td>将连个SQL语句做并运算，并且自动去重，添加all表示不去重</td>
+</tr>
+<tr>
+<td>intersect/intersect all</td>
+<td>将两个SQL语句做交运算，并自动去重，添加all表示不去重</td>
+</tr>
+<tr>
+<td>except/except all</td>
+<td>将两个SQL语句做差运算，并且自动去重，添加all表示不去重</td>
+</tr>
+<tr>
+<td>is null</td>
+<td>在where中使用is null表示这个值是空值</td>
+</tr>
+<tr>
+<td>is not null</td>
+<td>在where中使用is not null表示这个值不是空值</td>
+</tr>
+</tbody></table>
+<h2 id="7、聚集函数运算"><a href="#7、聚集函数运算" class="headerlink" title="7、聚集函数运算"></a>7、聚集函数运算</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>avg</td>
+<td>平均值</td>
+</tr>
+<tr>
+<td>min</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>max</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>sum</td>
+<td>总和</td>
+</tr>
+<tr>
+<td>count</td>
+<td>计数</td>
+</tr>
+<tr>
+<td>distinct</td>
+<td>表示将后面的属性去重</td>
+</tr>
+<tr>
+<td>group by</td>
+<td>将在group by上取值相同的信息分在一个组</td>
+</tr>
+<tr>
+<td>having</td>
+<td>对group by产生的分组进行筛选，可以使用聚集函数</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>数据库笔记</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql常用优化方案</title>
+    <url>/sql-optimize/</url>
+    <content><![CDATA[<blockquote>
+<p>sql的优化是sql语句书写的重中之重，好的sql语句可以带来不一样的使用体验，所以好好学习呀<br>本篇主要记录一些sql优化的常见优化方案</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、sql语句的优化"><a href="#一、sql语句的优化" class="headerlink" title="一、sql语句的优化"></a>一、sql语句的优化</h1><h2 id="1、索引"><a href="#1、索引" class="headerlink" title="1、索引"></a>1、索引</h2><p>①、对查询进行优化，要精良避免全表扫描，首先应考虑在where及order by涉及的列上建立索引<br>②、若查询条件使用 like “%”,前面加入%会导致全表扫描<br>③、使用group by，不会使用全表扫描，可以禁止排序order by null，提高效率<br>④、若使用or，or中所有的条件必须加索引，否则会全表扫描<br>⑤、select * 中使用具体的字段列表代替“*”，不要返回无用字段</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 例：(一个字段有索引，一个字段没索引)</span><br><span class="line">	select id from t where num=10 or name=&#x27;admin&#x27;</span><br><span class="line"># 可换为：</span><br><span class="line">	select id from t where num=10</span><br><span class="line">	union all</span><br><span class="line">	select id from t where name=&#x27;admin&#x27;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>索引并不是越多越好，索引固然能提高相应的select的效率，但同时也降低了insert及update的效率，因为insert或update时有可能会重建索引，所以怎样建索引需要慎重考虑，视情况而定。一个表的索引数最好不要超过6个，若太多则应考虑一些不常使用到的列上建索引要是否必</p>
+<p>应尽可能避免更新clustered索引数据列，因为clustered索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新clustered索引数据列，那么需要考虑是否应将该索引建为clustered索引</p>
+</blockquote>
+<h2 id="2、操作符的使用"><a href="#2、操作符的使用" class="headerlink" title="2、操作符的使用"></a>2、操作符的使用</h2><p>①、避免在where子句中使用 ！= 或 &lt;&gt;操作符，否则引擎将放弃使用索引而进行全表扫描<br>例：可将 a&lt;&gt;0 修改为 a&gt;0 or a&lt;0<br>②、应尽量避免在where子句中对字段进行null值半段，否则将导致引擎放弃使用索引而镜像全表扫描<br>③、char(100)类型，在字段建立时，空间就固定了，不管是否插入值(NULL也包含在内)，都占用100个字符的空间；varchar类型，是变长字段，null不占用空间</p>
+<blockquote>
+<p>尽量使用 数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和链接的性能，并会增加存储开销。这里因为引擎再处理查询和来连接时会逐个比较字符串中每一个字符，而对于数字型只需比较一次</p>
+</blockquote>
+<h2 id="3、in-和-exists"><a href="#3、in-和-exists" class="headerlink" title="3、in 和 exists"></a>3、in 和 exists</h2><p>①、in 先执行子查询，子查询去重后，再执行主查询<br>②、exists 用于检查子查询是否至少返回一行数据，该子查询实际上并不返回仍和 数据，而是返回值True或False<br>③、若两张表数据一样大，那么用in和exists差别不大，但是若不一样大，子查询小的用in，主查询小的用exists<br>④、避免不必要的类型转换，比如将字符串与数字类型标胶，这样会将字符串进行转换，导致全表扫描</p>
+<h2 id="4、where子句"><a href="#4、where子句" class="headerlink" title="4、where子句"></a>4、where子句</h2><p>在where子句中使用参数，也会导致全表扫描，因sql只有再运行时才会解析局部变量，但优化程序不能将访问计划的选择推迟到运行时，它必须再编译时进行选择。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select id from t where num=@num</span><br><span class="line">select id from t with(index(索引名)) where num=@num</span><br></pre></td></tr></table></figure>
+<p>应尽量避免再where子句中对字段进行表达式/函数操作，这将导致引擎放弃使用索引而进行全表扫描</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 例：</span><br><span class="line">select id from t where num/2 = 100</span><br><span class="line"># 改为：</span><br><span class="line">select id from t where num = 100*2</span><br><span class="line"></span><br><span class="line"># 例：</span><br><span class="line">select id from t where substring(name,1,3)=&#x27;abc&#x27;</span><br><span class="line">select id from t wherre datediff(day,createdate,&#x27;2005-11-30&#x27;) = 0</span><br><span class="line"></span><br><span class="line"># 改为：</span><br><span class="line">select id from t where name like &#x27;abc%&#x27;</span><br><span class="line">select id from t where createdate &gt;= &#x27;2005-11-30&#x27; and createdate &lt; &#x27;2005-12-1&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、创建表"><a href="#5、创建表" class="headerlink" title="5、创建表"></a>5、创建表</h2><p>①、避免频繁创建和删除临时表，以减少系统表资源的消耗。<br>②、在新建临时表，若一次性插入数据量很大，那么可以使用select into代替create table，避免造成大量log，以提高速度；若数据量不大，可先create table，然后insert</p>
+<p>③、若使用到了临时表，再存储过程的最后无比将所有的临时表显示删除，先truncate table，然后drop table，这样可避免系统表的较长时间锁定</p>
+<h2 id="6、游标"><a href="#6、游标" class="headerlink" title="6、游标"></a>6、游标</h2><p>①、尽量避免使用游标，因为游标的效率较差，若游标操作的数据超过1万行，应考虑改写<br>②、使用基于游标的方法或临时表方法之前，应先照基于集的解决方案来解决问题，基于集的方法通常更有效</p>
+<h2 id="7、其他"><a href="#7、其他" class="headerlink" title="7、其他"></a>7、其他</h2><p>①、在所有的存储过程和触发器的开始处设置 set nocount on ,在结束时设置 set nocount off 。无序在执行存储过程和触发器的每个语句后向客户端发送done_in_proc消息</p>
+<p>②、尽量避免大事务操作，提高系统并发能力</p>
+]]></content>
+      <categories>
+        <category>数据库笔记</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql数据库练习题</title>
+    <url>/sql-practice/</url>
+    <content><![CDATA[<blockquote>
+<p>sql的练习题是一些sql的基本使用以及函数、关键字的常用练习<br>本篇主要记录一些sql常见练习题，适合sql基础不稳定的童鞋，快来跟着一起学习吧！练习后你会感受到自己sql又提升一步</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="一、建表"><a href="#一、建表" class="headerlink" title="一、建表"></a>一、建表</h1><h2 id="1、表字段及含义"><a href="#1、表字段及含义" class="headerlink" title="1、表字段及含义"></a>1、表字段及含义</h2><blockquote>
+<p>Student(Sid,Sname,Sage,Ssex)学生表</p>
+<p>*Sid：学号<br>*Sname：学生姓名<br>*Sage：学生年龄<br>*Ssex：学生性别</p>
+</blockquote>
+<blockquote>
+<p>Course(Cid,Cname,T#)课程表</p>
+<p>*Cid：课程编号<br>*Cname：课程名称<br>*Tid：教师编号</p>
+</blockquote>
+<blockquote>
+<p>SC(Sid,Cid,score)成绩表</p>
+<p>*Sid：学号<br>*Cid：课程编号<br>*score：成绩</p>
+</blockquote>
+<blockquote>
+<p>Teacher(Tid,Tname)教师表</p>
+<p>*Tid：教师编号：<br>*Tname：教师名字</p>
+</blockquote>
+<h1 id="二、练习题"><a href="#二、练习题" class="headerlink" title="二、练习题"></a>二、练习题</h1><h2 id="1、查询“001”课程比“002”课程成绩高的所有学生的学号"><a href="#1、查询“001”课程比“002”课程成绩高的所有学生的学号" class="headerlink" title="1、查询“001”课程比“002”课程成绩高的所有学生的学号"></a>1、查询“001”课程比“002”课程成绩高的所有学生的学号</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select a.sid from </span><br><span class="line">(select sid,score from sc where cid = &#x27;001&#x27;) a,</span><br><span class="line">(select sid,score from sc where cid = &#x27;002&#x27;) b </span><br><span class="line">where a.sid = b.sid and a.score &gt; b.score;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、查询平均成绩大于60分的同学的学号和平均成绩"><a href="#2、查询平均成绩大于60分的同学的学号和平均成绩" class="headerlink" title="2、查询平均成绩大于60分的同学的学号和平均成绩"></a>2、查询平均成绩大于60分的同学的学号和平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,avg(score) from sc</span><br><span class="line">group by sid </span><br><span class="line">having avg(score) &gt; 60;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、查询所有同学的学号、姓名、选课数、总成绩"><a href="#3、查询所有同学的学号、姓名、选课数、总成绩" class="headerlink" title="3、查询所有同学的学号、姓名、选课数、总成绩"></a>3、查询所有同学的学号、姓名、选课数、总成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select s.sid,s.sname,count_cid as 选课数, </span><br><span class="line">sum_score  as 总成绩</span><br><span class="line">from student s</span><br><span class="line">left join </span><br><span class="line">(select sid,count(cid) as count_cid,sum(score) as sum_score </span><br><span class="line">from sc group by sid ) sc</span><br><span class="line">on s.sid = sc.sid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4、查询姓‘李’的老的个数"><a href="#4、查询姓‘李’的老的个数" class="headerlink" title="4、查询姓‘李’的老的个数"></a>4、查询姓‘李’的老的个数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select count(tname)</span><br><span class="line">from teacher </span><br><span class="line">where tname like &#x27;李%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、查询没有学过“叶平”老师可的同学的学号、姓名"><a href="#5、查询没有学过“叶平”老师可的同学的学号、姓名" class="headerlink" title="5、查询没有学过“叶平”老师可的同学的学号、姓名"></a>5、查询没有学过“叶平”老师可的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select s.sid,s.sname </span><br><span class="line">from student as s </span><br><span class="line">where s.sid not in (</span><br><span class="line">    select DISTINCT sid </span><br><span class="line">    from sc as sc </span><br><span class="line">    where sc.cid in (</span><br><span class="line">        select cid </span><br><span class="line">        from course as c </span><br><span class="line">        left join teacher as t on c.tid = t.tid </span><br><span class="line">        where t.tname = &#x27;叶平&#x27;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6、查询学过“叶平”老师所教的所有课的同学的学号、姓名"><a href="#6、查询学过“叶平”老师所教的所有课的同学的学号、姓名" class="headerlink" title="6、查询学过“叶平”老师所教的所有课的同学的学号、姓名"></a>6、查询学过“叶平”老师所教的所有课的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select s.sid,s.sname </span><br><span class="line">from student as s </span><br><span class="line">where s.sid in (</span><br><span class="line">    select distinct sc.sid </span><br><span class="line">  from sc as sc </span><br><span class="line">  where sc.cid in (</span><br><span class="line">    select cid </span><br><span class="line">    from course as c </span><br><span class="line">    left join teacher as t on c.tid = t.tid </span><br><span class="line">    where t.tname = &#x27;叶平&#x27;)</span><br><span class="line">        group by sc.sid </span><br><span class="line">    HAVING count(cid) =</span><br><span class="line">    (select count(cid) </span><br><span class="line">     from course as c left join teacher as t on c.tid = t.tid </span><br><span class="line">     where t.tname = &#x27;叶平&#x27;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名"><a href="#7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名" class="headerlink" title="7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名"></a>7、查询学过“001”并且也学过编号“002”课程的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT s.sid,s.sname </span><br><span class="line">from student as s </span><br><span class="line">left join sc as sc on s.sid = sc.sid</span><br><span class="line">where sc.cid = &#x27;001&#x27;</span><br><span class="line">and EXISTS(</span><br><span class="line">  select * from sc as sc_2 </span><br><span class="line">  where sc.sid = sc_2.sid </span><br><span class="line">  and sc_2.cid = &#x27;002&#x27;);</span><br><span class="line"></span><br><span class="line">select s.sid,s.sname</span><br><span class="line">from student as s </span><br><span class="line">left join sc as sc </span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">where sc.cid = &#x27;001&#x27;</span><br><span class="line">and s.sid in (</span><br><span class="line">  select sid from sc as sc_2 </span><br><span class="line">  where sc_2.cid = &#x27;002&#x27; </span><br><span class="line">  and sc_2.sid = sc.sid);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名"><a href="#8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名" class="headerlink" title="8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名"></a>8、查询课程编号“002”的成绩比课程编号“001”课程低的所有同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from (select student.sid,student.sname,score,</span><br><span class="line">     (select score from sc as sc_2 </span><br><span class="line">      where sc_2.sid = student.sid </span><br><span class="line">      and sc_2.cid = &#x27;002&#x27;) as score2 </span><br><span class="line">      from student,sc </span><br><span class="line">      where student.sid = sc.sid and cid = &#x27;001&#x27;) s_2</span><br><span class="line">where score2 &lt; score;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9、查询所有课程成绩小于60的同学的学号、姓名"><a href="#9、查询所有课程成绩小于60的同学的学号、姓名" class="headerlink" title="9、查询所有课程成绩小于60的同学的学号、姓名"></a>9、查询所有课程成绩小于60的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from student</span><br><span class="line">where sid not in </span><br><span class="line">(select s.sid </span><br><span class="line">from student s,sc </span><br><span class="line">where s.sid = sc.sid and score&gt;60 );</span><br><span class="line"></span><br><span class="line">select sid,sname</span><br><span class="line">from student s</span><br><span class="line">where not EXISTS (</span><br><span class="line">select s.sid from sc </span><br><span class="line">where sc.sid = s.sid and sc.score&gt;60);</span><br></pre></td></tr></table></figure>
+
+<h2 id="10、查询没有学全所有课的同学的学号、姓名"><a href="#10、查询没有学全所有课的同学的学号、姓名" class="headerlink" title="10、查询没有学全所有课的同学的学号、姓名"></a>10、查询没有学全所有课的同学的学号、姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select s.sid,s.sname</span><br><span class="line">from student s ,sc sc </span><br><span class="line">where s.sid = sc.sid</span><br><span class="line">group by s.sid,s.sname</span><br><span class="line">having count(sc.cid)&lt;(</span><br><span class="line">select count(cid) </span><br><span class="line">from course);</span><br><span class="line"></span><br><span class="line">select s.sid,s.sname</span><br><span class="line">from student s </span><br><span class="line">right join sc sc on s.sid = sc.sid</span><br><span class="line">group by s.sid,s.sname</span><br><span class="line">having count(sc.cid)&lt;</span><br><span class="line">(select count(cid) from course);</span><br></pre></td></tr></table></figure>
+
+<h2 id="11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名"><a href="#11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名" class="headerlink" title="11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名"></a>11、查询至少有一门课与学号为“1001”同学所学相同的同学的学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select student.sid,sname</span><br><span class="line">from student,sc </span><br><span class="line">where student.sid = sc.sid</span><br><span class="line">and cid in </span><br><span class="line">(select cid from sc where sid = &#x27;1001&#x27;);</span><br><span class="line"></span><br><span class="line">select s.sid,s.sname</span><br><span class="line">from sc sc left join student as s</span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">where sc.cid in (select cid from sc where sid = &#x27;1001&#x27;);</span><br><span class="line"></span><br><span class="line">select sc_1.sid,s.sname</span><br><span class="line">from sc sc_1 left join student as s</span><br><span class="line">on sc_1.sid = s.sid</span><br><span class="line">where </span><br><span class="line">exists (select sc_2.cid from sc as sc_2 </span><br><span class="line">where sc_1.cid = sc_2.cid </span><br><span class="line">and sc_2.sid = &#x27;1001&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名"><a href="#12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名" class="headerlink" title="12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名"></a>12、查询至少学过学号为“001”同学一门课的其他同学学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,sname from student s</span><br><span class="line">left join course c</span><br><span class="line">on s.sid = c.sid</span><br><span class="line">where c.cid in (select cid from sc</span><br><span class="line">where sid = &#x27;001&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩"><a href="#13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩" class="headerlink" title="13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩"></a>13、把“SC”表中“叶平”老师教的课的成绩都更改为此课程的平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">update sc set score = </span><br><span class="line">(select avg(sc_2.score) from sc sc_2  </span><br><span class="line">where sc_2.cid = sc.cid)</span><br><span class="line">where cid in </span><br><span class="line">(select c.cid from course c </span><br><span class="line">left join teacher t on t.tid = c.tid </span><br><span class="line">where t.tname = &#x27;叶平&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名"><a href="#14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名" class="headerlink" title="14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名"></a>14、查询和“1002”号的同学学习的课程完全相同的其他同学学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sc_1.sid </span><br><span class="line">from (select cid from sc where sid = &#x27;1002&#x27;) a</span><br><span class="line">left join sc sc_1 on a.cid = sc_1.cid</span><br><span class="line">where sc_1.sid &lt;&gt; &#x27;1002&#x27; </span><br><span class="line">group by sc_1.sid </span><br><span class="line">having count(sc_1.cid) = </span><br><span class="line">(select count(cid) from sc where sid = &#x27;1002&#x27;);</span><br><span class="line"></span><br><span class="line">select a.sid,s.sname from </span><br><span class="line">(select sid,GROUP_CONCAT(cid order by cid separator &#x27;,&#x27;) as cid_str </span><br><span class="line">from sc where sid = &#x27;1002&#x27;)b,</span><br><span class="line">(select sid,GROUP_CONCAT(cid order by cid separator &#x27;,&#x27;) as cid_str </span><br><span class="line">from sc group by sid)a</span><br><span class="line">left join student s </span><br><span class="line">on a.sid = s.sid</span><br><span class="line">where a.cid_str = b.cid_str and a.sid &lt;&gt; &#x27;1002&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="15、删除学习“叶平”老师课的SC表记录"><a href="#15、删除学习“叶平”老师课的SC表记录" class="headerlink" title="15、删除学习“叶平”老师课的SC表记录"></a>15、删除学习“叶平”老师课的SC表记录</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">delete from sc where</span><br><span class="line">cid in (</span><br><span class="line">select c.cid from course c </span><br><span class="line">left join teacher t on c.tid = t.tid </span><br><span class="line">where t.tname = &#x27;叶平&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩"><a href="#16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩" class="headerlink" title="16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩"></a>16、向SC表中插入一些记录，这些记录要求符合以下条件：没有上过编号“003”课程的同学学号、002号课的平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">insert into sc select sid,&#x27;002&#x27;,</span><br><span class="line">(select avg(score) from sc where cid = &#x27;0022&#x27;)</span><br><span class="line">from student </span><br><span class="line">where sid not in (select sid from sc where cid = &#x27;002&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分"><a href="#17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分" class="headerlink" title="17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分"></a>17、按平均成绩从高到低显示所有学生的“数据库”、“企业管理”、“英语”三门的课程成绩，按如下形式显示：学生ID，数据库，企业管理，英语，有效课程数，有效平均分</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid as 学生id,</span><br><span class="line">(SELECT score from sc </span><br><span class="line">where sc.sid = t.sid and cid = &#x27;004&#x27;) as 数据库,</span><br><span class="line">(select score from sc </span><br><span class="line">where sc.sid = t.sid and cid = &#x27;001&#x27;) as 企业管理,</span><br><span class="line">(select score from sc </span><br><span class="line">where sc.sid = t.sid and cid = &#x27;015&#x27;) as 英语,</span><br><span class="line">count(cid) as 有效课程数, avg(t.score) as 平均成绩</span><br><span class="line">from sc as t </span><br><span class="line">group by sid</span><br><span class="line">order by avg(t.score);</span><br></pre></td></tr></table></figure>
+
+<h2 id="18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分"><a href="#18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分" class="headerlink" title="18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分"></a>18、查询各科成绩最高和最低的分：以如下的形式显示：课程ID，最高分，最低分</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select l.cid as 课程id,l.score as 最高分,</span><br><span class="line">r.score as 最低分</span><br><span class="line">from sc l,sc r</span><br><span class="line">where l.cid = r.cid</span><br><span class="line">and l.score = </span><br><span class="line">(select max(t.score) from sc t </span><br><span class="line">where l.cid = t.cid group by t.cid)</span><br><span class="line">and r.score = (select min(t.score) from sc t </span><br><span class="line">where r.cid = t.cid group by t.cid)</span><br><span class="line">order by l.cid;</span><br><span class="line"></span><br><span class="line">select cid as 课程id,max(score) as 最高分,</span><br><span class="line">min(score) as 最低分</span><br><span class="line">from sc </span><br><span class="line">group by cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="19、按各科平均成绩从低到高和及格率的百分数从高到低顺序"><a href="#19、按各科平均成绩从低到高和及格率的百分数从高到低顺序" class="headerlink" title="19、按各科平均成绩从低到高和及格率的百分数从高到低顺序"></a>19、按各科平均成绩从低到高和及格率的百分数从高到低顺序</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT t.cid as 课程号,</span><br><span class="line">c.cname as 课程名,</span><br><span class="line">COALESCE(avg(score),0) as 平均成绩,</span><br><span class="line">100*sum(case </span><br><span class="line">when COALESCE(score,0) &gt;= 60 </span><br><span class="line">then 1 else 0 END)/count(*) as 及格百分数</span><br><span class="line">from sc t</span><br><span class="line">left join course c </span><br><span class="line">on t.cid = c.cid</span><br><span class="line">group by t.cid</span><br><span class="line">order by 100*sum(case </span><br><span class="line">when COALESCE(score,0) &gt;= 60 </span><br><span class="line">then 1 else 0 END)/count(*);</span><br></pre></td></tr></table></figure>
+
+<h2 id="20、查询如下课程平均成绩和及格率的百分数-用”1行”显示-企业管理（001），马克思（002），OO-amp-UML（003），数据库（004）"><a href="#20、查询如下课程平均成绩和及格率的百分数-用”1行”显示-企业管理（001），马克思（002），OO-amp-UML（003），数据库（004）" class="headerlink" title="20、查询如下课程平均成绩和及格率的百分数(用”1行”显示): 企业管理（001），马克思（002），OO&amp;UML（003），数据库（004）"></a>20、查询如下课程平均成绩和及格率的百分数(用”1行”显示): 企业管理（001），马克思（002），OO&amp;UML（003），数据库（004）</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select c.cname,avg(sc.score),</span><br><span class="line">100*sum(case </span><br><span class="line">when COALESCE(score,0) &gt;= 60 </span><br><span class="line">then 1 else 0 END)/count(*)</span><br><span class="line">from course c</span><br><span class="line">left join sc</span><br><span class="line">on c.cid = sc.cid</span><br><span class="line">group by c.cname</span><br><span class="line">having c.cid in (&#x27;001&#x27;,&#x27;002&#x27;,&#x27;003&#x27;,&#x27;004&#x27;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="21、查询不同老师所教不同课程平均分从高到低显示"><a href="#21、查询不同老师所教不同课程平均分从高到低显示" class="headerlink" title="21、查询不同老师所教不同课程平均分从高到低显示"></a>21、查询不同老师所教不同课程平均分从高到低显示</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select t.tid as 教师id,</span><br><span class="line">t.tname as 教师姓名,</span><br><span class="line">sc.cid as 课程id,</span><br><span class="line">avg(score) as 平均成绩</span><br><span class="line">from sc as sc</span><br><span class="line">LEFT JOIN course c on sc.cid = c.cid</span><br><span class="line">left join teacher t on c.tid = t.tid</span><br><span class="line">group by sc.cid </span><br><span class="line">order by avg(sc.score) desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理-001-，马克思-002-，UML-003-，数据库-004"><a href="#22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理-001-，马克思-002-，UML-003-，数据库-004" class="headerlink" title="22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理(001)，马克思(002)，UML(003)，数据库(004)"></a>22、查询如下课程成绩第3名到第6名的学生成绩单：企业管理(001)，马克思(002)，UML(003)，数据库(004)</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,cid,score</span><br><span class="line">from sc </span><br><span class="line">where cid in (&#x27;001&#x27;,&#x27;002&#x27;,&#x27;003&#x27;,&#x27;004&#x27;)</span><br><span class="line">order by score desc</span><br><span class="line">limit 2,4;</span><br></pre></td></tr></table></figure>
+
+<h2 id="23、统计下列各科成绩，各分数段人数：课程ID，课程名称，-100-85-85-70-70-60-小于60"><a href="#23、统计下列各科成绩，各分数段人数：课程ID，课程名称，-100-85-85-70-70-60-小于60" class="headerlink" title="23、统计下列各科成绩，各分数段人数：课程ID，课程名称，[100-85],[85-70],[70-60],[ 小于60]"></a>23、统计下列各科成绩，各分数段人数：课程ID，课程名称，[100-85],[85-70],[70-60],[ 小于60]</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sc.cid as 课程id,cname as 课程名称,</span><br><span class="line">sum(case when score between 85 and 100 then 1 else 0 end) as &#x27;[100-85]&#x27;,</span><br><span class="line">sum(case when score between 70 and 85 then 1 else 0 end) as &#x27;[85-70]&#x27;,</span><br><span class="line">sum(case when score between 60 and 70 then 1 else 0 end) as &#x27;[70-60]&#x27;,</span><br><span class="line">sum(case when score &lt; 60 then 1 else 0 end) as &#x27;[60-0]&#x27;</span><br><span class="line">from sc as sc </span><br><span class="line">left join course as c</span><br><span class="line">on sc.cid = c.cid</span><br><span class="line">group by sc.cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="24、查询学生平均成绩及其名次"><a href="#24、查询学生平均成绩及其名次" class="headerlink" title="24、查询学生平均成绩及其名次"></a>24、查询学生平均成绩及其名次</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select 1 + (select count(distinct 平均成绩) </span><br><span class="line">from (select sid,avg(score) as 平均成绩 </span><br><span class="line">from sc group by sid)t1 </span><br><span class="line">where 平均成绩 &gt; t2.平均成绩) as 名次,</span><br><span class="line">sid as 学生学号,平均成绩 </span><br><span class="line">from (select sid,avg(score) 平均成绩 from sc group by sid) as t2</span><br><span class="line">order by 平均成绩 desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="25、查询各科成绩前三名的记录（不考虑成绩并列情况）"><a href="#25、查询各科成绩前三名的记录（不考虑成绩并列情况）" class="headerlink" title="25、查询各科成绩前三名的记录（不考虑成绩并列情况）"></a>25、查询各科成绩前三名的记录（不考虑成绩并列情况）</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,cid,score</span><br><span class="line">from sc sc_1</span><br><span class="line">where (</span><br><span class="line">select count(3) from sc sc_2 </span><br><span class="line">where sc_1.cid = sc_2.cid </span><br><span class="line">and sc_2.score &gt;= sc_1.score) &lt;= 2 </span><br><span class="line">order by sc_1.cid</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="26、查询每门课程被选修的学生数"><a href="#26、查询每门课程被选修的学生数" class="headerlink" title="26、查询每门课程被选修的学生数"></a>26、查询每门课程被选修的学生数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select cid, count(sid)</span><br><span class="line">from sc </span><br><span class="line">group by cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="27、查询出只选修一门课程的全部学生的学号和姓名"><a href="#27、查询出只选修一门课程的全部学生的学号和姓名" class="headerlink" title="27、查询出只选修一门课程的全部学生的学号和姓名"></a>27、查询出只选修一门课程的全部学生的学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sc.sid,s.sname,</span><br><span class="line">count(sc.cid) as 课程数</span><br><span class="line">from sc as sc</span><br><span class="line">LEFT JOIN student as s</span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">group by sc.sid</span><br><span class="line">having count(sc.cid) = 1;</span><br></pre></td></tr></table></figure>
+
+<h2 id="28、查询男生、女生人数"><a href="#28、查询男生、女生人数" class="headerlink" title="28、查询男生、女生人数"></a>28、查询男生、女生人数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select count(ssex) as 男生人数</span><br><span class="line">from student</span><br><span class="line">group by ssex</span><br><span class="line">having ssex = &#x27;男&#x27;;</span><br><span class="line">select count(2) from student</span><br><span class="line">where ssex = &#x27;女&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="29、查询姓“张”的学生名单"><a href="#29、查询姓“张”的学生名单" class="headerlink" title="29、查询姓“张”的学生名单"></a>29、查询姓“张”的学生名单</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from student </span><br><span class="line">where sname like &#x27;张%&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="30、查询同名同姓的学生名单，并统计同名人数"><a href="#30、查询同名同姓的学生名单，并统计同名人数" class="headerlink" title="30、查询同名同姓的学生名单，并统计同名人数"></a>30、查询同名同姓的学生名单，并统计同名人数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sname,count(8)</span><br><span class="line">from student </span><br><span class="line">group by sname</span><br><span class="line">having count(8) &gt; 1;</span><br></pre></td></tr></table></figure>
+
+<h2 id="31、1981年出生的学生名单（注：student表中sage列的类型是datetime）"><a href="#31、1981年出生的学生名单（注：student表中sage列的类型是datetime）" class="headerlink" title="31、1981年出生的学生名单（注：student表中sage列的类型是datetime）"></a>31、1981年出生的学生名单（注：student表中sage列的类型是datetime）</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,sname</span><br><span class="line">from student</span><br><span class="line">where trunc(sage,&#x27;YYYY&#x27;) = &#x27;1981&#x27;</span><br></pre></td></tr></table></figure>
+
+<h2 id="32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩"><a href="#32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩" class="headerlink" title="32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩"></a>32、查询平均成绩大于85的所有学生的学号、姓名和平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select s.sname,sc.sid,avg(sc.score) as 平均成绩</span><br><span class="line">from sc as sc</span><br><span class="line">left join student as s </span><br><span class="line">on sc.sid = s.sid</span><br><span class="line">group by sc.sid </span><br><span class="line">having avg(sc.score)&gt;85;</span><br></pre></td></tr></table></figure>
+
+<h2 id="33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列"><a href="#33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列" class="headerlink" title="33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列"></a>33、查询每门课程的平均成绩，结果按平均成绩升序排序，平均成绩相同时，按课程号降序排列</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select cid,avg(score)</span><br><span class="line">from sc </span><br><span class="line">group by cid</span><br><span class="line">order by avg(score),cid desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="34、查询课程名称为“数据库”，且分数低于60的学生名字和分数"><a href="#34、查询课程名称为“数据库”，且分数低于60的学生名字和分数" class="headerlink" title="34、查询课程名称为“数据库”，且分数低于60的学生名字和分数"></a>34、查询课程名称为“数据库”，且分数低于60的学生名字和分数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select c.cname,s.sid,s.sname,sc.score</span><br><span class="line">from course c</span><br><span class="line">left join sc on sc.cid = c.cid</span><br><span class="line">LEFT JOIN student s on s.sid = sc.sid</span><br><span class="line">where c.cname = &#x27;数据库&#x27; and sc.score&lt;60;</span><br></pre></td></tr></table></figure>
+
+<h2 id="35、查询所有学生的选课情况"><a href="#35、查询所有学生的选课情况" class="headerlink" title="35、查询所有学生的选课情况"></a>35、查询所有学生的选课情况</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sc.sid,sc.cid,s.sname,c.cname</span><br><span class="line">from sc </span><br><span class="line">LEFT JOIN course c on sc.cid = c.cid</span><br><span class="line">left join student s on sc.sid = s.sid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数"><a href="#36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数" class="headerlink" title="36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数"></a>36、查询任何一门课程成绩在70分以上的姓名、课程名称和分数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select distinct s.sid,s.sname,sc.cid,sc.score</span><br><span class="line">from sc </span><br><span class="line">left join student s on sc.sid = s.sid</span><br><span class="line">left join course c on sc.cid = c.cid</span><br><span class="line">where sc.score&gt;70;</span><br></pre></td></tr></table></figure>
+
+<h2 id="37、查询不及格的课程，并按课程号从大到小的排列"><a href="#37、查询不及格的课程，并按课程号从大到小的排列" class="headerlink" title="37、查询不及格的课程，并按课程号从大到小的排列"></a>37、查询不及格的课程，并按课程号从大到小的排列</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select cid</span><br><span class="line">from sc </span><br><span class="line">where score&lt;60</span><br><span class="line">ORDER BY cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名"><a href="#38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名" class="headerlink" title="38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名"></a>38、查询课程编号为“003”且课程成绩在80分以上的学生的学号和姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sc.sid,s.sname </span><br><span class="line">from sc </span><br><span class="line">left join student s on sc.sid = s.sid</span><br><span class="line">where sc.cid = &#x27;003&#x27; and sc.score&gt;80;</span><br></pre></td></tr></table></figure>
+
+<h2 id="39、求选了课程的学生人数"><a href="#39、求选了课程的学生人数" class="headerlink" title="39、求选了课程的学生人数"></a>39、求选了课程的学生人数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select count(2) from </span><br><span class="line">(select distinct sid from sc)a;</span><br></pre></td></tr></table></figure>
+
+<h2 id="40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩"><a href="#40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩" class="headerlink" title="40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩"></a>40、查询选修“叶平”老师所授课程的学生中，成绩最高的学生姓名及其成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select s.sname,sc.score</span><br><span class="line">from sc sc </span><br><span class="line">left join student s on sc.sid = s.sid</span><br><span class="line">left join course c on sc.cid = c.cid</span><br><span class="line">left join teacher t on c.tid = t.tid</span><br><span class="line">where t.tname = &#x27;叶平&#x27;</span><br><span class="line">and sc.score = (</span><br><span class="line">select max(score) </span><br><span class="line">from sc sc_1 </span><br><span class="line">where sc.cid = sc_1.cid)</span><br></pre></td></tr></table></figure>
+
+<h2 id="41、查询各个课程及相应的选修人数"><a href="#41、查询各个课程及相应的选修人数" class="headerlink" title="41、查询各个课程及相应的选修人数"></a>41、查询各个课程及相应的选修人数</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select cid,count(*) from sc group by cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="42、查询不同课程成绩相同的学生和学号、课程号、学生成绩"><a href="#42、查询不同课程成绩相同的学生和学号、课程号、学生成绩" class="headerlink" title="42、查询不同课程成绩相同的学生和学号、课程号、学生成绩"></a>42、查询不同课程成绩相同的学生和学号、课程号、学生成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select DISTINCT a.sid,a.cid,a.score</span><br><span class="line">from sc as a ,sc as b </span><br><span class="line">where a.score = b.score</span><br><span class="line">and a.cid &lt;&gt; b.cid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="43、查询每门课程成绩最好的前两名"><a href="#43、查询每门课程成绩最好的前两名" class="headerlink" title="43、查询每门课程成绩最好的前两名"></a>43、查询每门课程成绩最好的前两名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="45、检索至少选修两门课程的学生学号"><a href="#45、检索至少选修两门课程的学生学号" class="headerlink" title="45、检索至少选修两门课程的学生学号"></a>45、检索至少选修两门课程的学生学号</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid</span><br><span class="line">from sc</span><br><span class="line">group by sid</span><br><span class="line">having count(8)&gt;=2;</span><br></pre></td></tr></table></figure>
+
+<h2 id="46、查询全部学生选修的课程和课程号和课程名"><a href="#46、查询全部学生选修的课程和课程号和课程名" class="headerlink" title="46、查询全部学生选修的课程和课程号和课程名"></a>46、查询全部学生选修的课程和课程号和课程名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select cid,cname</span><br><span class="line">from course </span><br><span class="line">where cid in (select cid from sc group by cid);</span><br></pre></td></tr></table></figure>
+
+<h2 id="47、查询没学过”叶平”老师讲授的任一门课程的学生姓名"><a href="#47、查询没学过”叶平”老师讲授的任一门课程的学生姓名" class="headerlink" title="47、查询没学过”叶平”老师讲授的任一门课程的学生姓名"></a>47、查询没学过”叶平”老师讲授的任一门课程的学生姓名</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sname </span><br><span class="line">from student </span><br><span class="line">where sid not in (</span><br><span class="line">    select sid </span><br><span class="line">    from sc,course,teacher </span><br><span class="line">    where course.tid = teacher.tid and sc.cid = course.cid </span><br><span class="line">    and teacher.tname = &#x27;叶平&#x27;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h2 id="48、查询两门以上不及格课程的同学的学号以及其平均成绩"><a href="#48、查询两门以上不及格课程的同学的学号以及其平均成绩" class="headerlink" title="48、查询两门以上不及格课程的同学的学号以及其平均成绩"></a>48、查询两门以上不及格课程的同学的学号以及其平均成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,avg(COALESCE(score,0))</span><br><span class="line">from sc</span><br><span class="line">where sid in (</span><br><span class="line">    select sid </span><br><span class="line">    from sc </span><br><span class="line">    where score&lt;60 </span><br><span class="line">    group by sid </span><br><span class="line">    having count(8)&gt;2</span><br><span class="line">)</span><br><span class="line">group by sid;</span><br></pre></td></tr></table></figure>
+
+<h2 id="49、检索“004”课程分数小于60，按分数降序排列的同学学号"><a href="#49、检索“004”课程分数小于60，按分数降序排列的同学学号" class="headerlink" title="49、检索“004”课程分数小于60，按分数降序排列的同学学号"></a>49、检索“004”课程分数小于60，按分数降序排列的同学学号</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select sid,score</span><br><span class="line">from sc</span><br><span class="line">where cid=&#x27;004&#x27;</span><br><span class="line">and score&lt;60</span><br><span class="line">order by score desc;</span><br></pre></td></tr></table></figure>
+
+<h2 id="50、删除“002”同学的“001”课程的成绩"><a href="#50、删除“002”同学的“001”课程的成绩" class="headerlink" title="50、删除“002”同学的“001”课程的成绩"></a>50、删除“002”同学的“001”课程的成绩</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">delete from sc</span><br><span class="line">where sid = &#x27;002&#x27;</span><br><span class="line">and cid = &#x27;001&#x27;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库笔记</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库笔记</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sql关于计算字符串类型的&#39;时长&#39;思路</title>
+    <url>/sql-question01/</url>
+    <content><![CDATA[<blockquote>
+<p>本篇是记录完成一段sql逻辑计算的思路</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="1-当前数据类型-TIMESTAMP"><a href="#1-当前数据类型-TIMESTAMP" class="headerlink" title="1.当前数据类型 TIMESTAMP"></a>1.当前数据类型 TIMESTAMP</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select TO_TIMESTAMP(&#x27;20220428115810&#x27;,&#x27;yyyy/mm/dd hh24:mi:ss&#x27;) PRI_TIME from dual;</span><br><span class="line">结果：2022-04-28 11:58:10</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-若直接使用-TIMESTAMP-进行计算："><a href="#2-若直接使用-TIMESTAMP-进行计算：" class="headerlink" title="2.若直接使用 TIMESTAMP 进行计算："></a>2.若直接使用 TIMESTAMP 进行计算：</h2><h3 id="1-两个-TIMESTAMP-数据类型-相减"><a href="#1-两个-TIMESTAMP-数据类型-相减" class="headerlink" title="1). 两个 TIMESTAMP 数据类型 相减"></a>1). 两个 TIMESTAMP 数据类型 相减</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select TO_TIMESTAMP(&#x27;20220428115810&#x27;,&#x27;yyyy/mm/dd hh24:mi:ss&#x27;) - TO_TIMESTAMP(&#x27;20220428110010&#x27;,&#x27;yyyy/mm/dd hh24:mi:ss&#x27;) from dual;</span><br><span class="line">结果：0 0:58:0.0  (数据类型 INTERVALDS)</span><br></pre></td></tr></table></figure>
+<h3 id="2-先将-TIMESTAMP-类型-转换为-DATE-类型"><a href="#2-先将-TIMESTAMP-类型-转换为-DATE-类型" class="headerlink" title="2). 先将 TIMESTAMP 类型 转换为 DATE 类型"></a>2). 先将 TIMESTAMP 类型 转换为 DATE 类型</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select TO_TIMESTAMP(&#x27;20220428115810&#x27;,&#x27;yyyy/mm/dd hh24:mi:ss&#x27;)+0 from dual;</span><br><span class="line">结果：2022-04-28 11:58:10  (数据类型 DATE)</span><br><span class="line"></span><br><span class="line">再将 两个 DATE 数据类型 相减</span><br><span class="line">select to_number((TO_TIMESTAMP(&#x27;20220428115810&#x27;,&#x27;yyyy/mm/dd hh24:mi:ss&#x27;)+0) - (TO_TIMESTAMP(&#x27;20220428110010&#x27;,&#x27;yyyy/mm/dd hh24:mi:ss&#x27;)+0))*24*60*60 from dual;</span><br><span class="line">结果：3,480   (数据类型 NUMBER)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-可以讲-步骤-2-中-结果作为存储值"><a href="#3-可以讲-步骤-2-中-结果作为存储值" class="headerlink" title="3.可以讲 步骤 (2) 中 结果作为存储值"></a>3.可以讲 步骤 (2) 中 结果作为存储值</h2><pre><code> 若需要展示出可使用：
+</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">SELECT floor(3480/3600)||to_char(to_date(mod(3480,3600),&#x27;sssss&#x27;),&#x27;:mi:ss&#x27;) FROM dual;</span><br><span class="line">SELECT to_char(trunc(3480/3600),&#x27;FM9900&#x27;)||&#x27;:&#x27;||to_char(trunc(mod(3480,3600)/60),&#x27;FM00&#x27;)||&#x27;:&#x27;||to_char(mod(3480,60),&#x27;FM00&#x27;) FROM dual;</span><br><span class="line">结果：0:58:00   (数据类型 VARCHAR2)</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>数据库笔记</category>
+      </categories>
+      <tags>
+        <tag>sql</tag>
+        <tag>数据库笔记</tag>
+      </tags>
+  </entry>
+</search>

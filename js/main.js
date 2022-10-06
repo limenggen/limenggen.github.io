@@ -1,33 +1,546 @@
-$(function () {
-
+~(function () {
   "use strict";
 
-  /***************************
+  const arrayify = (list) => Array.prototype.slice.call(list);
 
-  preloader
+  class SwupScriptsPlugin {
+    name = 'ScriptPlugin';
+    isSwupPlugin = true;
 
-  ***************************/
+    defaultOptions = {
+      selectors: 'script[data-swup-reload-script]',
+      insertBefore: '#async-script'
+    };
 
-  $(document).ready(function () {
+    constructor(options = {}) {
+      this.options = {
+        ...this.defaultOptions,
+        ...options
+      };
+    }
 
-    /***************************
-    window title
-    ***************************/
-    if (window.FAVICON && window.FAVICON.visibilitychange) {
+    mount() {
+      this.swup.on('contentReplaced', this.getScriptAndInsert);
+    }
+
+    unmount() {
+      this.swup.off('contentReplaced', this.getScriptAndInsert);
+    }
+
+    // 动态插件脚本
+    getScriptAndInsert = () => {
+      let nextHeadChildren = this.getNextScriptChildren();
+      if (nextHeadChildren.length) {
+        let scripts = Array.from(document.scripts)
+        let scriptCDN = []
+        let scriptBlock = []
+
+        nextHeadChildren.forEach(item => {
+          if (item.src)
+            scripts.findIndex(s => s.src === item.src) < 0 && scriptCDN.push(item);
+          else
+            scriptBlock.push(item.innerText)
+        })
+
+        Promise.all(scriptCDN.map(item => this.loadScript(item))).then(_ => {
+          scriptBlock.forEach(code => {
+            this.runScriptBlock(code)
+          })
+        })
+      }
+    };
+
+
+    loadScript(item) {
+      return new Promise((resolve, reject) => {
+        const element = document.createElement('script');
+        for (const { name, value } of arrayify(item.attributes)) {
+          element.setAttribute(name, value);
+        }
+        element.textContent = item.textContent;
+        element.setAttribute('async', 'false');
+        element.onload = resolve
+        element.onerror = reject
+        this.insertScript(element)
+      })
+    }
+
+    runScriptBlock(code) {
+      try {
+        const func = new Function(code);
+        func()
+      } catch (error) {
+        try {
+          window.eval(code)
+        } catch (error) {
+        }
+      }
+    }
+
+    insertScript(el) {
+      const body = document.body;
+      const asyncScript = document.querySelector(this.options.insertBefore)
+      body.insertBefore(el, asyncScript)
+    }
+
+    getNextScriptChildren() {
+      const pageContent = this.swup.cache
+        .getCurrentPage()
+        .originalContent.replace('<body', '<div id="swupBody"')
+        .replace('</body>', '</div>');
+      let element = document.createElement('div');
+      element.innerHTML = pageContent;
+      const children = element.querySelector('#swupBody').querySelectorAll(this.options.selectors);
+
+      // cleanup
+      element.innerHTML = '';
+      element = null;
+
+      return children;
+    };
+
+  }
+
+  class SwupHeadPlugin {
+    name = 'HeadPlugin';
+    isSwupPlugin = true;
+
+    defaultOptions = {
+      persistTags: false,
+      persistAssets: false,
+      specialTags: false
+    };
+
+    constructor(options) {
+      this.options = {
+        ...this.defaultOptions,
+        ...options
+      };
+
+      // options.persistAssets is a shortcut to:
+      // options.persistTags with a default asset selector for scripts & styles
+      if (this.options.persistAssets && !this.options.persistTags) {
+        this.options.persistTags = 'link[rel=stylesheet], script[src], style';
+      }
+    }
+
+    mount() {
+      this.swup.on('contentReplaced', this.getHeadAndReplace);
+      this.swup.on('contentReplaced', this.updateHtmlLangAttribute);
+    }
+
+    unmount() {
+      this.swup.off('contentReplaced', this.getHeadAndReplace);
+      this.swup.off('contentReplaced', this.updateHtmlLangAttribute);
+    }
+
+    getHeadAndReplace = () => {
+      const headChildren = this.getHeadChildren();
+      const nextHeadChildren = this.getNextHeadChildren();
+
+      this.replaceTags(headChildren, nextHeadChildren);
+    };
+
+    getHeadChildren = () => {
+      return document.head.children;
+    };
+
+    getNextHeadChildren = () => {
+      const pageContent = this.swup.cache
+        .getCurrentPage()
+        .originalContent.replace('<head', '<div id="swupHead"')
+        .replace('</head>', '</div>');
+      let element = document.createElement('div');
+      element.innerHTML = pageContent;
+      const children = element.querySelector('#swupHead').children;
+
+      // cleanup
+      element.innerHTML = '';
+      element = null;
+
+      return children;
+    };
+
+    replaceTags = (oldTags, newTags) => {
+      const head = document.head;
+      const themeActive = Boolean(document.querySelector('[data-swup-theme]'));
+      const addTags = this.getTagsToAdd(oldTags, newTags, themeActive);
+      const removeTags = this.getTagsToRemove(oldTags, newTags, themeActive);
+
+      removeTags.reverse().forEach((item) => {
+        head.removeChild(item.tag);
+      });
+
+      addTags.forEach((item) => {
+        // Insert tag *after* previous version of itself to preserve JS variable scope and CSS cascaade
+        head.insertBefore(item.tag, head.children[item.index + 1] || null);
+      });
+
+      this.swup.log(`Removed ${removeTags.length} / added ${addTags.length} tags in head`);
+    };
+
+    compareTags = (oldTag, newTag) => {
+      const oldTagContent = oldTag.outerHTML;
+      const newTagContent = newTag.outerHTML;
+      return oldTagContent === newTagContent;
+    };
+
+    getTagsToRemove = (oldTags, newTags) => {
+      const removeTags = [];
+
+      for (let i = 0; i < oldTags.length; i++) {
+        let foundAt = null;
+
+        for (let j = 0; j < newTags.length; j++) {
+          if (this.compareTags(oldTags[i], newTags[j])) {
+            foundAt = j;
+            break;
+          }
+        }
+
+        if (foundAt == null && oldTags[i].getAttribute('data-async-theme') === null && !this.isMatchesTag(oldTags[i], this.options.persistTags)) {
+          removeTags.push({ tag: oldTags[i] });
+        }
+      }
+
+      return removeTags;
+    };
+
+    getTagsToAdd = (oldTags, newTags, themeActive) => {
+      const addTags = [];
+
+      for (let i = 0; i < newTags.length; i++) {
+        let foundAt = null;
+
+        for (let j = 0; j < oldTags.length; j++) {
+          if (this.compareTags(oldTags[j], newTags[i])) {
+            foundAt = j;
+            break;
+          }
+        }
+
+        if (foundAt == null && !this.isMatchesTag(newTags[i], this.options.specialTags)) {
+          addTags.push({ index: themeActive ? i + 1 : i, tag: newTags[i] });
+        }
+      }
+
+      return addTags;
+    };
+
+    isMatchesTag = (item, matchesTag = this.options.persistTags) => {
+      if (typeof matchesTag === 'function') {
+        return matchesTag(item);
+      }
+      if (typeof matchesTag === 'string') {
+        return item.matches(matchesTag);
+      }
+      return Boolean(matchesTag);
+    };
+
+    updateHtmlLangAttribute = () => {
+      const html = document.documentElement;
+
+      const newPage = new DOMParser().parseFromString(
+        this.swup.cache.getCurrentPage().originalContent,
+        'text/html'
+      );
+      const newLang = newPage.documentElement.lang;
+
+      if (html.lang !== newLang) {
+        this.swup.log(`Updated lang attribute: ${html.lang} > ${newLang}`);
+        html.lang = newLang;
+      }
+    };
+  }
+
+  const utils = {
+    q: (...arg) => document.querySelector(...arg),
+    qa: (...arg) => document.querySelectorAll(...arg),
+    debounce(func, wait, immediate) {
+      let timeout;
+      return function () {
+        let context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          timeout = null;
+          if (!immediate) func.apply(context, args);
+        }, wait);
+        if (immediate && !timeout) func.apply(context, args);
+      };
+    },
+    wrap(el, wrapper) {
+      el.parentNode.insertBefore(wrapper, el);
+      el.parentNode.removeChild(el);
+      wrapper.appendChild(el);
+    },
+    urlFor(path) {
+      if (/^(#|\/\/|http(s)?:)/.test(path)) return path;
+      return (window.ASYNC_CONFIG.root + path).replace(/\/{2,}/g, '/')
+    },
+    InitFancybox() {
+      if (window.Fancybox) {
+        Fancybox.bind("[data-fancybox]");
+        Fancybox.bind('[data-fancybox="gallery"]');
+        Fancybox.bind('[data-fancybox="portfolio"]');
+        Fancybox.defaults.Hash = false;
+      }
+    },
+    InitSwiper() {
+      if (window.Swiper) {
+        /* slideshow */
+        var swiper = new Swiper('.trm-slideshow', {
+          slidesPerView: 1,
+          effect: 'fade',
+          parallax: true,
+          autoplay: true,
+          speed: 1400,
+        });
+
+        /* testimonials slider */
+        var swiper = new Swiper('.trm-testimonials-slider', {
+          slidesPerView: 1,
+          spaceBetween: 40,
+          parallax: true,
+          autoplay: false,
+          speed: 1400,
+          pagination: {
+            el: '.trm-testimonials-slider-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.trm-testimonials-slider-next',
+            prevEl: '.trm-testimonials-slider-prev',
+          },
+        });
+      }
+    },
+    InitPictures() {
+      if (window.Fancybox) {
+        utils.qa("article img").forEach((img) => {
+          let span = document.createElement("span");
+          span.dataset.fancybox = "gallery"
+          span.dataset.src = img.src;
+          utils.wrap(img, span)
+        })
+      }
+    },
+    InitSwup() {
+      let plugins = [];
+
+      plugins.push(new SwupHeadPlugin({
+        specialTags: '#trm-switch-style' // 忽略样式标签 避免重复添加
+      }))
+
+      plugins.push(new SwupScriptsPlugin())
+
+      const options = {
+        containers: ['#trm-dynamic-content'],
+        animateHistoryBrowsing: true,
+        linkSelector: '.trm-menu a:not([data-no-swup]), .trm-anima-link:not([data-no-swup])',
+        animationSelector: '[class="trm-swup-animation"]',
+        plugins
+      };
+      return new Swup(options);
+    },
+    InitThemeMode(init = false) {
+      let swich_input = utils.q('#trm-swich');
+      if (!swich_input) return;
+      let scroll_container = utils.q("#trm-scroll-container");
+      let switch_style = utils.q("#trm-switch-style");
+      /* Animated mask layers */
+      let mode_swich_animation = utils.q('.trm-mode-swich-animation');
+      let mode_swich_animation_frame = utils.q('.trm-mode-swich-animation-frame')
+
+      const setThemeColor = function () {
+        let themeColor = getComputedStyle(document.documentElement).getPropertyValue('--theme-color')
+        let themeColorDom = utils.q('meta[name="theme-color"]')
+        if (themeColor && themeColorDom) {
+          themeColorDom.content = themeColor
+        }
+      }
+
+      /* Sets the cache value */
+      if (init) {
+        let checked = (localStorage.getItem('theme-mode') || ASYNC_CONFIG.theme.default) == 'style-dark';
+        swich_input.checked = checked;
+        if (checked) {
+          mode_swich_animation.classList.add('trm-active');
+          mode_swich_animation_frame.classList.remove('trm-active');
+        } else {
+          mode_swich_animation.classList.remove('trm-active');
+          mode_swich_animation_frame.classList.remove('trm-active');
+        }
+
+        setThemeColor()
+      }
+
+      swich_input.addEventListener('change', function () {
+        new Promise(resolve => {
+          mode_swich_animation_frame.classList.add('trm-active');
+          scroll_container.style.opacity = 0;
+          setTimeout(() => resolve(), 600);
+        }).then(() => {
+          if (this.checked) {
+            setTimeout(function () {
+              mode_swich_animation.classList.add('trm-active');
+              switch_style.href = switch_style.href.replace('style-light', 'style-dark');
+            }, 200);
+          } else {
+            setTimeout(function () {
+              mode_swich_animation.classList.remove('trm-active');
+              switch_style.href = switch_style.href.replace('style-dark', 'style-light');
+            }, 200);
+          }
+
+          setTimeout(function () {
+            mode_swich_animation_frame.classList.remove('trm-active');
+            scroll_container.style.opacity = 1;
+            setThemeColor()
+          }, 600);
+        })
+
+        localStorage.setItem('theme-mode', this.checked ? 'style-dark' : 'style-light')
+      });
+
+    },
+    InitLocomotiveScroll() {
+      const container = utils.q('#trm-scroll-container');
+      const backtop = utils.q('#trm-back-top')
+
+      const scroll = new LocomotiveScroll({
+        el: utils.q('#trm-scroll-container'),
+        smooth: true,
+        lerp: .1,
+        reloadOnContextChange: true,
+        class: 'trm-active-el'
+      });
+
+      const update = utils.debounce(() => scroll.update(), 150)
+
+      // The height is not updated when handling the dynamic addition of DOM elements
+      const ro = new ResizeObserver(entries => {
+        scroll.update();
+      });
+      ro.observe(container);
+
+      window.addEventListener('resize', update)
+
+      scroll.on('scroll', ({ scroll }) => {
+        if (scroll.y > 500) {
+          backtop.classList.add('active-el')
+        } else {
+          backtop.classList.remove('active-el')
+        }
+      });
+
+      const back_fun = function (params) {
+        scroll.scrollTo(0);
+      }
+      backtop.addEventListener('click', back_fun)
+
+      const desktop = window.matchMedia('screen and (min-width: 768px)');
+      const mobile = window.matchMedia('screen and (max-width: 767px)');
+
+      const reload = function (e) {
+        if (e.matches) {
+          location.reload();
+        }
+      }
+
+      desktop.addListener(reload);
+      mobile.addListener(reload);
+
+      document.addEventListener('swup:contentReplaced', (event) => {
+        backtop.removeEventListener('click', back_fun)
+        window.removeEventListener('resize', update)
+        ro.unobserve(container)
+        desktop.removeListener(reload);
+        mobile.removeListener(reload);
+        scroll.destroy()
+      });
+    },
+    InitMenu() {
+      utils.q('.trm-menu-btn').addEventListener('click', function () {
+        utils.q('.trm-menu-btn,.trm-right-side').classList.toggle('trm-active');
+      })
+      utils.q('.trm-menu ul li a').addEventListener('click', function () {
+        utils.q('.trm-menu-btn,.trm-right-side').classList.remove('trm-active');
+      })
+    },
+    InitCounter(duration = 2000) {
+      const numRun = (item, step, count, num) => {
+        count += step;
+        if (count >= num) {
+          item.innerText = num
+        } else {
+          item.innerText = parseInt(count)
+          requestAnimationFrame(() => numRun(item, step, count, num))
+        }
+      }
+
+      utils.qa('.trm-counter').forEach(item => {
+        let num = Number(item.innerText)
+        if (!isNaN(num)) {
+          let setp = num / (duration / 16)
+          numRun(item, setp, 0, num)
+        }
+      })
+    },
+    InitToc() {
+      let tabs = document.getElementById('trm-tabs-nav')
+      if (tabs)
+        tabs.addEventListener('click', function (e) {
+          let to = e.target.dataset.to || e.target.parentElement.dataset.to;
+          let isAcive = e.target.classList.contains('active') || e.target.parentElement.classList.contains('active');
+          if (to && !isAcive) {
+            document.querySelectorAll('.trm-tabs-nav-item').forEach(item => {
+              item.classList.toggle('active');
+            })
+            document.querySelectorAll('.trm-tabs-item').forEach(item => {
+              item.classList.toggle('active');
+            })
+          }
+        })
+    },
+    InitCopyright() {
+      if (window.ASYNC_CONFIG.creative_commons.clipboard) {
+        let { author, i18n, creative_commons } = window.ASYNC_CONFIG
+        document.addEventListener('copy', function (event) {
+          const clipboardData = event.clipboardData || window.clipboardData;
+          if (!clipboardData) { return; }
+          const text = window.getSelection().toString();
+          if (text) {
+            event.preventDefault();
+            let copyrightText = `\n\n${i18n.author}${author}\n${i18n.copyright_link}${location.href}\n${i18n.copyright_license_title}${i18n.copyright_license_content.replace('undefined', 'CC' + creative_commons.license.toUpperCase() + ' ' + (creative_commons.license == 'zero' ? '1.0' : '4.0'))}`
+            clipboardData.setData('text/plain', text + copyrightText);
+          }
+        });
+      }
+    }
+  }
+
+  //#region init
+  /* preloader */
+  function ready() {
+    /* window title */
+    if (window.ASYNC_CONFIG && window.ASYNC_CONFIG.favicon.visibilitychange) {
       window.originTitle = document.title;
       let titleTime;
-      let icons = Array.from($('[rel="icon"]')).map(item => item.href)
+      let iconEls = Array.from(utils.qa('[rel="icon"]'));
+      let icons = iconEls.map(item => item.href)
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
-          $('[rel="icon"]').attr('href', window.FAVICON.hidden);
-          document.title = window.FAVICON.hideText;
+          iconEls.forEach(item => {
+            item.href = utils.urlFor(window.ASYNC_CONFIG.favicon.hidden)
+          })
+          document.title = window.ASYNC_CONFIG.favicon.hideText;
           clearTimeout(titleTime);
         }
         else {
-          Array.from($('[rel="icon"]')).map((item, index) => {
+          iconEls.forEach((item, index) => {
             item.href = icons[index]
           })
-          document.title = window.FAVICON.showText + window.originTitle;
+          document.title = window.ASYNC_CONFIG.favicon.showText + window.originTitle;
           titleTime = setTimeout(function () {
             document.title = window.originTitle;
           }, 2000);
@@ -35,443 +548,82 @@ $(function () {
       });
     }
 
-    /***************************
-    处理文章中图片
-    ***************************/
-    $("article img").each(function () {
-      var element = document.createElement("span");
-      $(element).attr("data-fancybox", "gallery");
-      $(element).attr("href", $(this).attr("src"));
-      $(this).wrap(element);
-    })
+    /* Work with pictures in articles */
+    utils.InitPictures()
 
-    $('html').addClass('is-animating');
-    $(".trm-scroll-container").animate({
-      opacity: 0,
-    });
+    /* loading animate */
+    utils.q('html').classList.add('is-animating');
+    utils.q(".trm-scroll-container").style.opacity = 0;
     setTimeout(function () {
-      $('html').removeClass('is-animating');
-      $(".trm-scroll-container").animate({
-        opacity: 1,
-      }, 600);
-    }, 1000);
-  });
-
-  /***************************
-
-  swup
-
-  ***************************/
-  const options = {
-    containers: ['#trm-dynamic-content'],
-    animateHistoryBrowsing: true,
-    linkSelector: '.trm-menu a:not([data-no-swup]), .trm-anima-link:not([data-no-swup])',
-    animationSelector: '[class="trm-swup-animation"]'
-  };
-  const swup = new Swup(options);
-  /***************************
-
-  menu
-
-  ***************************/
-  $('.trm-menu-btn').on('click', function () {
-    $('.trm-menu-btn , .trm-right-side').toggleClass('trm-active');
-  })
-  $('.trm-menu ul li a').on('click', function () {
-    $('.trm-menu-btn , .trm-right-side').removeClass('trm-active');
-  })
-  /***************************
-
-  mode switch
-
-  ***************************/
-  let checked = localStorage.getItem('theme-mode') == 'style-dark';
-  $('#trm-swich').attr('checked', checked)
-  if (checked) {
-    $('.trm-mode-swich-animation').addClass('trm-active');
-    $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-  } else {
-    $('.trm-mode-swich-animation').removeClass('trm-active');
-    $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-  }
-  $('.trm-mode-switcher').clone().appendTo('.trm-mode-switcher-place');
-  $('#trm-swich').change(function () {
-    if (this.checked) {
-      $('.trm-hidden-switcher input').prop("checked", true);
-      $('.trm-mode-swich-animation-frame').addClass('trm-active');
-      $("#trm-scroll-container").animate({
-        opacity: 0,
-      }, 600, function () {
-        setTimeout(function () {
-          $('.trm-mode-swich-animation').addClass('trm-active');
-          $("#trm-switch-style").attr("href", "/css/style-dark.css?" + window.HTMEM_VERSION);
-        }, 200);
-        setTimeout(function () {
-          $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-          $("#trm-scroll-container").animate({
-            opacity: 1,
-          }, 600);
-        }, 1000);
-      });
-    } else {
-      $('.trm-hidden-switcher input').prop("checked", false);
-      $('.trm-mode-swich-animation-frame').addClass('trm-active');
-      $("#trm-scroll-container").animate({
-        opacity: 0,
-      }, 600, function () {
-        setTimeout(function () {
-          $('.trm-mode-swich-animation').removeClass('trm-active');
-          $("#trm-switch-style").attr("href", "/css/style-light.css?" + window.HTMEM_VERSION);
-        }, 200);
-        setTimeout(function () {
-          $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-          $("#trm-scroll-container").animate({
-            opacity: 1,
-          }, 600);
-        }, 1000);
-      });
-    }
-    localStorage.setItem('theme-mode', this.checked ? 'style-dark' : 'style-light')
-  });
-  /***************************
-
-  counters
-
-  ***************************/
-  $('.trm-counter').each(function () {
-    $(this).prop('Counter', 0).animate({
-      Counter: $(this).text()
-    }, {
-      duration: 2000,
-      easing: 'linear',
-      step: function (now) {
-        $(this).text(Math.ceil(now));
-      }
-    });
-  });
-  /***************************
-
-  locomotive scroll
-
-  ***************************/
-  const scroll = new LocomotiveScroll({
-    el: document.querySelector('#trm-scroll-container'),
-    smooth: true,
-    lerp: .1,
-    reloadOnContextChange: true
-  });
-
-  const comComment = $('.comment-container')
-  if (comComment.length) {
-    const ro = new ResizeObserver(entries => {
-      scroll.scrollTo(0, {
-        callback () {
-          scroll.update();
-        }
-      });
-    });
-    ro.observe(comComment[0]);
-  }
-
-  scroll.on('scroll', ({ scroll }) => {
-    if (scroll.y > 500) {
-      $('#post-toc').show(300)
-    } else {
-      $('#post-toc').hide(300)
-    }
-  });
-
-  document.addEventListener('swup:contentReplaced', (event) => {
-    scroll.destroy()
-  });
-
-  /***************************
-
-  slideshow
-
-  ***************************/
-  var swiper = new Swiper('.trm-slideshow', {
-    slidesPerView: 1,
-    effect: 'fade',
-    parallax: true,
-    autoplay: true,
-    speed: 1400,
-  });
-  /***************************
-
-  testimonials slider
-
-  ***************************/
-  var swiper = new Swiper('.trm-testimonials-slider', {
-    slidesPerView: 1,
-    spaceBetween: 40,
-    parallax: true,
-    autoplay: false,
-    speed: 1400,
-    pagination: {
-      el: '.trm-testimonials-slider-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.trm-testimonials-slider-next',
-      prevEl: '.trm-testimonials-slider-prev',
-    },
-
-  });
-  /***************************
-
-  fancybox
-
-  ***************************/
-  $('[data-fancybox]').fancybox({
-    animationEffect: "zoom-in-out",
-    animationDuration: 600,
-    transitionDuration: 1200,
-    buttons: [
-      "zoom",
-      "slideShow",
-      "thumbs",
-      "close",
-    ],
-  });
-  $('[data-fancybox="gallery"]').fancybox({
-    animationEffect: "zoom-in-out",
-    animationDuration: 600,
-    transitionDuration: 1200,
-    buttons: [
-      "zoom",
-      "slideShow",
-      "thumbs",
-      "close",
-    ],
-  });
-  $('[data-fancybox="portfolio"]').fancybox({
-    animationEffect: "zoom-in-out",
-    animationDuration: 600,
-    transitionDuration: 1200,
-    buttons: [
-      "zoom",
-      "slideShow",
-      "thumbs",
-      "close",
-    ],
-  });
-  $.fancybox.defaults.hash = false;
-
-  /*----------------------------------------------------------
-  ------------------------------------------------------------
-
-  REINIT
-  
-
-  ------------------------------------------------------------
-  ----------------------------------------------------------*/
-  document.addEventListener("swup:contentReplaced", function () {
-    /***************************
-
-    底部倒计时
-
-    ***************************/
-
-    show_date_time && show_date_time();
-
-    /***************************
-
-    处理文章中图片
-
-    ***************************/
-    $("article img").each(function () {
-      var element = document.createElement("span");
-      $(element).attr("data-fancybox", "gallery");
-      $(element).attr("href", $(this).attr("src"));
-      $(this).wrap(element);
-    })
-    /***************************
-
-    preloader
-
-    ***************************/
-    $(".trm-scroll-container").animate({
-      opacity: 1,
+      utils.q('html').classList.remove('is-animating');
+      utils.q(".trm-scroll-container").style.opacity = 1;
     }, 600);
-    /***************************
+  }
 
-    menu
+  document.readyState === 'loading' ?
+    document.addEventListener('DOMContentLoaded', ready) : ready();
 
-    ***************************/
-    $('.trm-menu-btn').on('click', function () {
-      $('.trm-menu-btn , .trm-right-side').toggleClass('trm-active');
-    })
-    $('.trm-menu ul li a').on('click', function () {
-      $('.trm-menu-btn , .trm-right-side').removeClass('trm-active');
-    })
-    /***************************
+  /* swup */
+  window.ASYNC_CONFIG.swup && utils.InitSwup();
 
-    mode switch
+  /* menu */
+  utils.InitMenu()
 
-    ***************************/
-    $('.trm-mode-switcher').clone().appendTo('.trm-mode-switcher-place');
-    $('#trm-swich').change(function () {
-      if (this.checked) {
-        $('.trm-hidden-switcher input').prop("checked", true);
-        $('.trm-mode-swich-animation-frame').addClass('trm-active');
-        $("#trm-scroll-container").animate({
-          opacity: 0,
-        }, 600, function () {
-          setTimeout(function () {
-            $('.trm-mode-swich-animation').addClass('trm-active');
-            $("#trm-switch-style").attr("href", "/css/style-dark.css?" + window.HTMEM_VERSION);
-          }, 200);
-          setTimeout(function () {
-            $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-            $("#trm-scroll-container").animate({
-              opacity: 1,
-            }, 600);
-          }, 1000);
-        });
-      } else {
-        $('.trm-hidden-switcher input').prop("checked", false);
-        $('.trm-mode-swich-animation-frame').addClass('trm-active');
-        $("#trm-scroll-container").animate({
-          opacity: 0,
-        }, 600, function () {
-          setTimeout(function () {
-            $('.trm-mode-swich-animation').removeClass('trm-active');
-            $("#trm-switch-style").attr("href", "/css/style-light.css?" + window.HTMEM_VERSION);
-          }, 200);
-          setTimeout(function () {
-            $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-            $("#trm-scroll-container").animate({
-              opacity: 1,
-            }, 600);
-          }, 1000);
-        });
-      }
-      localStorage.setItem('theme-mode', this.checked ? 'style-dark' : 'style-light')
-    });
-    /***************************
+  /* theme mode switch */
+  utils.InitThemeMode(true)
 
-    counters
+  /* counters */
+  utils.InitCounter();
 
-    ***************************/
-    $('.trm-counter').each(function () {
-      $(this).prop('Counter', 0).animate({
-        Counter: $(this).text()
-      }, {
-        duration: 2000,
-        easing: 'linear',
-        step: function (now) {
-          $(this).text(Math.ceil(now));
-        }
-      });
-    });
-    /***************************
+  /* locomotive scroll */
+  utils.InitLocomotiveScroll()
 
-    locomotive scroll
+  /* swiper */
+  utils.InitSwiper()
 
-    ***************************/
-    const scroll = new LocomotiveScroll({
-      el: document.querySelector('#trm-scroll-container'),
-      smooth: true,
-      lerp: .1,
-      reloadOnContextChange: true
-    });
+  /* fancybox */
+  utils.InitFancybox()
 
-    const comComment = $('.comment-container')
-    if (comComment.length) {
-      const ro = new ResizeObserver(entries => {
-        scroll.scrollTo(0, {
-          callback () {
-            scroll.update();
-          }
-        });
-      });
-      ro.observe(comComment[0]);
-    }
+  /* toc */
+  utils.InitToc()
 
-    scroll.on('scroll', ({ scroll }) => {
-      if (scroll.y > 500) {
-        $('#post-toc').show(300)
-      } else {
-        $('#post-toc').hide(300)
-      }
-    });
+  /* copyright */
+  utils.InitCopyright()
+  //#endregion
 
-    document.addEventListener('swup:contentReplaced', (event) => {
-      scroll.destroy()
-    });
-    /***************************
+  //#region  Re/init
+  document.addEventListener("swup:contentReplaced", function () {
+    /* The blog runs long */
+    window.show_date_time && window.show_date_time();
 
-    slideshow
+    /* Work with pictures in articles */
+    utils.InitPictures()
 
-    ***************************/
-    var swiper = new Swiper('.trm-slideshow', {
-      slidesPerView: 1,
-      effect: 'fade',
-      parallax: true,
-      autoplay: true,
-      speed: 1400,
-    });
-    /***************************
+    /* preloader */
+    utils.q(".trm-scroll-container").style.opacity = 1;
 
-    testimonials slider
+    /* menu */
+    utils.InitMenu()
 
-    ***************************/
-    var swiper = new Swiper('.trm-testimonials-slider', {
-      slidesPerView: 1,
-      spaceBetween: 40,
-      parallax: true,
-      autoplay: false,
-      speed: 1400,
-      pagination: {
-        el: '.trm-testimonials-slider-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.trm-testimonials-slider-next',
-        prevEl: '.trm-testimonials-slider-prev',
-      },
+    /* theme mode switch */
+    utils.InitThemeMode(true)
 
-    });
-    /***************************
+    /* counters */
+    utils.InitCounter();
 
-    fancybox
+    /* locomotive scroll */
+    utils.InitLocomotiveScroll()
 
-    ***************************/
-    $('[data-fancybox]').fancybox({
-      animationEffect: "zoom-in-out",
-      animationDuration: 600,
-      transitionDuration: 1200,
-      buttons: [
-        "zoom",
-        "slideShow",
-        "thumbs",
-        "close",
-      ],
-    });
-    $('[data-fancybox="gallery"]').fancybox({
-      animationEffect: "zoom-in-out",
-      animationDuration: 600,
-      transitionDuration: 1200,
-      buttons: [
-        "zoom",
-        "slideShow",
-        "thumbs",
-        "close",
-      ],
-    });
-    $('[data-fancybox="portfolio"]').fancybox({
-      animationEffect: "zoom-in-out",
-      animationDuration: 600,
-      transitionDuration: 1200,
-      buttons: [
-        "zoom",
-        "slideShow",
-        "thumbs",
-        "close",
-      ],
-    });
-    $.fancybox.defaults.hash = false;
+    /* swiper */
+    utils.InitSwiper()
+
+    /* fancybox */
+    utils.InitFancybox()
+
+    /* toc */
+    utils.InitToc()
+
   });
+  //#endregion
 
-});
+}());
