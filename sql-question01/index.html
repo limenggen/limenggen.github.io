@@ -14,24 +14,24 @@
 <meta property="og:site_name" content="初月二三">
 <meta property="og:description" content="本篇是记录完成一段sql逻辑计算的思路">
 <meta property="og:locale">
-<meta property="og:image" content="https://s6.jpg.cm/2022/08/03/PQy4bt.webp">
+<meta property="og:image" content="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba48ec40aac85ce1549242d301d0c7a2afa/0.png">
 <meta property="article:published_time" content="2022-08-03T07:54:56.000Z">
-<meta property="article:modified_time" content="2022-10-06T10:57:35.312Z">
+<meta property="article:modified_time" content="2022-10-18T00:15:24.231Z">
 <meta property="article:author" content="初月二三">
 <meta property="article:tag" content="sql">
 <meta property="article:tag" content="数据库笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s6.jpg.cm/2022/08/03/PQy4bt.webp">
+<meta name="twitter:image" content="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba48ec40aac85ce1549242d301d0c7a2afa/0.png">
 
 
 <title >sql关于计算字符串类型的'时长'思路</title>
 
 <!-- Favicon -->
 
-    <link href='https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.1.1' rel='icon' type='image/png' sizes='16x16' ></link>
+    <link href='https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4631b8cbee998a5f52c42d74a6907bdb8/0.png?v=1.1.1' rel='icon' type='image/png' sizes='16x16' ></link>
 
 
-    <link href='https://s6.jpg.cm/2022/07/29/PQRdBW.png?v=1.1.1' rel='icon' type='image/png' sizes='32x32' ></link>
+    <link href='https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4631b8cbee998a5f52c42d74a6907bdb8/0.png?v=1.1.1' rel='icon' type='image/png' sizes='32x32' ></link>
 
 
 
@@ -66,7 +66,7 @@
 
 
 <!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"limenggen.github.io","author":"初月二三","root":"/","typed_text":["好好生活 慢慢相遇"],"favicon":{"logo":"https://s6.jpg.cm/2022/07/29/PQRdBW.png","icon16":"https://s6.jpg.cm/2022/07/29/PQRdBW.png","icon32":"https://s6.jpg.cm/2022/07/29/PQRdBW.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":null,"showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"theme_version":"1.1.1","theme":{"switch":true,"default":"style-light"},"search":{"enable":true,"type":"local","href":"https://www.google.com/search?q=site:","domain":"limenggen.github.io","path":"search.xml"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
+<script>window.ASYNC_CONFIG = {"hostname":"limenggen.github.io","author":"初月二三","root":"/","typed_text":["好好生活 慢慢相遇"],"favicon":{"logo":"https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4631b8cbee998a5f52c42d74a6907bdb8/0.png","icon16":"https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4631b8cbee998a5f52c42d74a6907bdb8/0.png","icon32":"https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4631b8cbee998a5f52c42d74a6907bdb8/0.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":null,"showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"theme_version":"1.1.1","theme":{"switch":true,"default":"style-light"},"search":{"enable":true,"type":"local","href":"https://www.google.com/search?q=site:","domain":"limenggen.github.io","path":"search.xml"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。"},"creative_commons":{"license":"by-nc-sa","language":"deed.zh","post":false,"clipboard":false},"swup":false};</script>
 
 <!-- Theme mode css -->
 
@@ -143,7 +143,7 @@
 			<!-- logo -->
 			<a href="/" class="trm-logo-frame trm-anima-link">
 				
-					<img src="https://s6.jpg.cm/2022/07/29/PQRdBW.png" alt="logo">
+					<img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4631b8cbee998a5f52c42d74a6907bdb8/0.png" alt="logo">
 				
 				
 					<div class="trm-logo-text">
@@ -286,7 +286,7 @@
     <div class="trm-banner" data-scroll data-scroll-direction="vertical">
     
     <!-- banner cover -->
-    <img src="https://s6.jpg.cm/2022/07/29/PQReM2.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
+    <img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4debac2d93cd06efa3fd12732702716dd/0.png" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
     <!-- banner cover end -->
     
 
@@ -347,7 +347,7 @@
     
         <!-- card header -->
 <div class="trm-mc-header">
-    <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://s6.jpg.cm/2022/07/29/PQR68H.jpg" alt="Avatar"> </div>
+    <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4290b0e3e6d6446a1712dbdba7206b4e9/0.png" alt="Avatar"> </div>
     <h5 class="trm-name trm-mb-15">
         初月二三
     </h5>
@@ -562,7 +562,7 @@
         <div class="col-lg-6">
     <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
         <a href="/db2-question01/" class="trm-cover-frame trm-anima-link">
-            <img src="https://s6.jpg.cm/2022/08/28/P8NUTz.jpg" alt="cover">
+            <img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba48e6d33b2ba13c60a76fc5ff0d00dddc4/0.png" alt="cover">
         </a>
         <div class="trm-card-descr">
             <h5>

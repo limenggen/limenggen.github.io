@@ -92,54 +92,54 @@
 <span id="more"></span>
 
 <h1 id="一、开启Hyper-V"><a href="#一、开启Hyper-V" class="headerlink" title="一、开启Hyper-V"></a>一、开启Hyper-V</h1><h2 id="1、打开-‘控制面板’-–-gt-‘程序’-–-gt-‘启用或关闭Windows功能’-–-gt-‘Hyper-V’"><a href="#1、打开-‘控制面板’-–-gt-‘程序’-–-gt-‘启用或关闭Windows功能’-–-gt-‘Hyper-V’" class="headerlink" title="1、打开 ‘控制面板’  –&gt;  ‘程序’  –&gt;  ‘启用或关闭Windows功能’  –&gt;  ‘Hyper-V’"></a>1、打开 ‘控制面板’  –&gt;  ‘程序’  –&gt;  ‘启用或关闭Windows功能’  –&gt;  ‘Hyper-V’</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQq9zz.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4d19ee23972791ac9dc560169e727a41b/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="2、重启电脑"><a href="#2、重启电脑" class="headerlink" title="2、重启电脑"></a>2、重启电脑</h2><h2 id="3、准备一个CentOS-7-x86-64-DVD-2009-iso-镜像"><a href="#3、准备一个CentOS-7-x86-64-DVD-2009-iso-镜像" class="headerlink" title="3、准备一个CentOS-7-x86_64-DVD-2009.iso 镜像"></a>3、准备一个CentOS-7-x86_64-DVD-2009.iso 镜像</h2><p>  下载地址：<a href="http://mirrors.aliyun.com/centos/7/isos/x86_64/">http://mirrors.aliyun.com/centos/7/isos/x86_64/</a>  (阿里云 开源镜像站)</p>
 <h1 id="二、使用Hyper-V创建-虚拟机"><a href="#二、使用Hyper-V创建-虚拟机" class="headerlink" title="二、使用Hyper-V创建 虚拟机"></a>二、使用Hyper-V创建 虚拟机</h1><h2 id="1、’Windows开始菜单’-–-gt-‘Windows管理工具’-–-gt-‘Hyper-V管理器’"><a href="#1、’Windows开始菜单’-–-gt-‘Windows管理工具’-–-gt-‘Hyper-V管理器’" class="headerlink" title="1、’Windows开始菜单’  –&gt;  ‘Windows管理工具’  –&gt;  ‘Hyper-V管理器’"></a>1、’Windows开始菜单’  –&gt;  ‘Windows管理工具’  –&gt;  ‘Hyper-V管理器’</h2><h2 id="2、在Hyper-V管理器右侧，点击新建虚拟机"><a href="#2、在Hyper-V管理器右侧，点击新建虚拟机" class="headerlink" title="2、在Hyper-V管理器右侧，点击新建虚拟机"></a>2、在Hyper-V管理器右侧，点击新建虚拟机</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQWGj6.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba49831977bbfa77ad68b4cdd3c67c02585/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="3、指定虚拟机名称和存储位置-可以不放在C盘"><a href="#3、指定虚拟机名称和存储位置-可以不放在C盘" class="headerlink" title="3、指定虚拟机名称和存储位置(可以不放在C盘)"></a>3、指定虚拟机名称和存储位置(可以不放在C盘)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqaIu.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba408f19515c9c1171f2f8ff47b34f9dfbe/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="4、指定代数-这里选择的是第二代"><a href="#4、指定代数-这里选择的是第二代" class="headerlink" title="4、指定代数(这里选择的是第二代)"></a>4、指定代数(这里选择的是第二代)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqiUG.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4b6b5888c7d9e90bec25fb4e542896e19/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="5、分配内存-可以分配大一点，2048MB"><a href="#5、分配内存-可以分配大一点，2048MB" class="headerlink" title="5、分配内存(可以分配大一点，2048MB)"></a>5、分配内存(可以分配大一点，2048MB)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqytR.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4296adcd325da97fa9316cd8c385e1169/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="6、配置网络-暂时不动"><a href="#6、配置网络-暂时不动" class="headerlink" title="6、配置网络(暂时不动)"></a>6、配置网络(暂时不动)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqxw4.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4b929f0b8cac3ff3844b48c6ef71b5e29/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="7、选择虚拟硬盘-可以先分配30GB"><a href="#7、选择虚拟硬盘-可以先分配30GB" class="headerlink" title="7、选择虚拟硬盘(可以先分配30GB)"></a>7、选择虚拟硬盘(可以先分配30GB)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqZEp.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba45d05eabe59810aadbe96a03dd9ec75fd/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="8、安装选项-选中第一步下载的镜像"><a href="#8、安装选项-选中第一步下载的镜像" class="headerlink" title="8、安装选项(选中第一步下载的镜像)"></a>8、安装选项(选中第一步下载的镜像)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqDxX.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba43ffd3f984deefb7a7755267f86b1c731/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="9、摘要-核对一下刚刚设置的内容-，点击完成"><a href="#9、摘要-核对一下刚刚设置的内容-，点击完成" class="headerlink" title="9、摘要(核对一下刚刚设置的内容)，点击完成"></a>9、摘要(核对一下刚刚设置的内容)，点击完成</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqOlD.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4b33d52e4855b38d020055bbe3e6622c0/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="10、不使用安全启动-避免启动虚机报UEFI"><a href="#10、不使用安全启动-避免启动虚机报UEFI" class="headerlink" title="10、不使用安全启动(避免启动虚机报UEFI)"></a>10、不使用安全启动(避免启动虚机报UEFI)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQWLnT.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba43364f8e3a57612541437049010f6f373/0.png" loading="lazy"></p>
 </blockquote>
 <h1 id="三、安装CentOS7"><a href="#三、安装CentOS7" class="headerlink" title="三、安装CentOS7"></a>三、安装CentOS7</h1><h2 id="1、正常安装-可以选择中文语言，设置root密码和新建用户"><a href="#1、正常安装-可以选择中文语言，设置root密码和新建用户" class="headerlink" title="1、正常安装 可以选择中文语言，设置root密码和新建用户"></a>1、正常安装 可以选择中文语言，设置root密码和新建用户</h2><h1 id="四、Hyper-V网络连接配置"><a href="#四、Hyper-V网络连接配置" class="headerlink" title="四、Hyper-V网络连接配置"></a>四、Hyper-V网络连接配置</h1><h2 id="1、配置虚拟机网络"><a href="#1、配置虚拟机网络" class="headerlink" title="1、配置虚拟机网络"></a>1、配置虚拟机网络</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQWPtE.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba41c5542439b1913d142e8256411e3a465/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="2、新建虚拟网络交换机-内部"><a href="#2、新建虚拟网络交换机-内部" class="headerlink" title="2、新建虚拟网络交换机(内部)"></a>2、新建虚拟网络交换机(内部)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQWR0Q.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba49d7c4c9a7662b20dbd4d736a44e73759/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="3、设置名称，点击应用"><a href="#3、设置名称，点击应用" class="headerlink" title="3、设置名称，点击应用"></a>3、设置名称，点击应用</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQWWIh.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba46c069e71a572d63ac3efc2279cb73b91/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="4、配置网络适配器"><a href="#4、配置网络适配器" class="headerlink" title="4、配置网络适配器"></a>4、配置网络适配器</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQWnUS.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4747fe8874f9c0a6703bb38e2802b545d/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="5、点击应用即可"><a href="#5、点击应用即可" class="headerlink" title="5、点击应用即可"></a>5、点击应用即可</h2><h2 id="6、配置本地网络连接-共享网络"><a href="#6、配置本地网络连接-共享网络" class="headerlink" title="6、配置本地网络连接(共享网络)"></a>6、配置本地网络连接(共享网络)</h2><blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQW5oW.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4378f0ef46360c51a16b06ce2823cafbc/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="7、设置CentOS7虚机中网络"><a href="#7、设置CentOS7虚机中网络" class="headerlink" title="7、设置CentOS7虚机中网络"></a>7、设置CentOS7虚机中网络</h2><p><code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code></p>
 <blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQW7x2.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4c1828133fe3db4ff10a19474f1f05264/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="8、Esc退出输入模式，用’-wq’-命令保存修改"><a href="#8、Esc退出输入模式，用’-wq’-命令保存修改" class="headerlink" title="8、Esc退出输入模式，用’:wq’ 命令保存修改"></a>8、Esc退出输入模式，用’:wq’ 命令保存修改</h2><h2 id="9、重启网关"><a href="#9、重启网关" class="headerlink" title="9、重启网关"></a>9、重启网关</h2><p><code>service network restart</code></p>
 <h2 id="10、可以关闭防火墙"><a href="#10、可以关闭防火墙" class="headerlink" title="10、可以关闭防火墙"></a>10、可以关闭防火墙</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">查看防火墙状态</span><br><span class="line">systemctl status firewalld</span><br><span class="line">service iptables status</span><br><span class="line"></span><br><span class="line">暂时关闭防火墙</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">service iptables stop</span><br><span class="line"></span><br><span class="line">永久关闭防火墙</span><br><span class="line">systemctl disable firewalld</span><br><span class="line">chkconfig iptables off</span><br><span class="line"></span><br><span class="line">重启防火墙</span><br><span class="line">systemctl enable firewalld</span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
@@ -261,11 +261,11 @@
 
 <h1 id="四、将代码上传GitHub"><a href="#四、将代码上传GitHub" class="headerlink" title="四、将代码上传GitHub"></a>四、将代码上传GitHub</h1><h2 id="1、注册一个GitHub账号"><a href="#1、注册一个GitHub账号" class="headerlink" title="1、注册一个GitHub账号"></a>1、注册一个GitHub账号</h2><p>新建一个Repositories(相当于库)，库名：<em>用户名.github.io</em></p>
 <blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqNgh.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba46ccb416316673f4b2bd4bdf747ee5d62/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="2、设置Pages"><a href="#2、设置Pages" class="headerlink" title="2、设置Pages"></a>2、设置Pages</h2><p>创建完仓库，进入Settings，找到GitHub pages设置</p>
 <blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqtJQ.png" loading="lazy">      <img src="https://s6.jpg.cm/2022/07/29/PQqsv2.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba41a5da3e6d8e686a76ab906909e182968/0.png" loading="lazy">      <img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba455f7453d285f7878965f3a55cc1eec5f/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="3、生成公钥"><a href="#3、生成公钥" class="headerlink" title="3、生成公钥"></a>3、生成公钥</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="comment"># 获取public key，复制文件内容</span></span><br></pre></td></tr></table></figure>
 
@@ -277,7 +277,7 @@
 
 <h1 id="五、将代码上传Gitee"><a href="#五、将代码上传Gitee" class="headerlink" title="五、将代码上传Gitee"></a>五、将代码上传Gitee</h1><h2 id="1、注册一个Gitee账号"><a href="#1、注册一个Gitee账号" class="headerlink" title="1、注册一个Gitee账号"></a>1、注册一个Gitee账号</h2><p>新建一个仓库，库名：<em>用户名.gitee.io</em></p>
 <blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqNgh.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba440008783a4399f5464037302310f0b0c/0.png" loading="lazy"></p>
 </blockquote>
 <h2 id="2、生成公钥："><a href="#2、生成公钥：" class="headerlink" title="2、生成公钥："></a>2、生成公钥：</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮箱地址&quot;</span></span><br><span class="line"><span class="built_in">cat</span> ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="comment"># 获取public key，复制文件内容</span></span><br></pre></td></tr></table></figure>
 
@@ -287,7 +287,7 @@
 
 <h2 id="5、上传博客服务"><a href="#5、上传博客服务" class="headerlink" title="5、上传博客服务"></a>5、上传博客服务</h2><p>在新建库中找到‘_服务_’，点击‘_Gitee Pages_’点击更新即可！</p>
 <blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQqrcW.png" loading="lazy">      <img src="https://s6.jpg.cm/2022/07/29/PQqYGS.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba460958231677ca5139b865646e30a6534/0.png" loading="lazy">      <img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4c5b08c6563df0d4cc730b3b43389a7cd/0.png" loading="lazy"></p>
 <ul>
 <li><em>Gitee每次上传代码都要再次更新！！！</em></li>
 </ul>
@@ -428,7 +428,7 @@
 </blockquote>
 <h2 id="4、创建springboot项目"><a href="#4、创建springboot项目" class="headerlink" title="4、创建springboot项目"></a>4、创建springboot项目</h2><blockquote>
 <ul>
-<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWljf.png" loading="lazy"></li>
+<li>项目结构<br><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4689595cfcc51d0f2f43ce167d5a1d566/0.png" loading="lazy"></li>
 </ul>
 </blockquote>
 <h2 id="5、添加pom-xml依赖"><a href="#5、添加pom-xml依赖" class="headerlink" title="5、添加pom.xml依赖"></a>5、添加pom.xml依赖</h2><figure class="highlight xml"><figcaption><span>pom.xml >folded</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 快速搭建并开发web项目 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- mybatis 与 spring boot 2.x的整合包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.3.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--mysql JDBC驱动 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- redis --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 统一不同的缓存技术 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-cache<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 添加lombok插件 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -478,7 +478,7 @@
 
 <h2 id="12、启动项目"><a href="#12、启动项目" class="headerlink" title="12、启动项目"></a>12、启动项目</h2><p>使用postman测试访问：<a href="http://localhost:8081/redis/queryAll">http://localhost:8081/redis/queryAll</a></p>
 <blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQW8tO.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba44192abde4cf1e148ac7fa5c7ac0a4c9f/0.png" loading="lazy"></p>
 </blockquote>
 ]]></content>
       <categories>
@@ -499,7 +499,7 @@
 
 <h1 id="一、Security基本搭建"><a href="#一、Security基本搭建" class="headerlink" title="一、Security基本搭建"></a>一、Security基本搭建</h1><h2 id="1、创建springboot项目"><a href="#1、创建springboot项目" class="headerlink" title="1、创建springboot项目"></a>1、创建springboot项目</h2><blockquote>
 <ul>
-<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWd6H.png" loading="lazy"></li>
+<li>项目结构<br><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba487bd102cbc38a939bcf1a77731b16049/0.png" loading="lazy"></li>
 </ul>
 </blockquote>
 <h2 id="2、添加项目依赖"><a href="#2、添加项目依赖" class="headerlink" title="2、添加项目依赖"></a>2、添加项目依赖</h2><p>pom.xml</p>
@@ -545,7 +545,7 @@
 
 <h2 id="1、创建一个SpringBoot项目"><a href="#1、创建一个SpringBoot项目" class="headerlink" title="1、创建一个SpringBoot项目"></a>1、创建一个SpringBoot项目</h2><blockquote>
 <ul>
-<li>项目结构<br><img src="https://s6.jpg.cm/2022/07/29/PQWeFL.png" loading="lazy"></li>
+<li>项目结构<br><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4cd9f721bb7eb29d854f8051efeb3a775/0.png" loading="lazy"></li>
 </ul>
 </blockquote>
 <h2 id="2、引入swagger依赖"><a href="#2、引入swagger依赖" class="headerlink" title="2、引入swagger依赖"></a>2、引入swagger依赖</h2><p>pom.xml</p>
@@ -582,7 +582,7 @@
 </ul>
 <h2 id="7、启动项目"><a href="#7、启动项目" class="headerlink" title="7、启动项目"></a>7、启动项目</h2><p>项目访问地址：<a href="http://localhost:8081/swagger-ui.html">http://localhost:8081/swagger-ui.html</a></p>
 <blockquote>
-<p><img src="https://s6.jpg.cm/2022/07/29/PQWV5U.png" loading="lazy"></p>
+<p><img src="https://p.qlogo.cn/hy_personal/3e28f14aa05168429ebacbf357961ba4220359579c7d8fb9de9f270f95b90671/0.png" loading="lazy"></p>
 </blockquote>
 ]]></content>
       <categories>
