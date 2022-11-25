@@ -2,24 +2,6 @@
 .trm-white-icon {
   display: none;
 }
-.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel {
-  background: linear-gradient(102.7deg, #fddaff 8.2%, #dfadfc 19.6%, #adcdfc 36.8%, #adfcf4 73.2%, #caf8d0 90.9%);
-  color: white;
-}
-.cbp_tmtimeline > li .cbp_tmlabel {
-  background: linear-gradient(102.7deg, #fddaff 8.2%, #dfadfc 19.6%, #adcdfc 36.8%, #adfcf4 73.2%, #caf8d0 90.9%);
-  color: white;
-}
-.cbp_tmtimeline > li:nth-child(odd) .cbp_tmlabel:after {
-  border-right-color: #fddaff;
-}
-.cbp_tmtimeline > li .cbp_tmlabel:after {
-  border-right-color: #fddaff;
-}
-.button {
-  background: linear-gradient(102.7deg, #fddaff 8.2%, #dfadfc 19.6%, #adcdfc 36.8%, #adfcf4 73.2%, #caf8d0 90.9%);
-  color: white;
-}
 :root {
   --theme-color: #fcfcfe;
 }
