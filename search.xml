@@ -1398,4 +1398,27 @@
         <category>转载</category>
       </categories>
   </entry>
+  <entry>
+    <title>mybatis 传参记录</title>
+    <url>/mybatis-parameter/</url>
+    <content><![CDATA[<blockquote>
+<p>本章记录传参mybatis遇到的一些问题</p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>在给mapper.xml 文件传多参数且其中一个参数为 in 参数<br>刚开始思考拼接当做一个参数传入 MySQL</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;select id=&quot;selectBookInfoList&quot; resultMap=&quot;ResultMapWithBLOBs&quot; parameterType=&quot;Map&quot;&gt;</span><br><span class="line">    select</span><br><span class="line">    &lt;include refid=&quot;Base_Column_List&quot;/&gt;,</span><br><span class="line">    &lt;include refid=&quot;Blob_Column_List&quot;/&gt;</span><br><span class="line">    from book_info</span><br><span class="line">    &lt;where&gt;</span><br><span class="line">        &lt;if test=&quot;bookId != null and bookId != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            book_id in (#&#123;bookId&#125;)</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;bookIsbn != null and bookIsbn != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            and book_isbn like #&#123;bookIsbn&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;bookName != null and bookName != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            and book_name like #&#123;bookName&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;bookAuthor != null and bookAuthor != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            and book_author like #&#123;bookAuthor&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">    &lt;/where&gt;</span><br><span class="line">    &lt;if test=&quot;start!=null and size!=null&quot;&gt;</span><br><span class="line">        limit #&#123;start&#125;, #&#123;size&#125;</span><br><span class="line">    &lt;/if&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>resultMap 为自定义实体类<br>book_id 为 int类型 #{bookId} 为拼接 1,2,3<br>结果发现mysql 将sql识别为 select * from book_info where book_id in (‘1,2,3’); 查询出 book_id 为 1 的数据</p>
+</blockquote>
+<h1 id="查询可知"><a href="#查询可知" class="headerlink" title="查询可知"></a>查询可知</h1><p>如果直接传入拼接好的where in 条件， 比如（’1’,’2’,’3’)，需要使用${bookId}传参，即绝对引用，而不能使用#<br>, 如果使用#传参会被mybatis当成字符串再添加一层’’引号，导致错误.<br>所以多参数拼接可以使用</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;select id=&quot;selectBookInfoList&quot; resultMap=&quot;ResultMapWithBLOBs&quot; parameterType=&quot;Map&quot;&gt;</span><br><span class="line">    select</span><br><span class="line">    &lt;include refid=&quot;Base_Column_List&quot;/&gt;,</span><br><span class="line">    &lt;include refid=&quot;Blob_Column_List&quot;/&gt;</span><br><span class="line">    from book_info</span><br><span class="line">    &lt;where&gt;</span><br><span class="line">        &lt;if test=&quot;bookId != null and bookId != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            book_id in ($&#123;bookId&#125;)</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;bookIsbn != null and bookIsbn != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            and book_isbn like #&#123;bookIsbn&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;bookName != null and bookName != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            and book_name like #&#123;bookName&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;bookAuthor != null and bookAuthor != &#x27;&#x27;&quot;&gt;</span><br><span class="line">            and book_author like #&#123;bookAuthor&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">    &lt;/where&gt;</span><br><span class="line">    &lt;if test=&quot;start!=null and size!=null&quot;&gt;</span><br><span class="line">        limit #&#123;start&#125;, #&#123;size&#125;</span><br><span class="line">    &lt;/if&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>拼接参数可以是：bookId = ‘1’,’2’,’3’<br>优点：简单方便，高效，缺点：不能防止SQL注入</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+  </entry>
 </search>
